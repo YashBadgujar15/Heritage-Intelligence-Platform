@@ -1,0 +1,25 @@
+{
+  "name": "Heritage Intelligence Platform",
+  "version": "1.0.0",
+  "description": "Agentic AI platform for smart heritage conservation, visitor flow management and personalized cultural storytelling for Ahmedabad's Walled City and Modhera Sun Temple.",
+  "challenge": "Challenge 12",
+  "domain": "Tourism & Heritage",
+  "technology": [
+    "IBM Bob",
+    "IBM Granite",
+    "IBM Cloud",
+    "HTML",
+    "CSS",
+    "JavaScript"
+  ],
+  "agents": [
+    "Structural Health Monitoring Agent",
+    "Visitor Flow Management Agent",
+    "Personalized Heritage Storytelling Agent",
+    "Encroachment Detection Agent",
+    "Conservation Reporting Dashboard Agent"
+  ],
+  "entry_point": "index.html",
+  "demo_url": "https://yashbadgujar15.github.io/Heritage-Intelligence-Platform/",
+  "repository": "https://github.com/YashBadgujar15/Heritage-Intelligence-Platform"
+}
