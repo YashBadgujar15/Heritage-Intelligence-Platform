@@ -1,0 +1,2138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Heritage Intelligence Platform — Ahmedabad & Modhera</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --amber: #b45309;
+      --amber-light: #fef3c7;
+      --amber-mid: #d97706;
+      --stone: #292524;
+      --stone-mid: #57534e;
+      --stone-light: #f5f5f4;
+      --teal: #0f766e;
+      --teal-light: #ccfbf1;
+      --red: #b91c1c;
+      --red-light: #fee2e2;
+      --blue: #1d4ed8;
+      --blue-light: #dbeafe;
+      --green: #15803d;
+      --green-light: #dcfce7;
+      --orange: #c2410c;
+      --orange-light: #ffedd5;
+      /* polish tokens */
+      --shadow-card: 0 1px 3px rgba(28,25,23,.06), 0 4px 12px rgba(28,25,23,.07);
+      --shadow-lift: 0 6px 20px rgba(28,25,23,.13), 0 2px 6px rgba(28,25,23,.07);
+    }
+    * { box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #faf8f5; color: #1c1917; margin: 0; -webkit-font-smoothing: antialiased; }
+    h1, h2, h3, .display { font-family: 'Playfair Display', serif; }
+    .fade-in { animation: fadeIn 0.45s ease both; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .pulse-dot { animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.4;} }
+    .spinner { animation: spin 1s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Hero: richer, warmer gradient with subtle grid overlay ── */
+    .gradient-hero {
+      position: relative;
+      background: linear-gradient(145deg, #120c08 0%, #1c1917 25%, #292524 55%, #44403c 80%, #57534e 100%);
+      overflow: hidden;
+    }
+    .gradient-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(180,83,9,.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(180,83,9,.055) 1px, transparent 1px);
+      background-size: 52px 52px;
+      pointer-events: none;
+    }
+    .gradient-hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, transparent 0%, #d97706 30%, #b45309 50%, #d97706 70%, transparent 100%);
+    }
+
+    /* ── Cards: warmer shadow, smoother lift ── */
+    .card-hover { transition: box-shadow 0.22s ease, transform 0.22s ease, border-color 0.22s ease; }
+    .card-hover:hover { box-shadow: var(--shadow-lift); transform: translateY(-3px); border-color: #c4b5a0 !important; }
+
+    /* ── Buttons: smooth transitions + press feedback ── */
+    button { transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, transform 0.15s ease; }
+    button:active:not(:disabled) { transform: scale(0.97); }
+
+    /* ── Tabs ── */
+    .tab-active { border-bottom: 2px solid var(--amber-mid); color: var(--amber); font-weight: 600; }
+    .tab-inactive { border-bottom: 2px solid transparent; color: #78716c; transition: color 0.18s; }
+    .tab-inactive:hover { color: #292524; }
+
+    .agent-chip { display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 999px; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; }
+    .progress-bar { height: 6px; border-radius: 3px; background: #e7e5e4; overflow: hidden; }
+    .progress-fill { height: 100%; border-radius: 3px; transition: width 0.9s cubic-bezier(.4,0,.2,1); }
+    ::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: #f5f5f4; } ::-webkit-scrollbar-thumb { background: #c8b99a; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #a8936e; }
+    .typewriter { overflow: hidden; white-space: pre-wrap; }
+    .section-hidden { display: none; }
+    .modal-overlay { position: fixed; inset: 0; background: rgba(20,16,12,.6); backdrop-filter: blur(4px); z-index: 100; display: flex; align-items: center; justify-content: center; }
+    .status-critical { color: var(--red); background: var(--red-light); }
+    .status-warning { color: var(--orange); background: var(--orange-light); }
+    .status-good { color: var(--green); background: var(--green-light); }
+    .status-info { color: var(--blue); background: var(--blue-light); }
+    select, input, textarea { font-family: 'Inter', sans-serif; }
+
+    /* ── Emergency Center ── */
+    .em-agent-card { transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.25s ease; }
+    .em-agent-card.hidden-step { opacity: 0.15; transform: scale(0.97); pointer-events: none; }
+    .em-agent-card.active-step { opacity: 1; transform: scale(1); box-shadow: var(--shadow-card); }
+    /* Orchestrator: richer dark panel with warm amber glow */
+    .em-orchestrator {
+      background: linear-gradient(145deg, #120c08 0%, #1c1917 35%, #292524 70%, #3a3330 100%);
+      box-shadow: 0 0 0 1px rgba(180,83,9,.3), 0 12px 40px rgba(12,8,4,.5);
+    }
+    /* Decision border: deeper glow */
+    .em-decision-border { border: 2px solid #b91c1c; box-shadow: 0 0 0 4px rgba(185,28,28,.1), 0 6px 24px rgba(185,28,28,.1); }
+    .em-step-reveal { animation: emReveal 0.65s cubic-bezier(.22,1,.36,1) both; }
+    @keyframes emReveal { from { opacity:0; transform:translateY(14px) scale(.99); } to { opacity:1; transform:translateY(0) scale(1); } }
+    .em-pulse-critical { animation: emPulse 2.5s infinite; }
+    @keyframes emPulse { 0%,100%{box-shadow:0 0 0 0 rgba(185,28,28,.22);} 50%{box-shadow:0 0 0 10px rgba(185,28,28,0);} }
+    .orchestrator-flow-line { width:2px; background:linear-gradient(to bottom,#b45309,#d97706); margin:0 auto; }
+
+    /* ── Reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in, .em-step-reveal { animation: none !important; opacity: 1; transform: none; }
+      .card-hover, button { transition: none !important; }
+    }
+
+    /* ── VISUAL POLISH (additive-only — no JS or markup changes) ── */
+
+    /* Reduced-motion safety */
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in, .em-step-reveal { animation: none; opacity: 1; transform: none; }
+      .card-hover, .card-hover:hover, .pol-btn, .pol-btn:hover { transition: none; transform: none; }
+    }
+
+    /* Slightly smoother card hover */
+    .card-hover { transition: box-shadow 0.22s ease, transform 0.22s ease, border-color 0.22s ease; }
+    .card-hover:hover { box-shadow: 0 6px 24px rgba(28,25,23,0.13), 0 2px 8px rgba(28,25,23,0.07); transform: translateY(-2px); border-color: #a8a29e; }
+
+    /* Section fade-in — applied via existing .fade-in class, no new classes */
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Polished button transitions */
+    button { transition: background-color 0.18s ease, color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease; }
+    button:active { transform: scale(0.98); }
+
+    /* Tab hover polish */
+    .tab-inactive { transition: color 0.18s ease; }
+    .tab-inactive:hover { color: #44403c; }
+
+    /* Progress bar smoother */
+    .progress-fill { transition: width 0.9s cubic-bezier(0.4, 0, 0.2, 1); }
+
+    /* Emergency Center — step connector glow */
+    .em-orchestrator { box-shadow: 0 0 0 1px rgba(180,83,9,0.25), 0 8px 32px rgba(28,25,23,0.35); }
+
+    /* Emergency agent cards — tighter hover while active */
+    .em-agent-card.active-step {
+      box-shadow: 0 2px 12px rgba(28,25,23,0.08);
+      transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.22s ease;
+    }
+
+    /* Critical incident pulse — slightly wider glow */
+    @keyframes emPulse { 0%,100%{ box-shadow: 0 0 0 0 rgba(185,28,28,0.22); } 50%{ box-shadow: 0 0 0 10px rgba(185,28,28,0); } }
+
+    /* Decision border subtle animation */
+    .em-decision-border { border: 2px solid #b91c1c; box-shadow: 0 0 0 4px rgba(185,28,28,0.09), 0 4px 20px rgba(185,28,28,0.07); }
+
+    /* Scrollbar polish */
+    ::-webkit-scrollbar-thumb { background: #c4b9a8; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #a8936e; }
+  </style>
+</head>
+<body>
+<!-- ═══════════════════════════════════════════════════ APP ROOT ═══ -->
+<div id="app"></div>
+
+<script>
+/* ================================================================
+   HERITAGE INTELLIGENCE PLATFORM
+   IBM Granite-powered · Ahmedabad Walled City & Modhera Sun Temple
+   ================================================================ */
+
+// ── STATE ─────────────────────────────────────────────────────────
+const state = {
+  view: 'landing',        // landing | tourist | authority | agents | emergency
+  site: null,             // 'walled-city' | 'modhera'
+  interest: null,         // 'history' | 'architecture' | 'culture' | 'general'
+  mode: null,             // 'tourist' | 'authority'
+  loading: {},            // { agentId: bool }
+  results: {},            // { agentId: content }
+  authTab: 'overview',    // overview | visitor | conservation | encroachment | structural | report
+  apiKey: '',
+  apiKeySet: false,
+  graniteConnected: false, // true only after a successful API response
+  showApiModal: false,
+  // Emergency Center
+  emergencyStep: 0,       // 0=idle, 1=incident, 2=structural, 3=visitor, 4=conservation, 5=encroachment, 6=orchestrator, 7=decision
+  emergencyRunning: false,
+};
+
+// ── DEMO DATA ──────────────────────────────────────────────────────
+const SITES = {
+  'walled-city': {
+    name: 'Ahmedabad Walled City',
+    subtitle: 'UNESCO World Heritage City · Est. 1411 CE',
+    image: '🏛️',
+    color: 'amber',
+    desc: 'A living heritage city with over 600 years of layered history, intricate pols, ornate havelis, and vibrant bazaars.',
+    coords: '23.0225° N, 72.5714° E',
+    period: '1411 CE – Present',
+    type: 'Urban Heritage Zone',
+    area: '5.5 sq km',
+    visitors: '4,200 / day',
+    riskLevel: 'High',
+    monuments: 26,
+    conservationStatus: 'Active Monitoring',
+  },
+  'modhera': {
+    name: 'Modhera Sun Temple',
+    subtitle: 'Solanki Dynasty Masterpiece · 1026 CE',
+    image: '☀️',
+    color: 'teal',
+    desc: 'An 11th-century Solanki architectural marvel dedicated to the Sun God, featuring intricate stone carvings and a stepped tank.',
+    coords: '23.5833° N, 72.1333° E',
+    period: '1026 CE',
+    type: 'Archaeological Monument',
+    area: '6.8 ha',
+    visitors: '1,850 / day',
+    riskLevel: 'Moderate',
+    monuments: 3,
+    conservationStatus: 'ASI Protected',
+  }
+};
+
+const VISITOR_DATA = {
+  'walled-city': {
+    currentLoad: 78, peakHour: '11:00–13:00', avgStay: '3.2 hrs',
+    hotspots: [
+      { name: 'Jama Masjid', load: 92, status: 'critical' },
+      { name: 'Bhadra Fort', load: 71, status: 'warning' },
+      { name: 'Teen Darwaza', load: 85, status: 'critical' },
+      { name: 'Swaminarayan Temple', load: 63, status: 'warning' },
+      { name: 'Siddi Saiyyed Mosque', load: 44, status: 'good' },
+      { name: 'Calico Museum', load: 38, status: 'good' },
+    ],
+    hourlyFlow: [320,410,580,820,1240,1580,1820,1920,1750,1410,980,610,380,290],
+    suggestions: [
+      'Redirect visitors from Teen Darwaza to Sidi Bashir Mosque via guided route — similar architecture, 45% lower crowd density.',
+      'Implement timed entry slots (30-min windows) for Jama Masjid during peak hours 10:00–14:00.',
+      'Deploy 2 additional guides at Bhadra Fort to manage queue and provide context.',
+      'Send push notification to registered tourists recommending morning visit to Calico Museum (currently at 38% capacity).',
+    ],
+    weeklyTrend: [3800, 4100, 3950, 4800, 5200, 6100, 5900],
+  },
+  'modhera': {
+    currentLoad: 52, peakHour: '09:00–11:00', avgStay: '2.1 hrs',
+    hotspots: [
+      { name: 'Surya Kund (Step Tank)', load: 68, status: 'warning' },
+      { name: 'Gudha Mandapa', load: 55, status: 'warning' },
+      { name: 'Garbhagriha (Sanctum)', load: 41, status: 'good' },
+      { name: 'Sabha Mandapa', load: 37, status: 'good' },
+    ],
+    hourlyFlow: [180,290,520,780,980,1020,880,720,540,380,240,140,90,60],
+    suggestions: [
+      'Morning golden-hour slot (6:30–8:00 AM) is under-utilised — market to photography enthusiasts and early risers.',
+      'Install shaded waiting zones near Surya Kund to reduce fatigue and prevent crowd bunching.',
+      'Consider one-way circulation path around the Kund to prevent bottlenecks at the northern steps.',
+    ],
+    weeklyTrend: [1600, 1750, 1700, 2100, 2400, 2800, 2650],
+  }
+};
+
+const CONSERVATION_DATA = {
+  'walled-city': {
+    structuralAlerts: [
+      { id: 'S001', location: 'Jama Masjid — East Minaret', severity: 'critical', issue: 'Visible spalling and crack propagation (3–8mm width) on load-bearing masonry. Monitoring sensors show 12% deviation from baseline vibration threshold.', recommendation: 'Immediate structural assessment by licensed conservation engineer. Restrict public access within 5m radius.', reported: '2 days ago' },
+      { id: 'S002', location: 'Bhadra Fort — Rampart Section C', severity: 'warning', issue: 'Erosion of mortar joints (20–30mm depth) along 18m stretch. Vegetation root intrusion detected in joints.', recommendation: 'Schedule repointing with lime mortar within 30 days. Remove vegetation with root treatment.', reported: '1 week ago' },
+      { id: 'S003', location: 'Teen Darwaza — North Arch', severity: 'warning', issue: 'Salt crystallisation (efflorescence) visible on 40% of arch surface. Surface delamination risk increasing.', recommendation: 'Desalination treatment recommended in next conservation cycle. Surface consolidation with approved consolidant.', reported: '3 days ago' },
+      { id: 'S004', location: 'Sidi Saiyyed Mosque — Jali Windows', severity: 'info', issue: 'Minor dust accumulation on lattice work. No structural compromise detected. Preventive cleaning required.', recommendation: 'Schedule routine cleaning maintenance. Apply anti-pollution coating per ASI guidelines.', reported: '2 weeks ago' },
+    ],
+    encroachmentAlerts: [
+      { id: 'E001', location: 'Pol No. 14 — Khadia Ward', severity: 'critical', issue: 'Unauthorised lean-to structure constructed against protected haveli boundary wall. Estimated 12 sq m footprint. Blocks heritage drainage channel.', recommendation: 'Issue notice under Heritage Conservation Act. Coordinate with municipal authority for removal within 7 days.', detected: '5 days ago' },
+      { id: 'E002', location: 'Manek Chowk Perimeter', severity: 'warning', issue: 'Vendor stall expansion beyond designated boundary markers. 3 stalls encroaching 2–4m into heritage pedestrian zone.', recommendation: 'Survey and re-mark boundary. Engage Heritage Cell for vendor relocation agreement.', detected: '12 days ago' },
+      { id: 'E003', location: 'Dhal ni Pol — Heritage Lane', severity: 'warning', issue: 'Overhead wire installation (cable TV) drilled through protected structure facade. Two anchor points visible.', recommendation: 'Cable provider to be notified. Require relocation along approved conduit route within 21 days.', detected: '8 days ago' },
+    ],
+    conservationProjects: [
+      { name: 'Haveli Restoration — Block 7', progress: 72, status: 'active', budget: '₹48L', lead: 'ASI Gujarat Circle' },
+      { name: 'Drainage System Revamp — Walled City Core', progress: 45, status: 'active', budget: '₹1.2Cr', lead: 'AMC Heritage Cell' },
+      { name: 'Heritage Signage & Interpretation', progress: 88, status: 'nearing', budget: '₹12L', lead: 'GIDB' },
+      { name: 'Traditional Crafts Documentation', progress: 30, status: 'active', budget: '₹8L', lead: 'INTACH Gujarat' },
+    ]
+  },
+  'modhera': {
+    structuralAlerts: [
+      { id: 'S001', location: 'Surya Kund — Step 14, East Face', severity: 'warning', issue: 'Biological growth (lichen/algae) covering approx 35% of lower step surface. Causes moisture retention accelerating stone deterioration.', recommendation: 'Biocide treatment followed by micro-cleaning within 45 days. Install improved drainage at kund perimeter.', reported: '1 week ago' },
+      { id: 'S002', location: 'Gudha Mandapa — Ceiling Panels', severity: 'info', issue: 'Minor hairline cracks in 3 of 52 decorative ceiling panels. No displacement detected. Monitor quarterly.', recommendation: 'Photogrammetric survey to establish crack baseline. No immediate intervention required.', reported: '3 weeks ago' },
+    ],
+    encroachmentAlerts: [
+      { id: 'E001', location: 'Eastern Buffer Zone', severity: 'warning', issue: 'Agricultural activity encroaching into 100m buffer zone. Tractor tracks visible within protected boundary on satellite review.', recommendation: 'Ground verification survey required. Coordinate with district collector for buffer zone enforcement.', detected: '18 days ago' },
+    ],
+    conservationProjects: [
+      { name: 'Stone Consolidation — Sabhamandapa', progress: 60, status: 'active', budget: '₹32L', lead: 'ASI Vadodara Circle' },
+      { name: 'Surya Kund Drainage Improvement', progress: 15, status: 'planned', budget: '₹55L', lead: 'ASI Gujarat Circle' },
+      { name: 'Visitor Interpretation Centre', progress: 95, status: 'nearing', budget: '₹85L', lead: 'Dept. of Tourism Gujarat' },
+    ]
+  }
+};
+
+// ── GRANITE API ────────────────────────────────────────────────────
+async function callGranite(agentId) {
+  setState({ loading: { ...state.loading, [agentId]: true } });
+
+  if (!state.apiKey) {
+    await simulateDelay(1800);
+    const demoResult = getDemoResult(agentId);
+    setState({ loading: { ...state.loading, [agentId]: false }, results: { ...state.results, [agentId]: { text: demoResult, isDemo: true } } });
+    return demoResult;
+  }
+
+  try {
+    const builtPrompt = buildPrompt(agentId);
+    const res = await fetch('https://us-south.ml.cloud.ibm.com/ml/v1/text/generation?version=2023-05-29', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${state.apiKey}` },
+      body: JSON.stringify({
+        model_id: 'ibm/granite-13b-instruct-v2',
+        input: builtPrompt,
+        parameters: { decoding_method: 'greedy', max_new_tokens: 800, min_new_tokens: 100, stop_sequences: [], repetition_penalty: 1.1 }
+      })
+    });
+    if (!res.ok) throw new Error('API error: ' + res.status);
+    const data = await res.json();
+    const text = data?.results?.[0]?.generated_text;
+    if (!text) throw new Error('No text in response');
+    setState({ graniteConnected: true, loading: { ...state.loading, [agentId]: false }, results: { ...state.results, [agentId]: { text, isDemo: false } } });
+    return text;
+  } catch (e) {
+    await simulateDelay(1800);
+    const demoResult = getDemoResult(agentId);
+    setState({ loading: { ...state.loading, [agentId]: false }, results: { ...state.results, [agentId]: { text: demoResult, isDemo: true } } });
+    return demoResult;
+  }
+}
+
+// Helper to extract text and demo flag from result
+function getResultText(agentId) {
+  const r = state.results[agentId];
+  if (!r) return null;
+  if (typeof r === 'string') return r; // legacy
+  return r.text;
+}
+function isResultDemo(agentId) {
+  const r = state.results[agentId];
+  if (!r) return true;
+  if (typeof r === 'string') return true; // legacy
+  return r.isDemo;
+}
+
+function buildPrompt(agentId) {
+  const siteInfo = state.site ? SITES[state.site] : {};
+  if (agentId === 'storytelling') {
+    return `You are an expert heritage guide and cultural storyteller. Generate a rich, engaging, and educational heritage narrative in markdown format.
+
+Site: ${siteInfo.name}
+Interest: ${state.interest}
+Period: ${siteInfo.period}
+
+Write a structured cultural narrative (600-800 words) with sections covering the most relevant historical, architectural, or cultural aspects of this site based on the visitor's interest. Use markdown headers, bold text for key terms, and make it inspiring and informative. Start directly with the content.`;
+  }
+  if (agentId === 'visitor-flow') {
+    const vd = VISITOR_DATA[state.site];
+    return `You are a heritage site visitor management expert. Analyse the following data and provide actionable management recommendations in markdown format.
+
+Site: ${siteInfo.name}
+Current Load: ${vd.currentLoad}% capacity
+Peak Hours: ${vd.peakHour}
+Hotspots: ${vd.hotspots.map(h => h.name + ' (' + h.load + '%)').join(', ')}
+
+Generate a visitor flow analysis report with immediate recommendations, crowd management strategies, and a predictive outlook. Be specific and actionable.`;
+  }
+  if (agentId === 'conservation-report') {
+    const cd = CONSERVATION_DATA[state.site];
+    return `You are a heritage conservation intelligence system. Synthesise the following monitoring data into a comprehensive conservation report in markdown format.
+
+Site: ${siteInfo.name}
+Risk Level: ${siteInfo.riskLevel}
+Structural Alerts: ${cd.structuralAlerts.length} (${cd.structuralAlerts.filter(a=>a.severity==='critical').length} critical)
+Encroachment Incidents: ${cd.encroachmentAlerts.length} (${cd.encroachmentAlerts.filter(a=>a.severity==='critical').length} critical)
+Active Projects: ${cd.conservationProjects.length}
+
+Generate an executive-level conservation intelligence report with risk assessment, priority action matrix, and recommendations. Format for heritage authority decision-making.`;
+  }
+  return '';
+}
+
+function simulateDelay(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+// ── DEMO RESULTS ───────────────────────────────────────────────────
+function getDemoResult(agentId) {
+  const site = state.site;
+  const interest = state.interest;
+
+  if (agentId === 'storytelling') return getStorytellingDemo(site, interest);
+  if (agentId === 'visitor-flow') return getVisitorFlowDemo(site);
+  if (agentId === 'conservation-report') return getConservationReportDemo(site);
+  return '';
+}
+
+function getStorytellingDemo(site, interest) {
+  const stories = {
+    'walled-city': {
+      history: `## A City Born from Ambition
+
+**Ahmedabad**, founded in 1411 CE by Sultan Ahmad Shah I of the Muzaffarid dynasty, stands as one of India's most extraordinary living heritage cities. The Sultan, having witnessed a hare fearlessly confront his hunting dogs at this bend of the Sabarmati River, took it as an omen of courage — and here he built his capital.
+
+### The Layered Centuries
+The Walled City you walk through today is not one city but many — a palimpsest of six centuries. Under the Sultanate, it flourished as a centre of Islamic architecture and Indo-Saracenic synthesis. The Mughal period brought Akbar, who made Ahmedabad a provincial capital and marvelled at its grandeur. Later, the Marathas left their architectural imprint, followed by the British who built beyond the walls but never dismantled the soul within.
+
+### The Pols — Urban Genius
+The **pol system** is perhaps the most sophisticated medieval urban planning concept in the subcontinent. These self-contained neighbourhood clusters, each with a single gated entry, internal water wells, shared chowks (squares), and community temples, functioned as independent micro-cities within the city. During communal tensions or floods, a pol could lock its gate and sustain itself for weeks.
+
+### Why This Matters Today
+UNESCO recognised Ahmedabad as India's **first World Heritage City** in 2017 — not for any single monument, but for the totality of its urban fabric: the living pols, the jharokha-adorned havelis, the stepwells, the mosques and temples coexisting within metres of each other. This is heritage not frozen in amber, but breathing, adapting, persisting.`,
+
+      architecture: `## Stone, Lime & Light: The Architecture of the Walled City
+
+The built heritage of Ahmedabad represents one of the finest laboratories of **Indo-Saracenic synthesis** — where Islamic spatial principles met Hindu and Jain craft traditions to produce something entirely original.
+
+### Structural Language
+The city's mosques demonstrate a masterly adaptation: **Hindu trabeate construction** (post-and-beam) was retained for structural bays while Islamic arcuated forms were applied to facades. The result is buildings that feel simultaneously familiar to both traditions. Notice how columns in the Jama Masjid recall temple pillars yet support pointed arches.
+
+### The Jali — Light Carved in Stone
+Nowhere is this synthesis more breathtaking than in the **jali** (lattice screen) work of the Sidi Saiyyed Mosque (1573 CE). The ten stone screens, particularly the famous "Tree of Life," are exercises in impossible delicacy — stone carved to the thinness of lace, with each leaf and tendril structurally self-supporting. Craftsmen believe the master carver wept when he saw it complete, knowing he could never surpass it.
+
+### Haveli Vernacular
+The residential architecture of the **pol havelis** follows a consistent deep logic: a narrow street facade (for privacy and shade) opens into an internal courtyard that provides light, ventilation, and social space. Upper floors progressively cantilever over the street on ornate wooden brackets — the **jharokhas** — allowing women to observe street life while maintaining purdah. Every detail is functional: the carved wooden facades minimise solar heat gain on east- and west-facing walls.
+
+### The Conservation Challenge
+These structures were built with **lime mortar and teak wood** — materials that breathe, flex, and self-heal to a degree. Modern cement repairs are catastrophic: they are stronger than the original masonry, causing stress fractures as the building moves. Conservation here demands understanding the original material intelligence.`,
+
+      culture: `## The Living Culture of Ahmedabad's Walled City
+
+### A City That Never Sleeps the Same Way Twice
+Step into the Walled City at **dawn** and you encounter one city: milkmen on bicycles, the smell of attar and agarbatti from opening temples, the sound of azaan from minarets, old men doing yoga in pol chowks. Return at **midday** and the bazaars are a roaring symphony of textile merchants, silver craftsmen, and street food vendors. At **dusk**, the pols transform into communal living rooms — children playing, elders gossiping, the clatter of home cooking drifting from latticed windows.
+
+### Craft Traditions Still Alive
+The Walled City remains a **working craft ecosystem**:
+- **Patola weaving** (double-ikat silk) has been practised in Patan for 900 years and traded through Ahmedabad markets
+- **Bandhani** (tie-dye) workshops still operate in the Kalupur area using techniques unchanged for 500 years  
+- **Rogan art** — the near-extinct Kutchi craft of castor-oil paint on fabric — finds its only trading outlet here
+- **Zardozi** embroidery workshops, largely employing Muslim artisans, produce work destined for the finest couture houses globally
+
+### Food as Living Heritage
+The Walled City's food culture is itself a UNESCO-worthy phenomenon. **Manek Chowk** transforms nightly from a gold market into a street food carnival. The **Gujarati thali** served in pol homes follows a nutritional philosophy developed over centuries of vegetarian practice — never a random assortment, but a carefully balanced sequence of tastes, textures and temperatures designed to aid digestion.`,
+
+      general: `## Welcome to Ahmedabad's Walled City
+
+You are about to explore one of the world's most extraordinary urban heritage sites — **India's first UNESCO World Heritage City**, a place where 600 years of continuous history is not preserved behind glass but lived, breathed, and negotiated every single day.
+
+### What Makes This Place Special
+Unlike heritage sites that are frozen ruins, Ahmedabad's Walled City is **entirely alive**. Over 600,000 people call it home. The same pols (neighbourhood clusters) that housed merchants in the 15th century house their descendants today. The mosques still call for prayer. The havelis still creak with domestic life.
+
+### Three Things You Must Experience
+**1. Get Lost in a Pol** — Enter any of the 600+ pols without a map. The disorienting narrowness, the sudden openings into shared courtyards, the ornate wooden facades — this is medieval urban planning at its most sophisticated.
+
+**2. The Jami Masjid at Midday** — The 15th-century mosque with its 260 columns creates a forest of stone that channels and dapples light in ways that feel deliberately meditative.
+
+**3. Manek Chowk After Dark** — By day, a gold and silver market. After 9 PM, Gujarat's most famous street food carnival. The transition happens in real time — watch traders pack up as food stalls unfurl.
+
+### Practical Wisdom
+The Walled City rewards **slow, foot-based exploration**. The lanes are too narrow for vehicles and too complex for GPS. Hire a heritage walk guide for your first visit — the stories embedded in every doorway are invisible without context. Best time: October to February, early morning or late evening.`
+    },
+    'modhera': {
+      history: `## The Sun Temple of Modhera: A 1000-Year Chronicle
+
+### The Solanki Moment
+In **1026 CE**, the Solanki (Chaulukya) king **Bhimdev I** commissioned a temple to Surya — the Sun God — at Modhera, a site already considered sacred since Vedic times. The Ramayan mentions Modhera as **Dharmaranaya**, the place where Ram performed rites after slaying the demon Ravana. Bhimdev built not merely a temple but a statement of civilisational achievement.
+
+### Why 1026 CE Matters
+The year is precise and resonant. It was the same year Mahmud of Ghazni made his seventeenth and final raid into India, looting the Somnath temple on the coast. Bhimdev I, having survived that humiliation, responded not with military power — which he lacked — but with cultural assertion. Modhera was his answer: *we build, therefore we endure.*
+
+### The Temple's Sacred Purpose
+The temple was aligned with astronomical precision so that at the **spring and autumn equinoxes**, the first rays of sunrise would pass through successive doorways and strike the central image of Surya directly — a feat of solar engineering achieved without modern instruments. The image itself was reportedly studded with gemstones so arranged that the sunlight created a halo effect. The original image is long gone, but the architecture remains structurally capable of the same alignment today.
+
+### Post-Solanki History
+The Solanki dynasty fell to the Delhi Sultanate in the 13th century. The temple was damaged — the main icon removed and worship formally discontinued (the temple was never reconsecrated, which is why the ASI can manage it). It then fell into centuries of quiet witness, visited by travellers including James Forbes who described it in the 18th century as "the most perfect specimen of Hindu architecture I have seen in India."`,
+
+      architecture: `## Decoding Modhera: An Architectural Analysis
+
+### The Three-Part Composition
+The Modhera complex is a masterclass in **axial temple planning**. Moving from east to west along the sacred axis, you encounter three distinct but unified components:
+
+**1. Surya Kund (Stepped Tank)** — A 176-step tank (kund) of perfect bilateral symmetry, its descending geometry creating 108 miniature shrines in the steps. The number 108 is cosmologically significant in Hinduism. The kund is not merely utilitarian (for ritual bathing) but a three-dimensional mandala — a geometric diagram of the cosmos — that pilgrims traverse physically as a meditation.
+
+**2. Sabha Mandapa (Assembly Hall)** — The pillared hall where devotees gathered before entering the sanctum. Its 52 pillars represent the weeks of the year in the Solanki calendar system. Each pillar carries narrative reliefs — episodes from the Ramayan, Mahabharat, and the Puranas — turning the hall into a visual library of sacred literature.
+
+**3. Garbhagriha (Sanctum Sanctorum)** — The innermost shrine, now imageless, but architecturally the most sophisticated. The exterior walls are divided into **projecting and receding planes** that create a rhythmic play of light and shadow throughout the day — effectively making the building a sundial that reads differently at every hour.
+
+### The Carving Philosophy
+No surface at Modhera is uncarved — yet it never feels chaotic. The Solanki master-builders applied a strict **hierarchical programme**: lowest registers carry celestial maidens (apsaras) and secular scenes; middle registers carry gods and their vehicles; upper registers near the shikhara carry increasingly abstract geometric forms as one approaches the divine. The carving is a cosmological instruction manual in stone.
+
+### Material & Technique
+Built entirely of **golden sandstone** quarried from the Deccan, Modhera's warm ochre colour shifts through amber, rose, and honey as the sun moves. The stone was carved after placement — meaning the sculptors worked with the building's light conditions in mind.`,
+
+      culture: `## The Living Spirit of Modhera
+
+### Beyond the Archaeological Monument
+The Archaeological Survey of India manages Modhera as a protected monument — no active worship occurs here. Yet Modhera is emphatically not dead. Every January, the site comes alive for the **Modhera Dance Festival (Uttarardh Mahotsav)**, a three-day classical dance festival where performances of Bharatanatyam, Odissi, Kuchipudi, and Kathak are staged against the illuminated temple backdrop. Artists from across India consider it among the most spiritually charged performance venues in the country.
+
+### The Solar Mythology
+The cult of Surya (Sun worship) was widespread in medieval Gujarat and Rajasthan. The Solanki kings traced their lineage to the Sun — they were **Suryavanshi** (Solar dynasty). The temple at Modhera was not merely religious infrastructure but dynastic propaganda of the most sophisticated kind: our king is descended from the force that governs all life.
+
+The **equinox alignment** of the temple — where sunrise illuminates the sanctum precisely on the spring and autumn equinoxes — represents a profound integration of astronomy, religion, and architecture that challenged European cathedrals' solar alignments by several centuries.
+
+### The Craftsmen's Legacy
+The sculptors of Modhera belonged to a professional class of temple architects called **Sutradharas** — literally "holders of the string" (the string being the measuring cord used in Vastu Shastra, the sacred science of sacred space). Their knowledge was transmitted through hereditary guilds. Some of those craft families still exist in villages near Modhera, though now working primarily in the handicraft market. The Sompura community of temple architects in Gujarat traces direct lineage to Solanki-era builders.`,
+
+      general: `## Modhera Sun Temple: Your Essential Guide
+
+### The First Impression
+Nothing quite prepares you for the **Surya Kund** — the great stepped tank that announces the temple complex. Descending from the entrance, you suddenly see it: a perfect square of descending stone steps, each level punctuated by miniature shrines, the geometry so precise it appears computational. At dawn or dusk, the water (when present) mirrors the entire composition, doubling its impact.
+
+### The Golden Hour Rule
+Modhera was **designed for sunlight**. The sandstone shifts from pale gold at noon to deep amber at golden hour to rose-grey at dusk. The sculptural reliefs — invisible in flat midday light — spring into sharp relief when the sun is low. Plan to arrive at either sunrise (spectacular, and crowd-free) or 90 minutes before sunset.
+
+### Three Moments That Will Stay With You
+**1. Stand at the kund's eastern edge at dawn** — the temple axis frames the sunrise with the Sabha Mandapa and sanctum aligned perfectly. You are standing where 11th-century pilgrims stood for the same view.
+
+**2. Find a quiet pillar in the Sabha Mandapa and study just one panel** — the narrative reliefs contain entire Puranic stories compressed into a few square feet of carved stone. Each panel rewards 10 minutes of attention.
+
+**3. The equinox visit (March 20–21 or Sept 22–23)** — if timing permits, the sunrise alignment for which the temple was built still functions perfectly after 1000 years. The experience is remarkable.
+
+### Practical Information
+Modhera is 100km from Ahmedabad (2-hour drive). The nearest town is Mehsana. Allow 3–4 hours for a proper visit. The on-site ASI museum contains recovered sculpture fragments and provides important context for the carvings. A licensed guide is highly recommended — the iconographic programme of the temple is dense and rewards explanation.`
+    }
+  };
+
+  return stories[site]?.[interest] || stories[site]?.['general'] || 'Content unavailable for this selection.';
+}
+
+function getVisitorFlowDemo(site) {
+  const data = VISITOR_DATA[site];
+  const siteName = SITES[site].name;
+  return `## Visitor Flow Intelligence Report — ${siteName}
+
+**Analysis Timestamp:** ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })} IST  
+**Current Site Load:** ${data.currentLoad}% capacity  
+**Peak Window:** ${data.peakHour}  
+**Average Visit Duration:** ${data.avgStay}
+
+---
+
+### Immediate Recommendations
+
+${data.suggestions.map((s, i) => `**${i+1}.** ${s}`).join('\n\n')}
+
+---
+
+### Crowd Management Intelligence
+
+Based on current visitor distribution patterns, the following interventions are recommended for the next 6-hour window:
+
+- **Dynamic signage** at primary entry points should display real-time crowd levels for each zone
+- **Staggered group entry** for tour groups (minimum 30-minute intervals between groups >15 persons)
+- **Alternative routing** via secondary lanes reduces peak congestion by an estimated 22–35%
+
+---
+
+### Predictive Outlook
+
+Weekend visitor volumes are projected to be **40–60% higher** than current levels. Pre-positioning additional visitor management staff at identified hotspots is recommended by Friday 18:00.`;
+}
+
+function getConservationReportDemo(site) {
+  const siteInfo = SITES[site];
+  const conservData = CONSERVATION_DATA[site];
+  const criticalStructural = conservData.structuralAlerts.filter(a => a.severity === 'critical').length;
+  const criticalEncroach = conservData.encroachmentAlerts.filter(a => a.severity === 'critical').length;
+
+  return `# Conservation Intelligence Report
+## ${siteInfo.name}
+
+**Report Generated:** ${new Date().toLocaleDateString('en-IN')}  
+**Classification:** Heritage Authority — Internal Use  
+**Powered by:** IBM Granite Heritage AI
+
+---
+
+## Executive Summary
+
+The ${siteInfo.name} is currently assessed at **${siteInfo.riskLevel} Risk** level based on integrated structural monitoring data, encroachment observations, visitor load analysis, and ongoing conservation project status.
+
+${criticalStructural > 0 ? `⚠️ **${criticalStructural} critical structural alert(s)** require immediate attention.` : '✅ No critical structural alerts at this time.'}
+${criticalEncroach > 0 ? `⚠️ **${criticalEncroach} critical encroachment incident(s)** require legal/administrative action.` : '✅ No critical encroachment incidents at this time.'}
+
+---
+
+## Structural Health Assessment
+
+${conservData.structuralAlerts.map(a => `### [${a.id}] ${a.location}
+**Severity:** ${a.severity.toUpperCase()} | **Reported:** ${a.reported}
+**Issue:** ${a.issue}
+**Recommended Action:** ${a.recommendation}`).join('\n\n')}
+
+---
+
+## Encroachment Observations
+
+${conservData.encroachmentAlerts.map(a => `### [${a.id}] ${a.location}
+**Priority:** ${a.severity.toUpperCase()} | **Detected:** ${a.detected}
+**Observation:** ${a.issue}
+**Recommended Action:** ${a.recommendation}`).join('\n\n')}
+
+---
+
+## Active Conservation Projects
+
+${conservData.conservationProjects.map(p => `- **${p.name}** — ${p.progress}% complete | Budget: ${p.budget} | Lead: ${p.lead}`).join('\n')}
+
+---
+
+## Priority Action Matrix
+
+| Priority | Action | Timeline | Lead Agency |
+|----------|--------|----------|-------------|
+| CRITICAL | Structural assessment — critical alert locations | Within 48 hours | Conservation Engineer |
+| HIGH | Legal notice — critical encroachment sites | Within 7 days | Heritage Cell |
+| MEDIUM | Visitor load reduction — hotspot zones | This week | Site Manager |
+| ONGOING | Progress review — active conservation projects | Monthly | Project Leads |
+
+---
+
+*This report was generated by the Heritage Intelligence Platform's Conservation Reporting Agent using IBM Granite LLM. All structural and encroachment data should be verified by qualified professionals before regulatory action.*`;
+}
+
+// ── RENDER ENGINE ──────────────────────────────────────────────────
+function setState(partial) {
+  Object.assign(state, partial);
+  render();
+}
+
+function render() {
+  const app = document.getElementById('app');
+  app.innerHTML = '';
+
+  if (state.showApiModal) renderApiModal(app);
+
+  const nav = renderNav();
+  app.appendChild(nav);
+
+  const main = document.createElement('main');
+  if (state.view === 'landing') renderLanding(main);
+  else if (state.view === 'tourist') renderTourist(main);
+  else if (state.view === 'authority') renderAuthority(main);
+  else if (state.view === 'agents') renderAgents(main);
+  else if (state.view === 'emergency') renderEmergency(main);
+  app.appendChild(main);
+
+  renderFooter(app);
+}
+// ── NAV ───────────────────────────────────────────────────────────
+function renderNav() {
+  const el = document.createElement('nav');
+  el.className = 'sticky top-0 z-50 bg-stone-900 border-b border-stone-700';
+  el.innerHTML = `
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-14">
+      <button onclick="setState({view:'landing',site:null,interest:null,mode:null,results:{}})"
+        class="flex items-center gap-2 text-white font-semibold tracking-tight hover:text-amber-400 transition-colors">
+        <span class="text-xl">🏛</span>
+        <span class="font-display" style="font-family:'Playfair Display',serif;font-size:15px;">Heritage Intelligence</span>
+        <span class="hidden sm:inline text-stone-400 text-xs font-normal ml-1">Platform</span>
+      </button>
+      <div class="flex items-center gap-1 flex-wrap">
+        ${['landing','tourist','authority','agents','emergency'].map(v => `
+          <button onclick="setState({view:'${v}'})"
+            class="px-3 py-1.5 text-xs font-medium rounded transition-colors ${state.view===v ? (v==='emergency'?'bg-red-700 text-white':'bg-amber-600 text-white') : (v==='emergency'?'text-red-400 hover:text-white hover:bg-red-800 border border-red-800':'text-stone-300 hover:text-white hover:bg-stone-700')}">
+            ${v==='landing'?'Home':v==='tourist'?'Tourist':v==='authority'?'Authority':v==='agents'?'Agents':'🚨 Emergency'}
+          </button>`).join('')}
+        <button onclick="setState({showApiModal:true})"
+          class="ml-2 px-3 py-1.5 text-xs font-medium rounded border ${state.graniteConnected?'border-green-500 text-green-400':state.apiKeySet?'border-amber-500 text-amber-300':'border-stone-500 text-stone-300'} hover:bg-stone-700 transition-colors">
+          ${state.graniteConnected ? '🟢 Granite Live' : state.apiKeySet ? '🔑 Key Set · Demo' : '🔑 API Key'}
+        </button>
+      </div>
+    </div>`;
+  return el;
+}
+
+// ── LANDING ────────────────────────────────────────────────────────
+function renderLanding(el) {
+  el.innerHTML = `
+  <!-- Hero -->
+  <section class="gradient-hero text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-20 lg:py-28">
+      <div class="max-w-3xl fade-in">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="agent-chip bg-amber-700 text-amber-200">AI-Powered</span>
+          <span class="agent-chip bg-stone-700 text-stone-300">IBM Granite</span>
+          <span class="agent-chip bg-teal-800 text-teal-200">UNESCO Heritage</span>
+        </div>
+        <h1 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.5rem);line-height:1.15;font-weight:700;" class="mb-5">
+          Heritage Intelligence<br/>Platform
+        </h1>
+        <p class="text-stone-300 text-lg leading-relaxed mb-8 max-w-2xl">
+          An AI-powered conservation and cultural engagement system for Ahmedabad's Walled City and the Modhera Sun Temple —
+          connecting tourists with living heritage while giving authorities actionable conservation intelligence.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <button onclick="setState({view:'tourist',site:null,interest:null,mode:'tourist'})"
+            class="px-6 py-3 bg-amber-600 hover:bg-amber-500 text-white font-semibold rounded-lg transition-colors">
+            🗺 Explore as Tourist
+          </button>
+          <button onclick="setState({view:'authority',mode:'authority'})"
+            class="px-6 py-3 bg-stone-700 hover:bg-stone-600 text-white font-semibold rounded-lg border border-stone-500 transition-colors">
+            🏛 Heritage Authority Dashboard
+          </button>
+          <button onclick="setState({view:'agents'})"
+            class="px-6 py-3 bg-transparent hover:bg-stone-700 text-stone-300 hover:text-white font-medium rounded-lg border border-stone-600 transition-colors">
+            🤖 View AI Agents
+          </button>
+          <button onclick="setState({view:'emergency',emergencyStep:0,emergencyRunning:false})"
+            class="px-6 py-3 bg-red-800 hover:bg-red-700 text-white font-semibold rounded-lg border border-red-600 transition-colors flex items-center gap-2">
+            🚨 Run Heritage Emergency Simulation
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sites -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
+    <h2 style="font-family:'Playfair Display',serif;" class="text-2xl font-semibold text-stone-800 mb-2">Heritage Sites</h2>
+    <p class="text-stone-500 mb-8">Two extraordinary sites, one integrated intelligence platform.</p>
+    <div class="grid md:grid-cols-2 gap-6">
+      ${Object.entries(SITES).map(([id, site]) => `
+        <div class="card-hover bg-white rounded-xl border border-stone-200 p-6 cursor-pointer"
+             onclick="setState({view:'tourist',site:'${id}',mode:'tourist'})">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <span class="text-4xl">${site.image}</span>
+            </div>
+            <span class="agent-chip ${id==='walled-city'?'bg-amber-100 text-amber-700':'bg-teal-100 text-teal-700'}">
+              ${site.riskLevel} Risk
+            </span>
+          </div>
+          <h3 style="font-family:'Playfair Display',serif;" class="text-xl font-semibold text-stone-800 mb-1">${site.name}</h3>
+          <p class="text-amber-600 text-sm font-medium mb-3">${site.subtitle}</p>
+          <p class="text-stone-500 text-sm leading-relaxed mb-4">${site.desc}</p>
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            ${[['📍','Location',site.coords],['📅','Period',site.period],['👥','Daily Visitors',site.visitors],['🏛','Monuments',site.monuments]].map(([icon,label,val])=>`
+            <div class="bg-stone-50 rounded-lg p-2">
+              <div class="text-stone-400">${icon} ${label}</div>
+              <div class="font-semibold text-stone-700 mt-0.5">${val}</div>
+            </div>`).join('')}
+          </div>
+        </div>`).join('')}
+    </div>
+  </section>
+
+  <!-- Agent Overview Strip -->
+  <section class="bg-stone-900 py-14">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-10">
+        <h2 style="font-family:'Playfair Display',serif;" class="text-2xl font-semibold text-white mb-2">Five Specialised AI Agents</h2>
+        <p class="text-stone-400">Powered by IBM Granite Large Language Model</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+        ${[
+          {icon:'📖', name:'Heritage Storytelling', desc:'Personalised cultural narratives for each visitor', color:'amber'},
+          {icon:'🚶', name:'Visitor Flow', desc:'Crowd analysis & intelligent routing suggestions', color:'blue'},
+          {icon:'📊', name:'Conservation Reports', desc:'AI-synthesised condition & action reports', color:'green'},
+          {icon:'🔍', name:'Encroachment Detection', desc:'Boundary monitoring & alert triage', color:'orange'},
+          {icon:'🏗', name:'Structural Health', desc:'Structural condition monitoring & risk alerts', color:'red'},
+        ].map(a => `
+        <div class="bg-stone-800 rounded-xl p-4 border border-stone-700 text-center">
+          <div class="text-3xl mb-2">${a.icon}</div>
+          <div class="text-white text-sm font-semibold mb-1">${a.name}</div>
+          <div class="text-stone-400 text-xs leading-relaxed">${a.desc}</div>
+        </div>`).join('')}
+      </div>
+    </div>
+  </section>
+
+  <!-- Emergency CTA Section -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+    <div class="bg-gradient-to-r from-stone-900 via-red-950 to-stone-900 rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 border border-red-900">
+      <div class="flex items-start gap-4">
+        <span class="text-4xl mt-1">🚨</span>
+        <div>
+          <h2 style="font-family:'Playfair Display',serif;" class="text-xl font-bold text-white mb-1">Heritage Emergency & Decision Center</h2>
+          <p class="text-stone-300 text-sm leading-relaxed max-w-xl">
+            See multiple AI agents coordinate a real-world conservation decision.
+            Watch the Structural, Visitor Flow, Conservation and Encroachment agents combine their findings
+            through the Heritage Intelligence Orchestrator to produce a unified emergency action plan.
+          </p>
+          <div class="flex flex-wrap gap-2 mt-3">
+            <span class="agent-chip bg-red-900 text-red-200">Cross-Agent Intelligence</span>
+            <span class="agent-chip bg-stone-700 text-stone-300">Orchestrated Decision-Making</span>
+            <span class="agent-chip bg-amber-900 text-amber-200">Demo Simulation</span>
+          </div>
+        </div>
+      </div>
+      <button onclick="setState({view:'emergency',emergencyStep:0,emergencyRunning:false})"
+        class="flex-shrink-0 px-8 py-4 bg-red-700 hover:bg-red-600 text-white font-bold rounded-xl transition-colors text-sm whitespace-nowrap border border-red-500">
+        🚨 Run Emergency Simulation
+      </button>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
+      ${[
+        ['600+','Years of continuous urban heritage in the Walled City','Historical fact'],
+        ['1026 CE','Year the Modhera Sun Temple was commissioned','Historical fact'],
+        ['26','Heritage monuments in ASI / AMC monitoring scope','Reference figure'],
+        ['~6,050','Average daily visitors across both sites — demo estimate','Demo estimate'],
+      ].map(([num, label, tag]) => `
+      <div class="text-center">
+        <div style="font-family:'Playfair Display',serif;font-size:2rem;color:#b45309;font-weight:700;">${num}</div>
+        <div class="text-stone-500 text-sm mt-1 leading-snug">${label}</div>
+        <div class="text-stone-300 text-xs mt-1">${tag}</div>
+      </div>`).join('')}
+    </div>
+
+    <!-- Data Provenance Notice -->
+    <div class="bg-stone-50 border border-stone-200 rounded-xl p-5 max-w-3xl mx-auto">
+      <div class="flex items-start gap-3">
+        <span class="text-stone-400 text-lg mt-0.5">ℹ</span>
+        <div>
+          <div class="font-semibold text-stone-700 text-sm mb-1">Data Provenance & Demo Notice</div>
+          <p class="text-stone-500 text-xs leading-relaxed">
+            All visitor load figures, hotspot percentages, structural alerts, encroachment observations, and
+            conservation project metrics shown in this platform are <strong>representative demonstration data</strong>
+            created to illustrate the platform's capabilities and architecture. No live sensors, CCTV feeds,
+            satellite imagery, drone data, or government databases are currently connected.
+          </p>
+          <p class="text-stone-400 text-xs leading-relaxed mt-2">
+            The architecture is designed for future integration with: ticketing &amp; CCTV visitor counting systems,
+            IoT structural sensors (vibration, crack-width, moisture), ASI &amp; AMC survey data,
+            satellite and drone imagery for encroachment detection, and relevant heritage authority data sources.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>`;
+}
+
+// ── TOURIST ────────────────────────────────────────────────────────
+function renderTourist(el) {
+  el.className = 'max-w-7xl mx-auto px-4 sm:px-6 py-10';
+
+  let html = `<div class="fade-in">
+    <div class="mb-8">
+      <h1 style="font-family:'Playfair Display',serif;" class="text-3xl font-bold text-stone-800 mb-1">Tourist Experience</h1>
+      <p class="text-stone-500">Select a heritage site and your interests for a personalised cultural journey.</p>
+    </div>
+
+    <!-- Step 1: Site Selector -->
+    <div class="mb-8">
+      <h2 class="text-xs font-semibold text-stone-400 uppercase tracking-wider mb-3">Step 1 — Choose Your Site</h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        ${Object.entries(SITES).map(([id, site]) => `
+          <button onclick="setState({site:'${id}',interest:null,results:{}})"
+            class="card-hover text-left rounded-xl border-2 p-5 transition-all ${state.site===id ? 'border-amber-500 bg-amber-50' : 'border-stone-200 bg-white hover:border-stone-300'}">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="text-3xl">${site.image}</span>
+              <div>
+                <div class="font-semibold text-stone-800">${site.name}</div>
+                <div class="text-xs text-stone-500">${site.subtitle}</div>
+              </div>
+              ${state.site===id ? '<span class="ml-auto text-amber-600 text-lg">✓</span>' : ''}
+            </div>
+          </button>`).join('')}
+      </div>
+    </div>`;
+
+  if (state.site) {
+    html += `
+    <!-- Step 2: Interest Selector -->
+    <div class="mb-8 fade-in">
+      <h2 class="text-xs font-semibold text-stone-400 uppercase tracking-wider mb-3">Step 2 — What Interests You?</h2>
+      <div class="flex flex-wrap gap-3">
+        ${[['history','📜','History & Origins'],['architecture','🏗','Architecture & Design'],['culture','🎭','Culture & Traditions'],['general','🌟','General Overview']].map(([id,icon,label]) => `
+          <button onclick="setInterest('${id}')"
+            class="flex items-center gap-2 px-4 py-2.5 rounded-lg border-2 font-medium text-sm transition-all ${state.interest===id ? 'border-amber-500 bg-amber-50 text-amber-700' : 'border-stone-200 bg-white text-stone-600 hover:border-stone-300'}">
+            ${icon} ${label}
+          </button>`).join('')}
+      </div>
+    </div>`;
+  }
+
+  if (state.site && state.interest) {
+    const loading = state.loading['storytelling'];
+    const result = state.results['storytelling'];
+    html += `
+    <!-- Storytelling Agent -->
+    <div class="mb-8 fade-in">
+      <div class="flex items-center justify-between mb-3">
+        <div class="flex items-center gap-2">
+          <span class="text-xl">📖</span>
+          <h2 class="font-semibold text-stone-800">Personalised Heritage Storytelling Agent</h2>
+          <span class="agent-chip bg-amber-100 text-amber-700">IBM Granite</span>
+          ${result && isResultDemo('storytelling') ? '<span class="agent-chip bg-stone-100 text-stone-500">Demo Mode</span>' : ''}
+          ${result && !isResultDemo('storytelling') ? '<span class="agent-chip bg-green-100 text-green-700">Granite Live</span>' : ''}
+        </div>
+        ${!result && !loading ? `<button onclick="callGranite('storytelling')"
+            class="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white text-sm font-semibold rounded-lg transition-colors">
+            Generate Story ✨
+          </button>` : ''}
+        ${result ? `<button onclick="clearResult('storytelling')"
+            class="px-3 py-1.5 text-xs text-stone-500 hover:text-stone-700 border border-stone-200 rounded-lg">
+            ↺ Regenerate
+          </button>` : ''}
+      </div>
+      <div class="bg-white rounded-xl border border-stone-200 overflow-hidden">
+        ${loading ? `
+          <div class="p-8 text-center">
+            <div class="inline-block w-8 h-8 border-2 border-amber-600 border-t-transparent rounded-full spinner mb-3"></div>
+            <div class="text-stone-500 text-sm">Generating your personalised heritage experience...</div>
+            <div class="text-stone-400 text-xs mt-1">${state.apiKey ? 'Calling IBM Granite API…' : 'Running in demo mode — loading curated narrative'}</div>
+          </div>` : result ? `
+          ${isResultDemo('storytelling') ? '<div class="px-6 pt-4 pb-0"><div class="bg-amber-50 border border-amber-200 rounded-lg px-4 py-2 text-xs text-amber-700 font-medium">📋 Demo Mode — Curated narrative. Connect IBM Granite API for live AI-generated content.</div></div>' : '<div class="px-6 pt-4 pb-0"><div class="bg-green-50 border border-green-200 rounded-lg px-4 py-2 text-xs text-green-700 font-medium">✅ IBM Granite Live — Response generated by ibm/granite-13b-instruct-v2</div></div>'}
+          <div class="p-6 prose prose-sm max-w-none text-stone-700 leading-relaxed">
+            ${markdownToHtml(getResultText('storytelling'))}
+          </div>` : `
+          <div class="p-8 text-center text-stone-400">
+            <div class="text-4xl mb-3">📖</div>
+            <div class="font-medium text-stone-600 mb-1">Ready to generate your story</div>
+            <div class="text-sm">Click "Generate Story" to create a personalised cultural experience based on your selections.<br/><span class="text-xs">${state.apiKey ? 'IBM Granite API key set — will attempt live generation.' : 'Running in demo mode — no API key required.'}</span></div>
+          </div>`}
+      </div>
+    </div>`;
+
+    // Visitor Flow Panel
+    const vd = VISITOR_DATA[state.site];
+    html += `
+    <div class="mb-8 fade-in">
+      <div class="flex items-center gap-2 mb-3">
+        <span class="text-xl">🚶</span>
+        <h2 class="font-semibold text-stone-800">Visitor Flow — Current Conditions</h2>
+        <span class="agent-chip bg-stone-100 text-stone-500">Demo Data</span>
+      </div>
+      <div class="bg-amber-50 border border-amber-200 rounded-lg px-4 py-2 mb-3 text-xs text-amber-700">
+        📋 <strong>Demo Mode:</strong> Visitor load figures, hotspot percentages and suggestions below are representative simulation data for demonstration purposes.
+      </div>
+      <div class="grid lg:grid-cols-3 gap-4">
+        <div class="bg-white rounded-xl border border-stone-200 p-5">
+          <div class="text-xs font-semibold text-stone-400 uppercase mb-3">Site Load <span class="text-stone-300 font-normal normal-case">(simulated)</span></div>
+          <div class="flex items-end gap-2 mb-3">
+            <span class="text-4xl font-bold ${vd.currentLoad>80?'text-red-600':vd.currentLoad>60?'text-orange-500':'text-green-600'}">${vd.currentLoad}%</span>
+            <span class="text-stone-400 text-sm mb-1">capacity</span>
+          </div>
+          <div class="progress-bar mb-2">
+            <div class="progress-fill ${vd.currentLoad>80?'bg-red-500':vd.currentLoad>60?'bg-orange-400':'bg-green-500'}" style="width:${vd.currentLoad}%"></div>
+          </div>
+          <div class="grid grid-cols-2 gap-2 text-xs mt-3">
+            <div class="bg-stone-50 p-2 rounded"><div class="text-stone-400">Peak Hours</div><div class="font-semibold">${vd.peakHour}</div></div>
+            <div class="bg-stone-50 p-2 rounded"><div class="text-stone-400">Avg Stay</div><div class="font-semibold">${vd.avgStay}</div></div>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl border border-stone-200 p-5">
+          <div class="text-xs font-semibold text-stone-400 uppercase mb-3">Hotspot Status</div>
+          <div class="space-y-2">
+            ${vd.hotspots.map(h => `
+              <div class="flex items-center justify-between">
+                <div class="text-xs text-stone-600 flex-1 mr-2 truncate">${h.name}</div>
+                <div class="flex items-center gap-2 flex-shrink-0">
+                  <div class="progress-bar w-16" style="height:4px;">
+                    <div class="progress-fill ${h.status==='critical'?'bg-red-500':h.status==='warning'?'bg-orange-400':'bg-green-500'}" style="width:${h.load}%"></div>
+                  </div>
+                  <span class="text-xs font-medium w-8 text-right ${h.status==='critical'?'text-red-600':h.status==='warning'?'text-orange-500':'text-green-600'}">${h.load}%</span>
+                </div>
+              </div>`).join('')}
+          </div>
+        </div>
+        <div class="bg-white rounded-xl border border-stone-200 p-5">
+          <div class="text-xs font-semibold text-stone-400 uppercase mb-3">Suggested Actions <span class="font-normal text-stone-300 normal-case">(demo)</span></div>
+          <div class="space-y-2">
+            ${vd.suggestions.slice(0,3).map((s,i) => `
+              <div class="flex gap-2 text-xs text-stone-600">
+                <span class="text-amber-500 font-bold mt-0.5 flex-shrink-0">${i+1}.</span>
+                <span class="leading-relaxed">${s.substring(0,120)}${s.length>120?'…':''}</span>
+              </div>`).join('')}
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  html += '</div>';
+  el.innerHTML = html;
+}
+
+// ── AUTHORITY ──────────────────────────────────────────────────────
+function renderAuthority(el) {
+  el.className = 'max-w-7xl mx-auto px-4 sm:px-6 py-10';
+
+  // Site selector
+  let siteSelector = `
+    <div class="fade-in">
+      <div class="mb-8">
+        <h1 style="font-family:'Playfair Display',serif;" class="text-3xl font-bold text-stone-800 mb-1">Authority Dashboard</h1>
+        <p class="text-stone-500">Conservation intelligence, structural monitoring, and encroachment management.</p>
+      </div>
+      <div class="mb-8">
+        <h2 class="text-xs font-semibold text-stone-400 uppercase tracking-wider mb-3">Select Site</h2>
+        <div class="flex flex-wrap gap-3">
+          ${Object.entries(SITES).map(([id, site]) => `
+            <button onclick="setState({site:'${id}',authTab:'overview',results:{}})"
+              class="flex items-center gap-2 px-4 py-2.5 rounded-lg border-2 font-medium text-sm transition-all ${state.site===id ? 'border-amber-500 bg-amber-50 text-amber-700' : 'border-stone-200 bg-white text-stone-600 hover:border-stone-300'}">
+              ${site.image} ${site.name}
+            </button>`).join('')}
+        </div>
+      </div>`;
+
+  if (!state.site) {
+    el.innerHTML = siteSelector + `
+      <div class="bg-white rounded-xl border border-stone-200 p-12 text-center text-stone-400">
+        <div class="text-5xl mb-4">🏛</div>
+        <div class="text-lg font-medium text-stone-600 mb-2">Select a heritage site</div>
+        <div class="text-sm">Choose Ahmedabad Walled City or Modhera Sun Temple to access the conservation dashboard.</div>
+      </div>
+    </div>`;
+    return;
+  }
+
+  const site = SITES[state.site];
+  const conservData = CONSERVATION_DATA[state.site];
+
+  const tabs = [
+    { id: 'overview', label: 'Overview', icon: '📊' },
+    { id: 'visitor', label: 'Visitor Flow', icon: '🚶' },
+    { id: 'conservation', label: 'Conservation', icon: '🔧' },
+    { id: 'encroachment', label: 'Encroachment', icon: '🔍' },
+    { id: 'structural', label: 'Structural', icon: '🏗' },
+    { id: 'report', label: 'AI Report', icon: '📋' },
+  ];
+
+  let html = siteSelector + `
+    <!-- Site Header -->
+    <div class="bg-white rounded-xl border border-stone-200 p-5 mb-6 fade-in">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <span class="text-4xl">${site.image}</span>
+          <div>
+            <h2 style="font-family:'Playfair Display',serif;" class="text-xl font-semibold text-stone-800">${site.name}</h2>
+            <p class="text-stone-500 text-sm">${site.subtitle}</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 flex-wrap">
+          <span class="agent-chip ${site.riskLevel==='High'?'status-critical':site.riskLevel==='Moderate'?'status-warning':'status-good'} px-3 py-1 rounded-lg text-xs font-semibold">
+            ${site.riskLevel==='High'?'🔴':'🟡'} ${site.riskLevel} Risk
+          </span>
+          <span class="text-xs text-stone-500 bg-stone-100 px-3 py-1 rounded-lg">${site.conservationStatus}</span>
+          <span class="flex items-center gap-1 text-xs bg-stone-100 text-stone-500 px-2 py-1 rounded-lg">
+            📋 Demo Mode
+          </span>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4 pt-4 border-t border-stone-100">
+        ${[['Area',site.area,'📐'],['Daily Visitors',site.visitors,'👥'],['Monuments',site.monuments,'🏛'],['Type',site.type,'📌']].map(([label,val,icon])=>`
+        <div>
+          <div class="text-xs text-stone-400">${icon} ${label}</div>
+          <div class="text-sm font-semibold text-stone-700 mt-0.5">${val}</div>
+        </div>`).join('')}
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="border-b border-stone-200 mb-6">
+      <div class="flex overflow-x-auto gap-0">
+        ${tabs.map(t => `
+          <button onclick="setState({authTab:'${t.id}'})"
+            class="px-4 py-3 text-sm font-medium whitespace-nowrap transition-colors flex items-center gap-1.5 ${state.authTab===t.id ? 'tab-active' : 'tab-inactive hover:text-stone-600'}">
+            ${t.icon} ${t.label}
+          </button>`).join('')}
+      </div>
+    </div>
+
+    <!-- Tab Content -->
+    <div class="fade-in">`;
+
+  if (state.authTab === 'overview') {
+    const vd = VISITOR_DATA[state.site];
+    const critStructural = conservData.structuralAlerts.filter(a=>a.severity==='critical').length;
+    const critEncroach = conservData.encroachmentAlerts.filter(a=>a.severity==='critical').length;
+    html += `
+      <!-- Demo notice banner -->
+      <div class="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 mb-5 flex items-start gap-3 text-xs text-amber-700">
+        <span class="text-base mt-0.5">📋</span>
+        <div><strong>Demo Mode Dashboard:</strong> All figures below — visitor load, structural alerts, encroachment incidents and project status — are representative demonstration data designed to showcase the platform architecture. No live sensors, CCTV, satellite or government databases are currently connected.</div>
+      </div>
+      <!-- Situation summary row -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        ${[[`${vd.currentLoad}%`,'Site Load',vd.currentLoad>80?'red':vd.currentLoad>60?'orange':'green','Simulated visitor capacity'],
+           [`${conservData.structuralAlerts.length}`,`Structural Alerts`,critStructural>0?'red':'orange','Demo inspection records'],
+           [`${conservData.encroachmentAlerts.length}`,`Encroachment`,critEncroach>0?'red':'orange','Demo field observations'],
+           [`${conservData.conservationProjects.length}`,`Active Projects`,'blue','Ongoing conservation work']
+          ].map(([val,label,color,desc])=>`
+        <div class="bg-white rounded-xl border border-stone-200 p-5">
+          <div class="text-xs text-stone-400 uppercase tracking-wider mb-1">${label}</div>
+          <div class="text-3xl font-bold text-${color}-600 mb-1">${val}</div>
+          <div class="text-xs text-stone-500">${desc}</div>
+        </div>`).join('')}
+      </div>
+      <!-- Heritage risks + recommended actions row -->
+      <div class="grid lg:grid-cols-3 gap-6 mb-6">
+        <div class="bg-white rounded-xl border border-stone-200 p-5">
+          <div class="font-medium text-stone-700 mb-3 text-sm">🔴 Heritage Risks — Immediate Action</div>
+          ${[...conservData.structuralAlerts.filter(a=>a.severity==='critical').map(a=>({...a,type:'structural'})),
+             ...conservData.encroachmentAlerts.filter(a=>a.severity==='critical').map(a=>({...a,type:'encroachment'}))
+            ].length === 0 ?
+            `<div class="text-center py-4 text-stone-400 text-sm">✅ No critical alerts in demo dataset</div>` :
+            [...conservData.structuralAlerts.filter(a=>a.severity==='critical').map(a=>({...a,type:'structural'})),
+             ...conservData.encroachmentAlerts.filter(a=>a.severity==='critical').map(a=>({...a,type:'encroachment'}))
+            ].map(a=>`
+            <div class="border border-red-100 bg-red-50 rounded-lg p-3 mb-2">
+              <div class="flex items-start gap-2">
+                <span class="agent-chip status-critical mt-0.5">${a.id}</span>
+                <div>
+                  <div class="text-sm font-medium text-stone-800">${a.location}</div>
+                  <div class="text-xs text-stone-500 mt-0.5">${a.issue.substring(0,100)}…</div>
+                </div>
+              </div>
+            </div>`).join('')}
+        </div>
+        <div class="bg-white rounded-xl border border-stone-200 p-5">
+          <div class="font-medium text-stone-700 mb-3 text-sm">🔧 Conservation Projects</div>
+          ${conservData.conservationProjects.map(p=>`
+            <div class="mb-3">
+              <div class="flex justify-between text-xs mb-1">
+                <span class="font-medium text-stone-700">${p.name}</span>
+                <span class="text-stone-500">${p.progress}%</span>
+              </div>
+              <div class="progress-bar mb-1">
+                <div class="progress-fill ${p.status==='nearing'?'bg-green-500':'bg-blue-500'}" style="width:${p.progress}%"></div>
+              </div>
+              <div class="flex justify-between text-xs text-stone-400">
+                <span>${p.lead}</span><span>${p.budget}</span>
+              </div>
+            </div>`).join('')}
+        </div>
+        <div class="bg-white rounded-xl border border-stone-200 p-5">
+          <div class="font-medium text-stone-700 mb-3 text-sm">✅ Recommended Actions</div>
+          <div class="space-y-2">
+            ${(critStructural > 0 ? ['🔴 Dispatch conservation engineer for critical structural assessment within 48 hours'] : [])
+              .concat(critEncroach > 0 ? ['🔴 Issue formal notice under Heritage Conservation Act for critical encroachment'] : [])
+              .concat(vd.currentLoad > 80 ? ['🟡 Activate visitor load management — implement timed entry at hotspot zones'] : [])
+              .concat(['🔵 Review and update progress on all active conservation projects', '📋 Generate AI conservation report for full intelligence synthesis'])
+              .map(r => `<div class="flex gap-2 text-xs text-stone-600 bg-stone-50 rounded-lg p-2"><span class="flex-shrink-0 mt-0.5">›</span><span>${r}</span></div>`).join('')}
+          </div>
+        </div>
+      </div>`;
+
+  } else if (state.authTab === 'visitor') {
+    const vd = VISITOR_DATA[state.site];
+    const loading = state.loading['visitor-flow'];
+    const result = state.results['visitor-flow'];
+    html += `
+      <div class="bg-amber-50 border border-amber-200 rounded-lg px-4 py-2 mb-4 text-xs text-amber-700">
+        📋 <strong>Demo Data:</strong> Visitor load, hotspot figures, hourly flow and weekly trend data below are representative simulation data. In production, this would integrate with CCTV counting systems, ticketing, and entry gate sensors.
+      </div>
+      <div class="grid lg:grid-cols-3 gap-6 mb-6">
+        <div class="bg-white rounded-xl border border-stone-200 p-5">
+          <div class="text-xs font-semibold text-stone-400 uppercase mb-3">Site Load <span class="font-normal text-stone-300 normal-case">(simulated)</span></div>
+          <div class="flex items-end gap-2 mb-3">
+            <span class="text-5xl font-bold ${vd.currentLoad>80?'text-red-600':vd.currentLoad>60?'text-orange-500':'text-green-600'}">${vd.currentLoad}%</span>
+          </div>
+          <div class="progress-bar mb-3">
+            <div class="progress-fill ${vd.currentLoad>80?'bg-red-500':vd.currentLoad>60?'bg-orange-400':'bg-green-500'}" style="width:${vd.currentLoad}%"></div>
+          </div>
+          <div class="space-y-2 text-xs">
+            <div class="flex justify-between"><span class="text-stone-400">Peak Window</span><span class="font-medium">${vd.peakHour}</span></div>
+            <div class="flex justify-between"><span class="text-stone-400">Avg Stay</span><span class="font-medium">${vd.avgStay}</span></div>
+          </div>
+        </div>
+        <div class="lg:col-span-2 bg-white rounded-xl border border-stone-200 p-5">
+          <div class="text-xs font-semibold text-stone-400 uppercase mb-3">Zone Hotspot Analysis <span class="font-normal text-stone-300 normal-case">(demo data)</span></div>
+          <div class="space-y-3">
+            ${vd.hotspots.map(h=>`
+              <div class="flex items-center gap-3">
+                <div class="w-36 text-xs text-stone-600 truncate">${h.name}</div>
+                <div class="flex-1">
+                  <div class="progress-bar">
+                    <div class="progress-fill ${h.status==='critical'?'bg-red-500':h.status==='warning'?'bg-orange-400':'bg-green-500'}" style="width:${h.load}%"></div>
+                  </div>
+                </div>
+                <div class="w-12 text-xs font-bold text-right ${h.status==='critical'?'text-red-600':h.status==='warning'?'text-orange-500':'text-green-600'}">${h.load}%</div>
+                <span class="agent-chip text-xs px-2 py-0.5 ${h.status==='critical'?'status-critical':h.status==='warning'?'status-warning':'status-good'}">${h.status}</span>
+              </div>`).join('')}
+          </div>
+        </div>
+      </div>
+      <!-- Hourly flow chart -->
+      <div class="bg-white rounded-xl border border-stone-200 p-5 mb-6">
+        <div class="flex items-center justify-between mb-4">
+          <div class="font-medium text-stone-700 text-sm">📈 Hourly Visitor Flow — Demo Pattern (08:00–21:00)</div>
+          <span class="agent-chip bg-stone-100 text-stone-500 text-xs">Simulated Data</span>
+        </div>
+        <div class="flex items-end gap-1 h-24">
+          ${vd.hourlyFlow.map((v,i)=>{
+            const maxV = Math.max(...vd.hourlyFlow);
+            const pct = Math.round((v/maxV)*100);
+            const hour = 8+i;
+            const isPeak = hour >= parseInt(vd.peakHour) && hour <= parseInt(vd.peakHour)+2;
+            return `<div class="flex-1 flex flex-col items-center gap-1" title="${hour}:00 — ${v} visitors (demo)">
+              <div class="w-full rounded-t ${pct>80?'bg-red-400':pct>60?'bg-orange-400':'bg-blue-400'} ${isPeak?'ring-1 ring-amber-500':''}" style="height:${pct}%;min-height:4px;"></div>
+              <div class="text-stone-300 text-xs" style="font-size:9px;">${hour}</div>
+            </div>`;
+          }).join('')}
+        </div>
+        <div class="text-xs text-stone-400 mt-2 text-center">Hover bars for details · Peak hour highlighted</div>
+      </div>
+      <!-- Weekly trend -->
+      <div class="bg-white rounded-xl border border-stone-200 p-5 mb-6">
+        <div class="flex items-center justify-between mb-4">
+          <div class="font-medium text-stone-700 text-sm">📅 Weekly Visitor Trend — Demo Pattern</div>
+          <span class="agent-chip bg-stone-100 text-stone-500 text-xs">Simulated Data</span>
+        </div>
+        <div class="flex items-end gap-2 h-16">
+          ${vd.weeklyTrend.map((v,i)=>{
+            const days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+            const maxV = Math.max(...vd.weeklyTrend);
+            const pct = Math.round((v/maxV)*100);
+            return `<div class="flex-1 flex flex-col items-center gap-1">
+              <div class="w-full rounded-t bg-teal-500 opacity-80" style="height:${pct}%;min-height:4px;"></div>
+              <div class="text-stone-400 text-xs" style="font-size:9px;">${days[i]}</div>
+            </div>`;
+          }).join('')}
+        </div>
+      </div>
+      <div class="bg-white rounded-xl border border-stone-200 p-5 mb-6">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-2">
+            <span class="font-medium text-stone-700 text-sm">🚶 Visitor Flow Management Agent</span>
+            <span class="agent-chip bg-blue-100 text-blue-700">IBM Granite</span>
+            ${getResultText('visitor-flow') && isResultDemo('visitor-flow') ? '<span class="agent-chip bg-stone-100 text-stone-500">Demo Mode</span>' : ''}
+            ${getResultText('visitor-flow') && !isResultDemo('visitor-flow') ? '<span class="agent-chip bg-green-100 text-green-700">Granite Live</span>' : ''}
+          </div>
+          ${!getResultText('visitor-flow') && !loading ? `<button onclick="callGranite('visitor-flow')"
+              class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold rounded-lg">
+              Generate Analysis ✨
+            </button>` : ''}
+          ${getResultText('visitor-flow') ? `<button onclick="clearResult('visitor-flow')" class="px-3 py-1.5 text-xs text-stone-500 hover:text-stone-700 border border-stone-200 rounded-lg">↺ Regenerate</button>` : ''}
+        </div>
+        ${loading ? `<div class="py-8 text-center"><div class="inline-block w-8 h-8 border-2 border-blue-600 border-t-transparent rounded-full spinner mb-3"></div><div class="text-stone-500 text-sm">Analysing visitor patterns…</div><div class="text-xs text-stone-400 mt-1">${state.apiKey ? 'Calling IBM Granite…' : 'Demo mode — loading analysis'}</div></div>`
+          : getResultText('visitor-flow') ? `
+          ${isResultDemo('visitor-flow') ? '<div class="mb-3 bg-amber-50 border border-amber-200 rounded-lg px-4 py-2 text-xs text-amber-700 font-medium">📋 Demo Mode — Analysis based on simulated visitor data.</div>' : '<div class="mb-3 bg-green-50 border border-green-200 rounded-lg px-4 py-2 text-xs text-green-700 font-medium">✅ IBM Granite Live</div>'}
+          <div class="prose prose-sm max-w-none text-stone-700">${markdownToHtml(getResultText('visitor-flow'))}</div>`
+          : `<div class="py-6 text-center text-stone-400 text-sm">Click "Generate Analysis" for AI-powered visitor flow recommendations based on the demo dataset.</div>`}
+      </div>`;
+
+  } else if (state.authTab === 'conservation') {
+    html += `
+      <div class="space-y-4">
+        ${conservData.conservationProjects.map(p=>`
+          <div class="bg-white rounded-xl border border-stone-200 p-5">
+            <div class="flex flex-wrap items-start justify-between gap-3 mb-3">
+              <div>
+                <h3 class="font-semibold text-stone-800">${p.name}</h3>
+                <div class="text-sm text-stone-500 mt-0.5">Lead: ${p.lead} · Budget: ${p.budget}</div>
+              </div>
+              <span class="agent-chip ${p.status==='nearing'?'status-good':p.status==='active'?'status-info':'bg-stone-100 text-stone-600'} text-xs">
+                ${p.status==='nearing'?'Nearing Completion':p.status==='active'?'Active':'Planned'}
+              </span>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="flex-1 progress-bar">
+                <div class="progress-fill ${p.status==='nearing'?'bg-green-500':'bg-blue-500'}" style="width:${p.progress}%"></div>
+              </div>
+              <span class="text-sm font-bold text-stone-600 w-10 text-right">${p.progress}%</span>
+            </div>
+          </div>`).join('')}
+      </div>`;
+
+  } else if (state.authTab === 'encroachment') {
+    html += `
+      <div class="mb-4 p-4 bg-amber-50 border border-amber-200 rounded-xl text-sm text-amber-700">
+        <span class="font-semibold">📋 Demo Mode — Encroachment Detection Agent:</span> Observations below are representative simulation data based on typical urban heritage encroachment patterns.
+        No satellite imagery, drone feeds or live survey databases are connected. In production, this agent would integrate with those data sources.
+      </div>
+      <div class="space-y-4">
+        ${conservData.encroachmentAlerts.map(a=>`
+          <div class="bg-white rounded-xl border-l-4 ${a.severity==='critical'?'border-red-500':'border-orange-400'} border border-stone-200 p-5">
+            <div class="flex flex-wrap items-start justify-between gap-3 mb-3">
+              <div>
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="agent-chip ${a.severity==='critical'?'status-critical':'status-warning'} text-xs">${a.id}</span>
+                  <span class="text-xs text-stone-400">${a.detected}</span>
+                </div>
+                <h3 class="font-semibold text-stone-800">${a.location}</h3>
+              </div>
+              <span class="agent-chip ${a.severity==='critical'?'status-critical':'status-warning'} font-semibold">
+                ${a.severity.toUpperCase()}
+              </span>
+            </div>
+            <p class="text-sm text-stone-600 mb-3">${a.issue}</p>
+            <div class="bg-stone-50 rounded-lg p-3 text-xs text-stone-600">
+              <span class="font-semibold text-stone-700">Recommended Action:</span> ${a.recommendation}
+            </div>
+          </div>`).join('')}
+      </div>`;
+
+  } else if (state.authTab === 'structural') {
+    html += `
+      <div class="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-xl text-sm text-blue-700">
+        <span class="font-semibold">📋 Demo Mode — Structural Health Monitoring Agent:</span> Alerts below are representative simulation data.
+        No IoT sensors, vibration monitors, crack-width gauges or moisture sensors are currently connected. In production, this agent would integrate with on-site IoT infrastructure.
+      </div>
+      <div class="space-y-4">
+        ${conservData.structuralAlerts.map(a=>`
+          <div class="bg-white rounded-xl border-l-4 ${a.severity==='critical'?'border-red-500':a.severity==='warning'?'border-orange-400':'border-blue-400'} border border-stone-200 p-5">
+            <div class="flex flex-wrap items-start justify-between gap-3 mb-3">
+              <div>
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="agent-chip ${a.severity==='critical'?'status-critical':a.severity==='warning'?'status-warning':'status-info'} text-xs">${a.id}</span>
+                  <span class="text-xs text-stone-400">${a.reported}</span>
+                </div>
+                <h3 class="font-semibold text-stone-800">${a.location}</h3>
+              </div>
+              <span class="agent-chip ${a.severity==='critical'?'status-critical':a.severity==='warning'?'status-warning':'status-info'} font-semibold">
+                ${a.severity.toUpperCase()}
+              </span>
+            </div>
+            <p class="text-sm text-stone-600 mb-3">${a.issue}</p>
+            <div class="bg-stone-50 rounded-lg p-3 text-xs text-stone-600">
+              <span class="font-semibold text-stone-700">Recommended Action:</span> ${a.recommendation}
+            </div>
+          </div>`).join('')}
+      </div>`;
+
+  } else if (state.authTab === 'report') {
+    const loading = state.loading['conservation-report'];
+    const reportText = getResultText('conservation-report');
+    html += `
+      <div class="bg-white rounded-xl border border-stone-200 overflow-hidden">
+        <div class="p-5 border-b border-stone-100 flex items-center justify-between flex-wrap gap-3">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-xl">📋</span>
+            <div>
+              <div class="font-semibold text-stone-800">Conservation Reporting Agent</div>
+              <div class="text-xs text-stone-400">AI-synthesised assessment for ${site.name}</div>
+            </div>
+            <span class="agent-chip bg-amber-100 text-amber-700">IBM Granite</span>
+            ${reportText && isResultDemo('conservation-report') ? '<span class="agent-chip bg-stone-100 text-stone-500">Demo Mode</span>' : ''}
+            ${reportText && !isResultDemo('conservation-report') ? '<span class="agent-chip bg-green-100 text-green-700">Granite Live</span>' : ''}
+          </div>
+          ${!reportText && !loading ? `<button onclick="callGranite('conservation-report')"
+              class="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white text-sm font-semibold rounded-lg">
+              Generate Report ✨
+            </button>` : ''}
+          ${reportText ? `<button onclick="clearResult('conservation-report')"
+              class="px-3 py-1.5 text-xs text-stone-500 hover:text-stone-700 border border-stone-200 rounded-lg">↺ Regenerate</button>` : ''}
+        </div>
+        <div class="p-6">
+          ${loading ? `<div class="py-12 text-center"><div class="inline-block w-8 h-8 border-2 border-amber-600 border-t-transparent rounded-full spinner mb-3"></div><div class="text-stone-500 text-sm">Synthesising conservation intelligence…</div><div class="text-stone-400 text-xs mt-1">${state.apiKey ? 'Calling IBM Granite…' : 'Demo mode — loading conservation analysis'}</div></div>`
+            : reportText ? `
+            ${isResultDemo('conservation-report') ? '<div class="mb-4 bg-amber-50 border border-amber-200 rounded-lg px-4 py-2 text-xs text-amber-700 font-medium">📋 Demo Mode — Report synthesised from demonstration data. Connect IBM Granite API for live AI-generated reports.</div>' : '<div class="mb-4 bg-green-50 border border-green-200 rounded-lg px-4 py-2 text-xs text-green-700 font-medium">✅ IBM Granite Live — Report generated by ibm/granite-13b-instruct-v2</div>'}
+            <div class="prose prose-sm max-w-none text-stone-700">${markdownToHtml(reportText)}</div>`
+            : `<div class="py-12 text-center text-stone-400"><div class="text-5xl mb-4">📋</div><div class="text-lg font-medium text-stone-600 mb-2">Generate Conservation Report</div><div class="text-sm max-w-md mx-auto">IBM Granite will synthesise structural health data, encroachment observations, visitor load analysis, and conservation project status into a comprehensive intelligence report for heritage authority decision-making.</div><div class="mt-3 text-xs">Runs in demo mode without an API key.</div></div>`}
+        </div>
+      </div>`;
+  }
+
+  html += '</div></div>';
+  el.innerHTML = html;
+}
+
+// ── AGENTS ─────────────────────────────────────────────────────────
+function renderAgents(el) {
+  el.className = 'max-w-7xl mx-auto px-4 sm:px-6 py-10';
+  el.innerHTML = `
+    <div class="fade-in">
+      <div class="mb-8">
+        <h1 style="font-family:'Playfair Display',serif;" class="text-3xl font-bold text-stone-800 mb-1">AI Agent Architecture</h1>
+        <p class="text-stone-500">Five specialised AI agents powering the Heritage Intelligence Platform — all demonstrable in this application.</p>
+      </div>
+
+      <!-- Cross-Agent Orchestration Flow Diagram -->
+      <div class="bg-stone-900 rounded-xl p-6 mb-8 text-white">
+        <div class="text-center mb-6">
+          <div class="text-xs font-semibold text-stone-400 uppercase tracking-wider mb-1">Cross-Agent Orchestration Workflow</div>
+          <div class="text-stone-500 text-xs mb-5">How specialised agents combine to produce coordinated decisions</div>
+          <!-- Two-column: single-agent + cross-agent -->
+          <div class="grid md:grid-cols-2 gap-6 text-left">
+            <!-- Single-agent path -->
+            <div>
+              <div class="text-xs font-semibold text-stone-400 uppercase tracking-wider mb-3 text-center">Single-Agent Path</div>
+              <div class="flex flex-col items-center gap-0">
+                <div class="w-full bg-stone-700 border border-stone-600 rounded-lg px-4 py-3 text-center">
+                  <div class="text-xs font-semibold text-white">👤 User / Site Data</div>
+                  <div class="text-xs text-stone-400 mt-0.5">Tourist request or authority query</div>
+                </div>
+                <div class="flex flex-col items-center py-1"><div class="w-px h-4 bg-stone-600"></div><div class="text-stone-500 text-xs">↓</div></div>
+                <div class="w-full bg-stone-800 border border-stone-600 rounded-lg px-4 py-3 text-center">
+                  <div class="text-xs font-semibold text-white">🤖 Specialist Agent</div>
+                  <div class="text-xs text-stone-400 mt-0.5">Storytelling · Visitor Flow · Conservation</div>
+                </div>
+                <div class="flex flex-col items-center py-1"><div class="w-px h-4 bg-stone-600"></div><div class="text-stone-500 text-xs">↓</div></div>
+                <div class="w-full bg-stone-700 border border-amber-800 rounded-lg px-4 py-3 text-center">
+                  <div class="text-xs font-semibold text-amber-300">⚡ IBM Granite / Demo</div>
+                  <div class="text-xs text-stone-400 mt-0.5">ibm/granite-13b-instruct-v2</div>
+                </div>
+                <div class="flex flex-col items-center py-1"><div class="w-px h-4 bg-stone-600"></div><div class="text-stone-500 text-xs">↓</div></div>
+                <div class="w-full bg-teal-900 border border-teal-700 rounded-lg px-4 py-3 text-center">
+                  <div class="text-xs font-semibold text-teal-200">📋 Single Recommendation</div>
+                  <div class="text-xs text-stone-400 mt-0.5">Story · Flow analysis · Conservation report</div>
+                </div>
+              </div>
+            </div>
+            <!-- Cross-agent path (NEW) -->
+            <div>
+              <div class="text-xs font-semibold text-red-400 uppercase tracking-wider mb-3 text-center flex items-center justify-center gap-1">🚨 Cross-Agent Emergency Path <span class="text-xs text-red-600 normal-case font-normal">(new)</span></div>
+              <div class="flex flex-col items-center gap-0">
+                <div class="w-full bg-stone-700 border border-stone-600 rounded-lg px-4 py-3 text-center">
+                  <div class="text-xs font-semibold text-white">👤 User / Site Data</div>
+                  <div class="text-xs text-stone-400 mt-0.5">Heritage emergency trigger or incident input</div>
+                </div>
+                <div class="flex flex-col items-center py-1"><div class="w-px h-4 bg-stone-600"></div><div class="text-stone-500 text-xs">↓</div></div>
+                <div class="w-full bg-stone-800 border border-stone-600 rounded-lg px-4 py-3 text-center">
+                  <div class="text-xs font-semibold text-white">🤖🤖🤖🤖 Specialised Agents</div>
+                  <div class="text-xs text-stone-400 mt-0.5">Structural · Visitor Flow · Conservation · Encroachment</div>
+                </div>
+                <div class="flex flex-col items-center py-1"><div class="w-px h-4 bg-stone-600"></div><div class="text-stone-500 text-xs">↓</div></div>
+                <div class="w-full bg-red-950 border border-red-700 rounded-lg px-4 py-3 text-center">
+                  <div class="text-xs font-semibold text-red-200">🔗 Cross-Agent Intelligence</div>
+                  <div class="text-xs text-stone-400 mt-0.5">Risk signals combined · Conflicts resolved</div>
+                </div>
+                <div class="flex flex-col items-center py-1"><div class="w-px h-4 bg-stone-600"></div><div class="text-stone-500 text-xs">↓</div></div>
+                <div class="w-full bg-amber-900 border border-amber-600 rounded-lg px-4 py-3 text-center">
+                  <div class="text-xs font-semibold text-amber-200">🏛 Heritage Intelligence Orchestrator</div>
+                  <div class="text-xs text-stone-400 mt-0.5">Weighted synthesis · Decision logic · Priority assignment</div>
+                </div>
+                <div class="flex flex-col items-center py-1"><div class="w-px h-4 bg-stone-600"></div><div class="text-stone-500 text-xs">↓</div></div>
+                <div class="w-full bg-stone-700 border border-amber-800 rounded-lg px-4 py-3 text-center">
+                  <div class="text-xs font-semibold text-amber-300">⚡ IBM Granite / Demo</div>
+                  <div class="text-xs text-stone-400 mt-0.5">Emergency action plan generation</div>
+                </div>
+                <div class="flex flex-col items-center py-1"><div class="w-px h-4 bg-stone-600"></div><div class="text-stone-500 text-xs">↓</div></div>
+                <div class="w-full bg-red-900 border border-red-600 rounded-lg px-4 py-3 text-center">
+                  <div class="text-xs font-semibold text-white">🚨 Coordinated Decision</div>
+                  <div class="text-xs text-stone-400 mt-0.5">Unified action plan → Authority Action</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-6 border-t border-stone-700 pt-4 flex flex-wrap items-center justify-between gap-3">
+          <div class="text-xs text-stone-500">All five agents demonstrable. IBM Granite API integration production-ready.</div>
+          <button onclick="setState({view:'emergency',emergencyStep:0,emergencyRunning:false})"
+            class="px-4 py-2 bg-red-800 hover:bg-red-700 text-white text-xs font-semibold rounded-lg border border-red-600 transition-colors">
+            🚨 Open Emergency Center
+          </button>
+        </div>
+      </div>
+
+      <!-- Five Agent Status Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-3 mb-8">
+        ${[
+          {icon:'📖',name:'Storytelling',status:'Demo Ready',color:'amber',desc:'Tourist view → select site + interest → Generate Story',nav:'tourist'},
+          {icon:'🚶',name:'Visitor Flow',status:'Demo Ready',color:'blue',desc:'Authority → Visitor Flow tab → Generate Analysis',nav:'authority'},
+          {icon:'📊',name:'Conservation',status:'Demo Ready',color:'green',desc:'Authority → AI Report tab → Generate Report',nav:'authority'},
+          {icon:'🔍',name:'Encroachment',status:'Demo Data',color:'orange',desc:'Authority → Encroachment tab — demo observations',nav:'authority'},
+          {icon:'🏗',name:'Structural',status:'Demo Data',color:'red',desc:'Authority → Structural tab — demo alerts',nav:'authority'},
+        ].map(a=>`
+          <div class="bg-white rounded-xl border border-stone-200 p-4 text-center card-hover cursor-pointer" onclick="setState({view:'${a.nav}',authTab:'${a.nav==='authority'?(a.name==='Visitor Flow'?'visitor':a.name==='Conservation'?'report':a.name==='Encroachment'?'encroachment':'structural'):'overview'}})"
+               title="Click to navigate">
+            <div class="text-3xl mb-2">${a.icon}</div>
+            <div class="text-stone-800 text-xs font-semibold mb-1">${a.name}</div>
+            <div class="text-stone-400 text-xs mb-2 leading-snug">${a.desc}</div>
+            <span class="agent-chip text-xs ${a.status==='Demo Ready'?'status-good':'status-info'}">
+              ${a.status}
+            </span>
+          </div>`).join('')}
+      </div>
+
+      <!-- Encroachment Demo Preview -->
+      <div class="bg-white rounded-xl border border-stone-200 p-6 mb-6">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="text-2xl">🔍</span>
+          <h2 class="font-semibold text-stone-800">Encroachment Detection Agent — Demo Preview</h2>
+          <span class="agent-chip bg-stone-100 text-stone-500">Demo Data</span>
+        </div>
+        <div class="bg-amber-50 border border-amber-200 rounded-lg px-4 py-2 mb-4 text-xs text-amber-700">
+          📋 <strong>Demo Mode:</strong> Observations below are representative simulation data based on typical urban heritage encroachment patterns. Production integration would connect to satellite imagery APIs, drone feeds, and periodic survey databases — no such live connections exist in this demonstration.
+        </div>
+        <div class="grid md:grid-cols-2 gap-4">
+          ${CONSERVATION_DATA['walled-city'].encroachmentAlerts.map(a=>`
+            <div class="border-l-4 ${a.severity==='critical'?'border-red-500':'border-orange-400'} bg-stone-50 rounded-r-lg p-4">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="agent-chip ${a.severity==='critical'?'status-critical':'status-warning'} text-xs">${a.id}</span>
+                <span class="text-xs text-stone-500">${a.detected}</span>
+                <span class="agent-chip ${a.severity==='critical'?'status-critical':'status-warning'} text-xs">${a.severity.toUpperCase()}</span>
+              </div>
+              <div class="font-medium text-stone-800 text-sm mb-1">${a.location}</div>
+              <div class="text-xs text-stone-600 mb-2">${a.issue}</div>
+              <div class="text-xs text-stone-500 bg-white rounded p-2"><strong>Action:</strong> ${a.recommendation}</div>
+            </div>`).join('')}
+        </div>
+      </div>
+
+      <!-- Structural Demo Preview -->
+      <div class="bg-white rounded-xl border border-stone-200 p-6 mb-8">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="text-2xl">🏗</span>
+          <h2 class="font-semibold text-stone-800">Structural Health Monitoring Agent — Demo Preview</h2>
+          <span class="agent-chip bg-stone-100 text-stone-500">Demo Data</span>
+        </div>
+        <div class="bg-blue-50 border border-blue-200 rounded-lg px-4 py-2 mb-4 text-xs text-blue-700">
+          📋 <strong>Demo Mode:</strong> Structural alerts below are representative simulation data. Production deployment would integrate with IoT vibration sensors, crack-width monitors, and moisture sensors installed in heritage structures — no such sensors are connected in this demonstration.
+        </div>
+        <div class="grid md:grid-cols-2 gap-4">
+          ${CONSERVATION_DATA['walled-city'].structuralAlerts.map(a=>`
+            <div class="border-l-4 ${a.severity==='critical'?'border-red-500':a.severity==='warning'?'border-orange-400':'border-blue-400'} bg-stone-50 rounded-r-lg p-4">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="agent-chip ${a.severity==='critical'?'status-critical':a.severity==='warning'?'status-warning':'status-info'} text-xs">${a.id}</span>
+                <span class="text-xs text-stone-500">${a.reported}</span>
+                <span class="agent-chip ${a.severity==='critical'?'status-critical':a.severity==='warning'?'status-warning':'status-info'} text-xs">${a.severity.toUpperCase()}</span>
+              </div>
+              <div class="font-medium text-stone-800 text-sm mb-1">${a.location}</div>
+              <div class="text-xs text-stone-600 mb-2">${a.issue}</div>
+              <div class="text-xs text-stone-500 bg-white rounded p-2"><strong>Action:</strong> ${a.recommendation}</div>
+            </div>`).join('')}
+        </div>
+      </div>
+
+      <!-- Individual Agent Cards -->
+      <h2 style="font-family:'Playfair Display',serif;" class="text-xl font-semibold text-stone-800 mb-5">Agent Technical Specifications</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        ${[
+          {
+            icon:'📖', name:'Personalised Heritage Storytelling Agent', status:'active', color:'amber',
+            model:'ibm/granite-13b-instruct-v2',
+            purpose:'Generates personalised cultural stories, historical narratives, and architectural explanations tailored to each visitor\'s interests and the selected heritage site.',
+            inputs:['Selected heritage site','Visitor interest category','Curated heritage knowledge base'],
+            outputs:['Structured cultural narrative','Historical context','Architectural insights','Practical visitor guidance'],
+            prompting:'Receives site + interest → constructs contextual prompt → Granite generates 600-900 word structured narrative · Demo mode: curated expert narratives'
+          },
+          {
+            icon:'🚶', name:'Visitor Flow Management Agent', status:'active', color:'blue',
+            model:'ibm/granite-13b-instruct-v2',
+            purpose:'Analyses visitor load data, identifies congestion hotspots, and generates intelligent crowd management recommendations for site staff.',
+            inputs:['Zone capacity data (demo)','Hourly flow patterns (demo)','Peak hour analysis'],
+            outputs:['Load analysis report','Hotspot identification','Routing recommendations','Predictive outlook'],
+            prompting:'Receives demo capacity metrics → Granite analyses patterns → prioritised management recommendations · Clearly labelled as demo analysis'
+          },
+          {
+            icon:'📊', name:'Conservation Reporting Agent', status:'active', color:'green',
+            model:'ibm/granite-13b-instruct-v2',
+            purpose:'Synthesises structural health data, encroachment observations, visitor load, and project status into a comprehensive conservation intelligence report.',
+            inputs:['Structural alerts (demo)','Encroachment records (demo)','Conservation project status','Visitor metrics (demo)'],
+            outputs:['Executive summary','Risk assessment','Priority action matrix','Authority report'],
+            prompting:'Aggregates demo monitoring data → Granite synthesises into structured report · Labelled as demo output'
+          },
+          {
+            icon:'🔍', name:'Encroachment Detection Agent', status:'demo', color:'orange',
+            model:'IBM Granite Vision (production roadmap)',
+            purpose:'Monitors heritage buffer zones and protected boundaries for unauthorised construction, land use changes, and boundary violations using survey data and image review.',
+            inputs:['Field survey data (demo)','Periodic boundary review','Observation reports'],
+            outputs:['Violation alerts (demo)','Severity classification','Legal action recommendations'],
+            prompting:'Demo: operates on pre-loaded field observation data · Production: would integrate with satellite/drone imagery APIs and ASI survey databases'
+          },
+          {
+            icon:'🏗', name:'Structural Health Monitoring Agent', status:'demo', color:'red',
+            model:'ibm/granite-13b-instruct-v2 + IoT (production roadmap)',
+            purpose:'Monitors structural condition of heritage monuments through inspection reports and, in production, real-time IoT sensor data for crack propagation, vibration, and moisture.',
+            inputs:['Inspection reports (demo)','Structural observations (demo)','Historical comparison data'],
+            outputs:['Structural risk alerts (demo)','Severity classification','Intervention recommendations'],
+            prompting:'Demo: processes pre-loaded inspection data · Production: IoT sensor integration with vibration, crack-width, and moisture sensors'
+          },
+        ].map(a=>`
+          <div class="bg-white rounded-xl border border-stone-200 p-6 card-hover">
+            <div class="flex items-start justify-between mb-3">
+              <div class="flex items-center gap-2">
+                <span class="text-3xl">${a.icon}</span>
+                <span class="agent-chip ${a.status==='active'?'status-good':a.status==='demo'?'status-info':'status-warning'} text-xs">
+                  ${a.status==='active'?'AI Active':a.status==='demo'?'Demo Ready':'Integration Ready'}
+                </span>
+              </div>
+            </div>
+            <h3 class="font-semibold text-stone-800 mb-2" style="font-family:'Playfair Display',serif;">${a.name}</h3>
+            <p class="text-stone-500 text-sm mb-4 leading-relaxed">${a.purpose}</p>
+            <div class="space-y-3">
+              <div>
+                <div class="text-xs font-semibold text-stone-400 uppercase mb-1.5">Model</div>
+                <div class="bg-stone-50 text-stone-600 text-xs px-2 py-1 rounded font-mono">${a.model}</div>
+              </div>
+              <div>
+                <div class="text-xs font-semibold text-stone-400 uppercase mb-1.5">Inputs</div>
+                <div class="flex flex-wrap gap-1">${a.inputs.map(i=>`<span class="bg-blue-50 text-blue-700 text-xs px-2 py-0.5 rounded">${i}</span>`).join('')}</div>
+              </div>
+              <div>
+                <div class="text-xs font-semibold text-stone-400 uppercase mb-1.5">Outputs</div>
+                <div class="flex flex-wrap gap-1">${a.outputs.map(o=>`<span class="bg-amber-50 text-amber-700 text-xs px-2 py-0.5 rounded">${o}</span>`).join('')}</div>
+              </div>
+              <div class="bg-stone-50 rounded-lg p-3">
+                <div class="text-xs font-semibold text-stone-500 mb-1">Prompting / Data Logic</div>
+                <div class="text-xs text-stone-500 leading-relaxed">${a.prompting}</div>
+              </div>
+            </div>
+          </div>`).join('')}
+      </div>
+    </div>`;
+}
+
+// ── API MODAL ──────────────────────────────────────────────────────
+function renderApiModal(app) {
+  const overlay = document.createElement('div');
+  overlay.className = 'modal-overlay';
+  overlay.innerHTML = `
+    <div class="bg-white rounded-2xl p-6 max-w-md w-full mx-4 shadow-2xl" onclick="event.stopPropagation()">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="font-semibold text-stone-800">IBM Granite Integration</h2>
+        <button onclick="setState({showApiModal:false})" class="text-stone-400 hover:text-stone-600 text-xl">×</button>
+      </div>
+      <!-- Current status -->
+      <div class="mb-4 rounded-lg p-3 text-sm ${state.graniteConnected ? 'bg-green-50 border border-green-200 text-green-700' : state.apiKeySet ? 'bg-amber-50 border border-amber-200 text-amber-700' : 'bg-stone-50 border border-stone-200 text-stone-600'}">
+        ${state.graniteConnected
+          ? '🟢 <strong>IBM Granite Live</strong> — A successful API response has been received from ibm/granite-13b-instruct-v2.'
+          : state.apiKeySet
+          ? '🔑 <strong>API Key Set · Demo Mode</strong> — Key stored but no successful API call yet. Agents will attempt live calls and fall back to demo if needed.'
+          : '📋 <strong>Demo Mode</strong> — No API key. All agents run with curated demonstration responses.'}
+      </div>
+      <p class="text-sm text-stone-500 mb-4">
+        Enter your IBM WatsonX API key to attempt live AI generation. Without a key, the platform runs in
+        demo mode with curated responses showcasing the full agent experience.
+      </p>
+      <div class="bg-stone-50 rounded-lg p-3 mb-4 text-xs text-stone-500">
+        <strong>Endpoint:</strong> IBM WatsonX.ai (us-south)<br/>
+        <strong>Model:</strong> ibm/granite-13b-instruct-v2<br/>
+        <strong>Scope:</strong> Storytelling · Visitor Flow · Conservation Reports<br/>
+        <strong>Note:</strong> Connected status is only shown after a successful API response.
+      </div>
+      <input id="apiKeyInput" type="password" placeholder="Paste your IBM WatsonX API key here…"
+        value="${state.apiKey}"
+        class="w-full border border-stone-200 rounded-lg px-3 py-2.5 text-sm mb-4 focus:outline-none focus:ring-2 focus:ring-amber-500"
+        oninput="state.apiKey=this.value"/>
+      <div class="flex gap-3">
+        <button onclick="setState({apiKeySet:!!state.apiKey,graniteConnected:state.graniteConnected&&!!state.apiKey,showApiModal:false})"
+          class="flex-1 py-2.5 bg-amber-600 hover:bg-amber-500 text-white text-sm font-semibold rounded-lg">
+          ${state.apiKeySet ? 'Update Key' : 'Save Key'}
+        </button>
+        <button onclick="setState({apiKey:'',apiKeySet:false,graniteConnected:false,showApiModal:false})"
+          class="px-4 py-2.5 border border-stone-200 text-stone-600 text-sm rounded-lg hover:bg-stone-50">
+          Clear · Use Demo
+        </button>
+      </div>
+      <p class="text-xs text-stone-400 mt-3 text-center">
+        Demo mode provides curated expert responses for all five agents — no API key required.
+      </p>
+    </div>`;
+  overlay.onclick = () => setState({ showApiModal: false });
+  app.appendChild(overlay);
+}
+
+// ── FOOTER ─────────────────────────────────────────────────────────
+function renderFooter(app) {
+  const footer = document.createElement('footer');
+  footer.className = 'bg-stone-900 text-stone-400 mt-16 py-10 border-t border-stone-700';
+  footer.innerHTML = `
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="grid sm:grid-cols-3 gap-6 mb-8">
+        <div>
+          <div class="font-semibold text-white mb-2" style="font-family:'Playfair Display',serif;">Heritage Intelligence Platform</div>
+          <p class="text-sm leading-relaxed">AI-powered conservation and cultural engagement for Ahmedabad's Walled City and the Modhera Sun Temple.</p>
+        </div>
+        <div>
+          <div class="text-xs font-semibold text-stone-300 uppercase tracking-wider mb-2">Technology</div>
+          <div class="space-y-1 text-sm">
+            <div>IBM Granite LLM</div>
+            <div>WatsonX.ai Platform</div>
+            <div>Five Specialised AI Agents</div>
+            <div>Demo-first · Production-ready Architecture</div>
+          </div>
+        </div>
+        <div>
+          <div class="text-xs font-semibold text-stone-300 uppercase tracking-wider mb-2">Heritage Sites</div>
+          <div class="space-y-1 text-sm">
+            <div>Ahmedabad Walled City · UNESCO WHC</div>
+            <div>Modhera Sun Temple · ASI Protected</div>
+            <div>Gujarat, India</div>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-stone-700 pt-6 flex flex-wrap items-center justify-between gap-3 text-xs">
+        <div>Challenge 12 — Smart Heritage Conservation Platform · IBM Hackathon</div>
+        <div>Powered by IBM Granite · Built with Heritage Intelligence</div>
+      </div>
+    </div>`;
+  app.appendChild(footer);
+}
+
+// ── MARKDOWN RENDERER ──────────────────────────────────────────────
+function markdownToHtml(md) {
+  if (!md) return '';
+  return md
+    .replace(/^#{1} (.+)$/gm, '<h1 style="font-family:\'Playfair Display\',serif;font-size:1.5rem;font-weight:700;color:#1c1917;margin:1.25rem 0 0.5rem;">$1</h1>')
+    .replace(/^#{2} (.+)$/gm, '<h2 style="font-family:\'Playfair Display\',serif;font-size:1.2rem;font-weight:600;color:#292524;margin:1rem 0 0.4rem;border-bottom:1px solid #e7e5e4;padding-bottom:0.25rem;">$1</h2>')
+    .replace(/^#{3} (.+)$/gm, '<h3 style="font-size:0.95rem;font-weight:600;color:#44403c;margin:0.85rem 0 0.3rem;">$1</h3>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/`(.+?)`/g, '<code style="background:#f5f5f4;padding:1px 5px;border-radius:3px;font-size:0.85em;">$1</code>')
+    .replace(/^\| (.+) \|$/gm, (_, row) => {
+      const cells = row.split(' | ');
+      return '<tr>' + cells.map(c => `<td style="padding:6px 12px;border:1px solid #e7e5e4;font-size:0.8rem;">${c.trim()}</td>`).join('') + '</tr>';
+    })
+    .replace(/(<tr>.*<\/tr>\n?)+/gs, match => `<table style="border-collapse:collapse;width:100%;margin:0.75rem 0;font-size:0.85rem;">${match}</table>`)
+    .replace(/^- (.+)$/gm, '<li style="margin:3px 0;padding-left:4px;">$1</li>')
+    .replace(/(<li.*<\/li>\n?)+/gs, match => `<ul style="padding-left:1.25rem;margin:0.5rem 0;list-style:disc;">${match}</ul>`)
+    .replace(/^\d+\. (.+)$/gm, '<li style="margin:3px 0;padding-left:4px;">$1</li>')
+    .replace(/^---+$/gm, '<hr style="border:none;border-top:1px solid #e7e5e4;margin:1rem 0;"/>')
+    .replace(/^⚠️ (.+)$/gm, '<div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:6px;padding:8px 12px;margin:6px 0;color:#9a3412;font-size:0.85rem;">⚠️ $1</div>')
+    .replace(/^✅ (.+)$/gm, '<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:8px 12px;margin:6px 0;color:#15803d;font-size:0.85rem;">✅ $1</div>')
+    .replace(/\n{2,}/g, '</p><p style="margin:0.5rem 0;">')
+    .replace(/^(?!<[hupltd]|<\/|⚠|✅)(.+)$/gm, '<p style="margin:0.4rem 0;line-height:1.7;">$1</p>');
+}
+
+// ── EMERGENCY CENTER ───────────────────────────────────────────────
+
+// Emergency scenario data — deterministic, reuses existing demo alert S001
+const EMERGENCY_SCENARIO = {
+  incidentId: 'INC-2024-001',
+  location: 'Jama Masjid — East Minaret',
+  site: 'Ahmedabad Walled City',
+  detectedBy: 'Structural Health Monitoring Agent',
+  severity: 'CRITICAL',
+  timestamp: 'Demo · Not a live timestamp',
+  structuralAlert: {
+    id: 'S001',
+    location: 'Jama Masjid — East Minaret',
+    severity: 'critical',
+    issue: 'Visible spalling and crack propagation (3–8mm width) on load-bearing masonry. Monitoring sensors show 12% deviation from baseline vibration threshold.',
+    recommendation: 'Immediate structural assessment by licensed conservation engineer. Restrict public access within 5m radius.',
+    reported: '2 days ago (demo)',
+    finding: 'Critical structural observation — crack propagation in load-bearing masonry. Deviation from vibration baseline confirmed.',
+    status: 'CRITICAL',
+  },
+  visitorAlert: {
+    zone: 'Jama Masjid Precinct',
+    currentLoad: 92,
+    status: 'critical',
+    finding: 'Zone load at 92% capacity. High visitor concentration within 10m of affected structure. Crowd bunching at primary entrance creates elevated risk exposure.',
+    recommendation: 'Immediate controlled dispersal. Redirect to Sidi Bashir Mosque via guided alternate route.',
+    status_label: 'HIGH ATTENTION',
+  },
+  conservationAlert: {
+    finding: 'Structural alert S001 aligns with flagged risk zone in Haveli Restoration programme. Immediate professional assessment is the conservation priority before further deterioration or safety risk.',
+    action: 'Priority escalation to lead conservation engineer. Document event in conservation monitoring log.',
+    status_label: 'PRIORITY',
+  },
+  encroachmentAlert: {
+    finding: 'No active encroachment observation directly correlated with this structural incident location. Encroachment database shows no records within 15m of affected minaret.',
+    status_label: 'NO IMPACT',
+    relevant: false,
+  },
+};
+
+function runEmergencySimulation() {
+  if (state.emergencyRunning) return;
+  setState({ emergencyRunning: true, emergencyStep: 0 });
+  const steps = [1, 2, 3, 4, 5, 6, 7];
+  const delays = [400, 1200, 2200, 3200, 4200, 5400, 6800];
+  steps.forEach((step, i) => {
+    setTimeout(() => {
+      setState({ emergencyStep: step });
+      if (step === 7) setState({ emergencyRunning: false });
+    }, delays[i]);
+  });
+}
+
+function resetEmergencySimulation() {
+  setState({ emergencyStep: 0, emergencyRunning: false });
+}
+
+function renderEmergency(el) {
+  el.className = 'max-w-5xl mx-auto px-4 sm:px-6 py-10';
+  const s = EMERGENCY_SCENARIO;
+  const step = state.emergencyStep;
+  const running = state.emergencyRunning;
+
+  // Helper: show element only if step reached
+  const show = (minStep) => step >= minStep;
+
+  el.innerHTML = `
+  <div class="fade-in">
+    <!-- Page Header -->
+    <div class="mb-8 flex flex-wrap items-start justify-between gap-4">
+      <div>
+        <div class="flex items-center gap-2 mb-2">
+          <span class="agent-chip bg-red-100 text-red-700">Heritage Emergency</span>
+          <span class="agent-chip bg-stone-100 text-stone-500">Demo Simulation</span>
+          <span class="agent-chip bg-amber-100 text-amber-700">Cross-Agent</span>
+        </div>
+        <h1 style="font-family:'Playfair Display',serif;" class="text-3xl font-bold text-stone-800 mb-1">Heritage Emergency &amp; Decision Center</h1>
+        <p class="text-stone-500 text-sm max-w-2xl">Multiple specialised agents working in coordination through the Heritage Intelligence Orchestrator to produce a unified emergency decision.</p>
+      </div>
+      <div class="flex gap-2 flex-shrink-0">
+        ${running
+          ? '<button disabled class="px-5 py-2.5 bg-stone-300 text-stone-500 text-sm font-semibold rounded-lg cursor-not-allowed flex items-center gap-2"><span class="inline-block w-4 h-4 border-2 border-stone-400 border-t-transparent rounded-full spinner"></span> Simulating…</button>'
+          : step === 0
+            ? '<button onclick="runEmergencySimulation()" class="px-5 py-2.5 bg-red-700 hover:bg-red-600 text-white text-sm font-semibold rounded-lg transition-colors border border-red-500">▶ Run Emergency Simulation</button>'
+            : '<button onclick="runEmergencySimulation()" class="px-5 py-2.5 bg-red-700 hover:bg-red-600 text-white text-sm font-semibold rounded-lg transition-colors border border-red-500">↺ Run Again</button>'
+        }
+        ${step > 0 ? '<button onclick="resetEmergencySimulation()" class="px-5 py-2.5 bg-stone-100 hover:bg-stone-200 text-stone-600 text-sm font-semibold rounded-lg transition-colors border border-stone-200">✕ Reset</button>' : ''}
+      </div>
+    </div>
+
+    <!-- STEP 0: Pre-simulation idle state -->
+    ${step === 0 ? `
+    <div class="bg-stone-50 border-2 border-dashed border-stone-300 rounded-2xl p-12 text-center">
+      <div class="text-6xl mb-4">🚨</div>
+      <h2 style="font-family:'Playfair Display',serif;" class="text-2xl font-bold text-stone-700 mb-3">Cross-Agent Heritage Emergency Simulation</h2>
+      <p class="text-stone-500 text-sm leading-relaxed max-w-lg mx-auto mb-2">
+        Click <strong>Run Emergency Simulation</strong> to watch four specialised AI agents
+        analyse a simultaneous structural and visitor emergency at Jama Masjid, Ahmedabad Walled City,
+        and coordinate a unified heritage management decision.
+      </p>
+      <p class="text-stone-400 text-xs mb-6">
+        DEMO SIMULATION — Uses representative data from the existing demo dataset.
+        No live sensors, CCTV, satellite imagery, or government databases are connected.
+      </p>
+      <div class="grid sm:grid-cols-4 gap-3 max-w-2xl mx-auto mb-6">
+        ${[['🏗','Structural Agent'],['🚶','Visitor Flow Agent'],['📊','Conservation Agent'],['🔍','Encroachment Agent']].map(([ic,nm])=>`
+          <div class="bg-white border border-stone-200 rounded-xl p-3 text-center">
+            <div class="text-2xl mb-1">${ic}</div>
+            <div class="text-xs font-medium text-stone-600">${nm}</div>
+          </div>`).join('')}
+      </div>
+      <div class="text-stone-400 text-xs">↓ All converge into the Heritage Intelligence Orchestrator ↓</div>
+      <div class="mt-3 inline-block bg-amber-100 border border-amber-300 rounded-lg px-4 py-2 text-xs text-amber-700 font-medium">
+        🏛 Heritage Intelligence Orchestrator → 🚨 Coordinated Decision
+      </div>
+    </div>` : ''}
+
+    <!-- STEP 1+: Incident Detected -->
+    ${show(1) ? `
+    <div class="em-step-reveal mb-6">
+      <!-- Demo Notice Banner -->
+      <div class="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 mb-5 flex items-start gap-3 text-xs text-amber-700">
+        <span class="mt-0.5 text-base">📋</span>
+        <div><strong>DEMO SIMULATION</strong> — All incident data, agent findings, and recommendations below are representative simulation data.
+        No live sensors, CCTV feeds, satellite imagery, or government databases are connected to this demonstration.</div>
+      </div>
+
+      <!-- Incident Card -->
+      <div class="em-decision-border em-pulse-critical bg-red-50 rounded-2xl p-6 mb-6">
+        <div class="flex flex-wrap items-start justify-between gap-3 mb-4">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="agent-chip status-critical">🚨 INCIDENT DETECTED</span>
+              <span class="agent-chip bg-stone-100 text-stone-500">Demo Mode</span>
+            </div>
+            <h2 style="font-family:'Playfair Display',serif;" class="text-xl font-bold text-stone-800">${s.location}</h2>
+            <p class="text-stone-500 text-sm mt-0.5">${s.site} · Detected by: ${s.detectedBy}</p>
+          </div>
+          <div class="text-right">
+            <div class="text-2xl font-black text-red-700" style="font-family:'Playfair Display',serif;">CRITICAL</div>
+            <div class="text-xs text-stone-400 mt-0.5">${s.incidentId} · ${s.timestamp}</div>
+          </div>
+        </div>
+        <div class="grid sm:grid-cols-3 gap-3 text-sm">
+          <div class="bg-white rounded-xl border border-red-200 p-3">
+            <div class="text-xs text-stone-400 mb-1">Incident Type</div>
+            <div class="font-semibold text-stone-800">Structural Emergency</div>
+          </div>
+          <div class="bg-white rounded-xl border border-red-200 p-3">
+            <div class="text-xs text-stone-400 mb-1">Affected Area</div>
+            <div class="font-semibold text-stone-800">${s.location}</div>
+          </div>
+          <div class="bg-white rounded-xl border border-red-200 p-3">
+            <div class="text-xs text-stone-400 mb-1">Initiated</div>
+            <div class="font-semibold text-stone-800">Multi-Agent Analysis</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section label -->
+      <h2 class="text-xs font-semibold text-stone-400 uppercase tracking-wider mb-4">Step 2 — Multi-Agent Analysis</h2>
+
+      <div class="grid sm:grid-cols-2 gap-4 mb-6">
+
+        <!-- Structural Agent -->
+        <div class="em-agent-card ${show(2) ? 'active-step em-step-reveal' : 'hidden-step'} bg-white rounded-xl border-l-4 border-red-500 border border-stone-200 p-5 relative">
+          ${show(2) ? '' : '<div class="absolute inset-0 rounded-xl bg-stone-50/60 flex items-center justify-center z-10"><span class="text-stone-400 text-xs font-medium">Querying agent…</span></div>'}
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-xl">🏗</span>
+            <div class="font-semibold text-stone-800 text-sm">Structural Health Monitoring Agent</div>
+            <span class="agent-chip status-critical ml-auto">${s.structuralAlert.status}</span>
+          </div>
+          <div class="text-xs text-stone-500 mb-2 font-semibold uppercase tracking-wider">Finding</div>
+          <p class="text-sm text-stone-700 leading-relaxed mb-3">${s.structuralAlert.finding}</p>
+          <div class="bg-red-50 border border-red-200 rounded-lg p-3 text-xs text-red-700">
+            <strong>Action Signal:</strong> ${s.structuralAlert.recommendation}
+          </div>
+          <div class="mt-2 flex items-center gap-2">
+            <span class="text-xs text-stone-400">Source: Alert ${s.structuralAlert.id}</span>
+            <span class="agent-chip bg-stone-100 text-stone-400 text-xs">Demo Data</span>
+          </div>
+        </div>
+
+        <!-- Visitor Flow Agent -->
+        <div class="em-agent-card ${show(3) ? 'active-step em-step-reveal' : 'hidden-step'} bg-white rounded-xl border-l-4 border-orange-400 border border-stone-200 p-5 relative">
+          ${show(3) ? '' : '<div class="absolute inset-0 rounded-xl bg-stone-50/60 flex items-center justify-center z-10"><span class="text-stone-400 text-xs font-medium">Querying agent…</span></div>'}
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-xl">🚶</span>
+            <div class="font-semibold text-stone-800 text-sm">Visitor Flow Management Agent</div>
+            <span class="agent-chip status-warning ml-auto">${s.visitorAlert.status_label}</span>
+          </div>
+          <div class="text-xs text-stone-500 mb-2 font-semibold uppercase tracking-wider">Finding</div>
+          <p class="text-sm text-stone-700 leading-relaxed mb-3">${s.visitorAlert.finding}</p>
+          <div class="flex items-center gap-2 mb-3">
+            <div class="text-xs text-stone-500">Zone Load:</div>
+            <div class="flex-1 progress-bar"><div class="progress-fill bg-red-500" style="width:${s.visitorAlert.currentLoad}%"></div></div>
+            <div class="text-sm font-bold text-red-600 w-10 text-right">${s.visitorAlert.currentLoad}%</div>
+          </div>
+          <div class="bg-orange-50 border border-orange-200 rounded-lg p-3 text-xs text-orange-700">
+            <strong>Action Signal:</strong> ${s.visitorAlert.recommendation}
+          </div>
+          <div class="mt-2"><span class="agent-chip bg-stone-100 text-stone-400 text-xs">Demo Data</span></div>
+        </div>
+
+        <!-- Conservation Agent -->
+        <div class="em-agent-card ${show(4) ? 'active-step em-step-reveal' : 'hidden-step'} bg-white rounded-xl border-l-4 border-blue-500 border border-stone-200 p-5 relative">
+          ${show(4) ? '' : '<div class="absolute inset-0 rounded-xl bg-stone-50/60 flex items-center justify-center z-10"><span class="text-stone-400 text-xs font-medium">Querying agent…</span></div>'}
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-xl">📊</span>
+            <div class="font-semibold text-stone-800 text-sm">Conservation Reporting Agent</div>
+            <span class="agent-chip status-info ml-auto">${s.conservationAlert.status_label}</span>
+          </div>
+          <div class="text-xs text-stone-500 mb-2 font-semibold uppercase tracking-wider">Finding</div>
+          <p class="text-sm text-stone-700 leading-relaxed mb-3">${s.conservationAlert.finding}</p>
+          <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 text-xs text-blue-700">
+            <strong>Action Signal:</strong> ${s.conservationAlert.action}
+          </div>
+          <div class="mt-2"><span class="agent-chip bg-stone-100 text-stone-400 text-xs">Demo Data</span></div>
+        </div>
+
+        <!-- Encroachment Agent -->
+        <div class="em-agent-card ${show(5) ? 'active-step em-step-reveal' : 'hidden-step'} bg-white rounded-xl border-l-4 border-stone-300 border border-stone-200 p-5 relative">
+          ${show(5) ? '' : '<div class="absolute inset-0 rounded-xl bg-stone-50/60 flex items-center justify-center z-10"><span class="text-stone-400 text-xs font-medium">Querying agent…</span></div>'}
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-xl">🔍</span>
+            <div class="font-semibold text-stone-800 text-sm">Encroachment Detection Agent</div>
+            <span class="agent-chip bg-stone-100 text-stone-500 ml-auto">${s.encroachmentAlert.status_label}</span>
+          </div>
+          <div class="text-xs text-stone-500 mb-2 font-semibold uppercase tracking-wider">Finding</div>
+          <p class="text-sm text-stone-600 leading-relaxed mb-3">${s.encroachmentAlert.finding}</p>
+          <div class="bg-stone-50 border border-stone-200 rounded-lg p-3 text-xs text-stone-500">
+            <strong>Conclusion:</strong> No encroachment signal relevant to this incident. Agent standing by.
+          </div>
+          <div class="mt-2"><span class="agent-chip bg-stone-100 text-stone-400 text-xs">Demo Data</span></div>
+        </div>
+      </div>
+    </div>` : ''}
+
+    <!-- STEP 6: Orchestrator Panel -->
+    ${show(6) ? `
+    <div class="em-step-reveal mb-6">
+      <h2 class="text-xs font-semibold text-stone-400 uppercase tracking-wider mb-4">Step 3 — Heritage Intelligence Orchestrator</h2>
+      <div class="em-orchestrator rounded-2xl p-6 text-white">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="text-3xl">🏛</span>
+          <div>
+            <div style="font-family:'Playfair Display',serif;" class="text-lg font-bold">Heritage Intelligence Orchestrator</div>
+            <div class="text-stone-400 text-xs mt-0.5">Cross-Agent Risk Synthesis · Weighted Decision Logic</div>
+          </div>
+          <span class="agent-chip bg-amber-800 text-amber-200 ml-auto">Active</span>
+        </div>
+
+        <!-- Signal summary -->
+        <div class="grid sm:grid-cols-3 gap-3 mb-5">
+          ${[
+            ['Structural Risk','CRITICAL','bg-red-900 border-red-700 text-red-200','#b91c1c'],
+            ['Visitor Impact','HIGH','bg-orange-900 border-orange-700 text-orange-200','#c2410c'],
+            ['Conservation Priority','IMMEDIATE','bg-blue-900 border-blue-700 text-blue-200','#1d4ed8'],
+          ].map(([label,val,cls,col])=>`
+          <div class="rounded-xl border ${cls} px-4 py-3 text-center" style="background:rgba(0,0,0,0.3);">
+            <div class="text-xs font-semibold uppercase tracking-wider mb-1 opacity-70">${label}</div>
+            <div class="text-lg font-black" style="color:${col==='#b91c1c'?'#fca5a5':col==='#c2410c'?'#fdba74':'#93c5fd'};">${val}</div>
+          </div>`).join('')}
+        </div>
+
+        <!-- Orchestrator reasoning box -->
+        <div class="bg-stone-800 rounded-xl border border-stone-600 p-4 mb-5">
+          <div class="text-xs font-semibold text-stone-400 uppercase tracking-wider mb-3">Orchestrator Synthesis Logic</div>
+          <div class="space-y-2 text-sm">
+            <div class="flex items-start gap-2">
+              <span class="text-amber-400 flex-shrink-0 mt-0.5">→</span>
+              <span class="text-stone-300">Structural agent signal weight: <strong class="text-white">CRITICAL (highest priority)</strong> — structural integrity of a protected monument overrides all other considerations.</span>
+            </div>
+            <div class="flex items-start gap-2">
+              <span class="text-amber-400 flex-shrink-0 mt-0.5">→</span>
+              <span class="text-stone-300">Visitor flow signal amplifies structural risk — 92% zone load in proximity to affected structure elevates public safety priority from <em>HIGH</em> to <strong class="text-white">IMMEDIATE</strong>.</span>
+            </div>
+            <div class="flex items-start gap-2">
+              <span class="text-amber-400 flex-shrink-0 mt-0.5">→</span>
+              <span class="text-stone-300">Conservation agent confirms alignment with existing monitoring programme — escalation path is already defined.</span>
+            </div>
+            <div class="flex items-start gap-2">
+              <span class="text-amber-400 flex-shrink-0 mt-0.5">→</span>
+              <span class="text-stone-300">Encroachment agent: no signal contribution to this incident. Weight: 0.</span>
+            </div>
+            <div class="flex items-start gap-2 mt-3 pt-3 border-t border-stone-600">
+              <span class="text-red-400 flex-shrink-0 mt-0.5">⚡</span>
+              <span class="text-stone-200"><strong class="text-white">Coordinated verdict:</strong> CRITICAL HERITAGE EVENT — simultaneous structural and public safety risk. Unified action plan required. Confidence: DEMO / SIMULATED.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Overall verdict -->
+        <div class="bg-red-900 border border-red-700 rounded-xl p-4 text-center">
+          <div class="text-xs font-semibold text-red-300 uppercase tracking-wider mb-1">Overall Incident Classification</div>
+          <div class="text-2xl font-black text-white mb-1" style="font-family:'Playfair Display',serif;">🚨 CRITICAL HERITAGE EVENT</div>
+          <div class="text-red-300 text-xs">Structural integrity + Public safety + Conservation priority — all agents aligned on immediate response need</div>
+        </div>
+
+        <div class="mt-4 text-xs text-stone-500 text-center">
+          This decision is not produced by a single chatbot. The Heritage Intelligence Orchestrator combines signals from specialised agents,
+          evaluates their interaction, and synthesises a coordinated action plan.
+        </div>
+      </div>
+    </div>` : ''}
+
+    <!-- STEP 7: Action Plan + Decision Card -->
+    ${show(7) ? `
+    <div class="em-step-reveal">
+      <h2 class="text-xs font-semibold text-stone-400 uppercase tracking-wider mb-4">Step 4 — AI-Generated Emergency Action Plan</h2>
+
+      <!-- Action Plan -->
+      <div class="bg-white rounded-2xl border border-stone-200 p-6 mb-6">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="text-xl">📋</span>
+          <div class="font-semibold text-stone-800">Coordinated Emergency Action Plan</div>
+          <span class="agent-chip bg-stone-100 text-stone-500">Demo Simulation</span>
+          <span class="agent-chip bg-amber-100 text-amber-700">IBM Granite / Demo</span>
+        </div>
+        <div class="bg-amber-50 border border-amber-200 rounded-lg px-4 py-2 mb-5 text-xs text-amber-700">
+          📋 <strong>DEMO SIMULATION</strong> — These are simulated recommendations for the hackathon demonstration only.
+          They are NOT real emergency instructions. Any actual heritage emergency must be managed by qualified professionals.
+        </div>
+
+        <div class="grid sm:grid-cols-3 gap-5">
+          <!-- Immediate -->
+          <div class="bg-red-50 border border-red-200 rounded-xl p-4">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="agent-chip status-critical">Immediate</span>
+            </div>
+            <ul class="space-y-2 text-sm text-stone-700">
+              <li class="flex gap-2"><span class="text-red-500 flex-shrink-0 font-bold mt-0.5">•</span><span>Control visitor access and dispersal from the affected zone at Jama Masjid.</span></li>
+              <li class="flex gap-2"><span class="text-red-500 flex-shrink-0 font-bold mt-0.5">•</span><span>Reroute visitors via guided alternate path to Sidi Bashir Mosque (45% lower density).</span></li>
+              <li class="flex gap-2"><span class="text-red-500 flex-shrink-0 font-bold mt-0.5">•</span><span>Notify licensed conservation/structural engineer for immediate site assessment.</span></li>
+              <li class="flex gap-2"><span class="text-red-500 flex-shrink-0 font-bold mt-0.5">•</span><span>Establish a 5m exclusion perimeter around affected minaret.</span></li>
+            </ul>
+          </div>
+
+          <!-- Within 24 Hours -->
+          <div class="bg-orange-50 border border-orange-200 rounded-xl p-4">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="agent-chip status-warning">Within 24 Hours</span>
+            </div>
+            <ul class="space-y-2 text-sm text-stone-700">
+              <li class="flex gap-2"><span class="text-orange-500 flex-shrink-0 font-bold mt-0.5">•</span><span>Compare current structural observation against historical records for Alert S001.</span></li>
+              <li class="flex gap-2"><span class="text-orange-500 flex-shrink-0 font-bold mt-0.5">•</span><span>Record incident in conservation monitoring workflow and notify ASI Gujarat Circle.</span></li>
+              <li class="flex gap-2"><span class="text-orange-500 flex-shrink-0 font-bold mt-0.5">•</span><span>Reassess visitor routing based on engineering assessment outcome.</span></li>
+              <li class="flex gap-2"><span class="text-orange-500 flex-shrink-0 font-bold mt-0.5">•</span><span>Issue formal incident report via Heritage Cell to relevant authorities.</span></li>
+            </ul>
+          </div>
+
+          <!-- Follow-up -->
+          <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="agent-chip status-info">Follow-up</span>
+            </div>
+            <ul class="space-y-2 text-sm text-stone-700">
+              <li class="flex gap-2"><span class="text-blue-500 flex-shrink-0 font-bold mt-0.5">•</span><span>Continue structural monitoring and escalate Alert S001 in the Haveli Restoration programme.</span></li>
+              <li class="flex gap-2"><span class="text-blue-500 flex-shrink-0 font-bold mt-0.5">•</span><span>Review visitor-flow restrictions once professional assessment confirms structural status.</span></li>
+              <li class="flex gap-2"><span class="text-blue-500 flex-shrink-0 font-bold mt-0.5">•</span><span>Update conservation monitoring baseline after intervention.</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Decision Card -->
+      <div class="em-decision-border rounded-2xl p-6 mb-6">
+        <div class="flex items-center justify-between mb-4 flex-wrap gap-3">
+          <div>
+            <div class="text-xs font-semibold text-red-600 uppercase tracking-wider mb-1">Heritage Decision</div>
+            <h2 style="font-family:'Playfair Display',serif;" class="text-xl font-bold text-stone-800">Final Coordinated Decision</h2>
+          </div>
+          <span class="agent-chip status-critical text-sm px-4 py-1.5">🚨 CRITICAL</span>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+          ${[
+            ['Risk Level','CRITICAL','text-red-700 bg-red-50 border-red-200'],
+            ['Recommended Priority','IMMEDIATE','text-orange-700 bg-orange-50 border-orange-200'],
+            ['Visitor Action','TEMPORARY CONTROL / REROUTING','text-blue-700 bg-blue-50 border-blue-200'],
+            ['Conservation Action','PROFESSIONAL STRUCTURAL ASSESSMENT','text-teal-700 bg-teal-50 border-teal-200'],
+          ].map(([label,val,cls])=>`
+          <div class="border rounded-xl p-3 ${cls}">
+            <div class="text-xs font-semibold uppercase tracking-wider mb-1 opacity-70">${label}</div>
+            <div class="text-sm font-bold leading-snug">${val}</div>
+          </div>`).join('')}
+        </div>
+        <div class="bg-stone-50 border border-stone-200 rounded-xl p-4 flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <div class="text-xs font-semibold text-stone-500 uppercase tracking-wider mb-0.5">Decision Confidence</div>
+            <div class="font-bold text-stone-700">DEMO / SIMULATED</div>
+          </div>
+          <div class="text-xs text-stone-400 max-w-sm text-right">
+            Produced by cross-agent synthesis. In production, confidence would reflect sensor data quality, recency, and corroborating signals.
+          </div>
+        </div>
+      </div>
+
+      <!-- Why this is Agentic -->
+      <div class="bg-stone-900 rounded-2xl p-6 text-white">
+        <div class="flex items-start gap-3">
+          <span class="text-2xl mt-0.5">🔗</span>
+          <div>
+            <div class="font-semibold text-white mb-2">Why This Is Agentic — Not a Single Chatbot</div>
+            <p class="text-stone-300 text-sm leading-relaxed">
+              This decision is not produced by a single chatbot or a single model call. The <strong class="text-amber-300">Heritage Intelligence Orchestrator</strong>
+              combined signals from four specialised agents — each focused on a different aspect of the heritage management challenge.
+              The Structural agent supplied the physical risk signal. The Visitor Flow agent supplied the public safety amplifier.
+              The Conservation agent supplied the institutional response pathway. The Encroachment agent confirmed the absence of
+              a correlated signal. The Orchestrator evaluated these interactions, applied weighted priority logic, and synthesised
+              a single coordinated action plan — something no individual agent could produce alone.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>` : ''}
+
+  </div>`;
+}
+
+// ── HELPERS ────────────────────────────────────────────────────────
+function setInterest(id) {
+  setState({ interest: id, results: {} });
+}
+function clearResult(agentId) {
+  const newResults = Object.assign({}, state.results);
+  delete newResults[agentId];
+  setState({ results: newResults });
+}
+
+// ── INIT ───────────────────────────────────────────────────────────
+render();
+</script>
+</body>
+</html>
