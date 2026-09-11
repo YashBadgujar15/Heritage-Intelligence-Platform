@@ -2,157 +2,87 @@
 
 ### Agentic AI for Smart Heritage Conservation, Visitor Flow & Personalized Cultural Experiences
 
-**Gujarat Hackathon 2026 — Challenge 12**  
-**Domain:** Tourism & Heritage
+<p align="center">
+
+**Gujarat Hackathon 2026 · Challenge 12 · Tourism & Heritage**
+
+</p>
+
+<p align="center">
+
+<a href="https://yashbadgujar15.github.io/Heritage-Intelligence-Platform/">
+  <strong>🌐 Live Demo</strong>
+</a>
+&nbsp;&nbsp;•&nbsp;&nbsp;
+<a href="https://github.com/YashBadgujar15/Heritage-Intelligence-Platform">
+  <strong>💻 GitHub Repository</strong>
+</a>
+
+</p>
 
 ---
 
 ## 🌍 Overview
 
-Heritage Intelligence Platform is an Agentic AI-powered solution designed to support smart heritage conservation, visitor-flow management and personalized cultural storytelling.
+**Heritage Intelligence Platform** is an **Agentic AI-powered heritage intelligence system** designed to support:
 
-The platform focuses on:
+* 🏛️ Smart heritage conservation
+* 🚶 Visitor-flow management
+* 🔍 Encroachment-risk analysis
+* 🏗️ Structural-health intelligence
+* 📖 Personalized cultural storytelling
+* 📊 AI-supported conservation reporting
+* 🚨 Emergency heritage decision support
 
-- 🏛️ Ahmedabad's Walled City
-- ☀️ Modhera Sun Temple
+The platform focuses on two important heritage contexts:
 
-It brings together five specialized AI agents through a central **Heritage Intelligence Orchestrator**.
+* 🏛️ **Ahmedabad's Walled City**
+* ☀️ **Modhera Sun Temple**
+
+Instead of treating heritage management as a single chatbot problem, the platform uses **five specialized AI agents** coordinated through a central **Heritage Intelligence Orchestrator**.
 
 > **Preserve the past. Understand the present. Intelligently shape the future of heritage.**
 
 ---
 
-## 🎯 Problem Statement
+# 🎯 Problem Statement
 
-Gujarat's heritage sites face several challenges:
+Gujarat's heritage sites face multiple interconnected challenges:
 
-- Structural and weathering-related conservation risks
-- Unmanaged tourist footfall
-- Urban encroachment
-- Limited personalized digital storytelling
-- Fragmented heritage-management information
+| Challenge                             | Impact                                  |
+| ------------------------------------- | --------------------------------------- |
+| 🏗️ Structural deterioration          | Potential conservation risks            |
+| ☀️ Weathering & environmental effects | Long-term heritage damage               |
+| 🚶 Unmanaged visitor footfall         | Visitor pressure and overcrowding       |
+| 🏙️ Urban encroachment                | Threat to heritage surroundings         |
+| 📖 Generic cultural information       | Limited visitor engagement              |
+| 📊 Fragmented information             | Difficult heritage-management decisions |
 
-There is a need for an intelligent platform that can connect these different dimensions and support better heritage experiences and conservation decisions.
+Traditional systems often address these problems separately.
+
+### 💡 Our Approach
+
+We connect these dimensions through a **multi-agent intelligence architecture** where specialized agents analyse different heritage signals and an orchestrator combines their outputs into a coordinated decision-support response.
 
 ---
 
-## 💡 Our Solution
+# 💡 Our Solution
 
-Heritage Intelligence Platform approaches heritage management as a **multi-agent intelligence problem** rather than a simple chatbot.
+Heritage Intelligence Platform provides **two connected experiences**.
 
-The platform provides two major experiences.
-
-### 👤 Tourist Experience
+## 👤 Tourist Experience
 
 Visitors can:
 
-- Select a heritage site
-- Select their interests
-- Explore personalized cultural stories
-- View visitor-flow information
-- Experience an interactive heritage interface
+1. Select a heritage site
+2. Select their interests
+3. Explore personalized cultural stories
+4. Understand visitor-flow conditions
+5. Discover heritage information interactively
 
-### 🏛️ Authority Experience
+### Tourist Flow
 
-Authorities can:
-
-- Review heritage intelligence
-- Monitor visitor pressure
-- Review conservation priorities
-- Analyse structural-health signals
-- Review encroachment-related signals
-- Access conservation reporting
-- Review coordinated AI-supported decisions
-
----
-
-# 🤖 Five Specialized AI Agents
-
-### 🏗️ 1. Structural Health Monitoring Agent
-
-Supports analysis of structural-health signals and identifies potential conservation concerns.
-
-### 🚶 2. Visitor Flow Management Agent
-
-Analyses visitor-pressure information and supports better visitor-flow decisions.
-
-### 📖 3. Personalized Heritage Storytelling Agent
-
-Creates engaging cultural narratives based on the selected heritage site and visitor interests.
-
-### 🔍 4. Encroachment Detection Agent
-
-Supports identification and analysis of potential encroachment-related heritage risks.
-
-### 📊 5. Conservation Reporting Dashboard Agent
-
-Combines heritage intelligence into understandable reports and decision-support information.
-
----
-
-# 🧠 Agentic AI Architecture
-
-
-                  USER / HERITAGE SIGNALS
-                            │
-                            ▼
-              ┌──────────────────────────┐
-              │   SPECIALIZED AI AGENTS  │
-              └──────────────────────────┘
-                    │    │    │    │    │
-                    ▼    ▼    ▼    ▼    ▼
-                Structural Health
-                Visitor Flow
-                Storytelling
-                Encroachment
-                Conservation
-                    │    │    │    │    │
-                    └────┴────┴────┴────┘
-                            │
-                            ▼
-             ┌────────────────────────────┐
-             │ HERITAGE INTELLIGENCE      │
-             │ ORCHESTRATOR               │
-             └────────────────────────────┘
-                            │
-                            ▼
-                    AI ACTION PLAN
-                            │
-                            ▼
-                   HERITAGE DECISION
-
-Why Agentic AI?
-
-Instead of using one general-purpose chatbot, each agent focuses on a specific responsibility while the Heritage Intelligence Orchestrator coordinates their outputs.
-
-Specialized Agents → Collaboration → Orchestration → Decision Support
-
-🚨 Heritage Emergency & Decision Center
-
-The platform includes a dedicated multi-agent emergency decision experience.
-
-Demonstration Scenario
-
-Ahmedabad Walled City — Jama Masjid, East Minaret
-
-Incident Detected
-       ↓
-Multi-Agent Analysis
-       ↓
-Heritage Intelligence Orchestrator
-       ↓
-AI-Generated Action Plan
-       ↓
-Heritage Decision
-
-
-This demonstrates how multiple specialized agents can contribute different perspectives before producing a coordinated heritage-management decision.
-
-Not just a chatbot response — coordinated intelligence across specialized agents.
-
-🖥️ Platform Experience
-
-👤 Tourist
+```text
 Select Heritage Site
         ↓
 Select Interest
@@ -160,151 +90,430 @@ Select Interest
 Personalized Storytelling
         ↓
 Visitor Flow Information
+        ↓
+Interactive Heritage Experience
+```
 
-🏛️ Authority
+---
+
+## 🏛️ Authority Experience
+
+Heritage authorities can access:
+
+* Heritage overview
+* Visitor-pressure intelligence
+* Conservation priorities
+* Structural-health signals
+* Encroachment-related intelligence
+* Conservation reports
+* Emergency decision support
+* Coordinated AI recommendations
+
+### Authority Flow
+
+```text
 Heritage Overview
-        ↓
+       ↓
 Visitor Flow
-        ↓
+       ↓
 Conservation
-        ↓
+       ↓
 Structural Health
-        ↓
+       ↓
 Encroachment
-        ↓
+       ↓
 Conservation Reporting
+       ↓
+AI-Supported Decision
+```
 
-🤖 Agent Architecture
-The platform provides a dedicated view of all five specialized agents and their responsibilities.
+---
 
-⭐ Key Features
-|       Feature                                       Purpose                            
-| -----------------------------------   ---------------------------------- 
-| 🏛️ Heritage Intelligence Dashboard  | Unified heritage-management view   |
-| 🚶 Visitor Flow Management          | Understand visitor pressure        |
-| 📖 Personalized Storytelling        | Interest-based cultural narratives |
-| 🏗️ Structural Health Intelligence   | Conservation risk signals          |
-| 🔍 Encroachment Intelligence        | Encroachment-related risk analysis |
-| 📊 Conservation Reporting           | AI-supported conservation insights |
-| 🚨 Emergency Decision Center        | Multi-agent emergency coordination |
-| 🤖 Agent Architecture               | Five specialized AI agents         |
-| 🧠 Intelligence Orchestrator        | Coordinates agent outputs          |
-| 👤 Tourist Experience               | Personalized heritage exploration  |
-| 🏛️ Authority Experience             | Heritage decision support          |
+# 🤖 Five Specialized AI Agents
 
+The core of the platform is a **five-agent architecture**.
 
-⚙️ Technology Stack
+| Agent                                           | Responsibility                                                                           |
+| ----------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| 🏗️ **Structural Health Monitoring Agent**      | Analyses structural-health signals and identifies potential conservation concerns        |
+| 🚶 **Visitor Flow Management Agent**            | Analyses visitor pressure and supports visitor-flow decisions                            |
+| 📖 **Personalized Heritage Storytelling Agent** | Generates engaging cultural narratives based on site and visitor interests               |
+| 🔍 **Encroachment Detection Agent**             | Supports identification and analysis of potential encroachment-related risks             |
+| 📊 **Conservation Reporting Agent**             | Combines heritage intelligence into understandable reports and decision-support insights |
 
-AI & Development :-
-  IBM Bob
-  IBM Granite
-  IBM Cloud / watsonx integration structure
-Application :-
-  HTML
-  CSS
-  JavaScript
-Development & Deployment :-
-  Git
-  GitHub
-  GitHub Pages
+---
 
-🏆 Novelty & Uniqueness
+# 🧠 Agentic AI Architecture
 
-1. Multi-Agent Heritage Intelligence
+```text
+                 👤 USER / HERITAGE SIGNALS
+                           │
+                           ▼
+              ┌──────────────────────────┐
+              │   SPECIALIZED AI AGENTS  │
+              └──────────────────────────┘
+                           │
+       ┌───────────┬───────┼───────┬───────────┐
+       ▼           ▼       ▼       ▼           ▼
+   🏗️ Structural  🚶 Visitor  📖 Story  🔍 Encroach.  📊 Conservation
+       │           │       │       │           │
+       └───────────┴───────┼───────┴───────────┘
+                           │
+                           ▼
+             ┌────────────────────────────┐
+             │  🧠 HERITAGE INTELLIGENCE  │
+             │       ORCHESTRATOR         │
+             └────────────────────────────┘
+                           │
+                           ▼
+                  🤖 AI ACTION PLAN
+                           │
+                           ▼
+                 🏛️ HERITAGE DECISION
+```
+
+### Why Agentic AI?
+
+Instead of using one general-purpose chatbot, each agent has a **specific responsibility**.
+
+```text
+Specialized Agents
+        ↓
+Independent Analysis
+        ↓
+Agent Collaboration
+        ↓
+Central Orchestration
+        ↓
+Coordinated Action Plan
+        ↓
+Heritage Decision Support
+```
+
+> **Specialization → Collaboration → Orchestration → Decision**
+
+---
+
+# 🚨 Heritage Emergency & Decision Center
+
+The platform includes a dedicated **Emergency Decision Center** demonstrating how multiple specialized agents can coordinate during a potential heritage-risk event.
+
+### Demonstration Scenario
+
+**Ahmedabad Walled City — Jama Masjid, East Minaret**
+
+```text
+🚨 Incident Detected
+        ↓
+🤖 Multi-Agent Analysis
+        ↓
+🧠 Heritage Intelligence Orchestrator
+        ↓
+📋 AI-Generated Action Plan
+        ↓
+🏛️ Heritage Decision
+```
+
+Different agents contribute different perspectives before the orchestrator produces a coordinated decision-support response.
+
+### Example Intelligence
+
+```text
+Structural Agent
+      ↓
+Potential structural concern
+
+Visitor Flow Agent
+      ↓
+Visitor pressure assessment
+
+Encroachment Agent
+      ↓
+Surrounding-risk assessment
+
+Conservation Agent
+      ↓
+Priority recommendation
+
+Storytelling Agent
+      ↓
+Visitor communication context
+
+              ↓
+
+🧠 ORCHESTRATOR
+
+              ↓
+
+🚨 COORDINATED ACTION PLAN
+```
+
+> **Not just a chatbot response — coordinated intelligence across specialized agents.**
+
+---
+
+# 🖥️ Platform Experience
+
+## 👤 Tourist Dashboard
+
+```text
+🏛️ Choose Heritage Site
+          ↓
+❤️ Choose Interest
+          ↓
+📖 Personalized Cultural Story
+          ↓
+🚶 Visitor Flow Information
+          ↓
+🌐 Interactive Exploration
+```
+
+## 🏛️ Authority Dashboard
+
+```text
+📊 Heritage Overview
+        ↓
+🚶 Visitor Flow
+        ↓
+🏗️ Structural Health
+        ↓
+🔍 Encroachment
+        ↓
+🛡️ Conservation
+        ↓
+📋 AI Reporting
+        ↓
+🚨 Emergency Decision Center
+```
+
+---
+
+# ⭐ Key Features
+
+| Feature                                 | Purpose                            |
+| --------------------------------------- | ---------------------------------- |
+| 🏛️ **Heritage Intelligence Dashboard** | Unified heritage-management view   |
+| 🚶 **Visitor Flow Management**          | Understand visitor pressure        |
+| 📖 **Personalized Storytelling**        | Interest-based cultural narratives |
+| 🏗️ **Structural Health Intelligence**  | Conservation-risk signals          |
+| 🔍 **Encroachment Intelligence**        | Encroachment-related risk analysis |
+| 📊 **Conservation Reporting**           | AI-supported conservation insights |
+| 🚨 **Emergency Decision Center**        | Multi-agent emergency coordination |
+| 🤖 **Agent Architecture**               | Five specialized AI agents         |
+| 🧠 **Intelligence Orchestrator**        | Coordinates agent outputs          |
+| 👤 **Tourist Experience**               | Personalized heritage exploration  |
+| 🏛️ **Authority Experience**            | Heritage decision support          |
+
+---
+
+# 🧩 Core Intelligence Pipeline
+
+```text
+              HERITAGE DATA / SIGNALS
+                       │
+                       ▼
+              ┌─────────────────┐
+              │  AI AGENT LAYER │
+              └─────────────────┘
+                       │
+        ┌──────────────┼──────────────┐
+        ▼              ▼              ▼
+   Detection       Analysis       Storytelling
+        │              │              │
+        └──────────────┼──────────────┘
+                       ▼
+                ORCHESTRATOR
+                       │
+                       ▼
+                RISK / INSIGHT
+                       │
+                       ▼
+                ACTION PLAN
+                       │
+                       ▼
+             HERITAGE DECISION
+```
+
+---
+
+# 🏆 Novelty & Uniqueness
+
+### 1️⃣ Multi-Agent Heritage Intelligence
 
 Heritage management is divided into specialized AI responsibilities instead of relying on one generic chatbot.
 
-2. Central Orchestration
+### 2️⃣ Central Intelligence Orchestration
 
-Agent outputs are coordinated through a central Heritage Intelligence Orchestrator.
+The **Heritage Intelligence Orchestrator** coordinates outputs from multiple specialized agents.
 
-3. Tourist + Authority Platform
+### 3️⃣ Tourist + Authority Platform
 
-The same platform supports both heritage visitors and heritage managers.
+One platform supports both:
 
-4. Emergency Decision Center
+```text
+👤 Heritage Visitors
+        +
+🏛️ Heritage Authorities
+```
 
-A dedicated scenario demonstrates multi-agent coordination for a heritage-risk situation.
+### 4️⃣ Emergency Decision Center
 
-5. Personalized Cultural Storytelling
+A dedicated scenario demonstrates multi-agent coordination during a heritage-risk situation.
 
-Heritage information can be adapted around visitor interests.
+### 5️⃣ Personalized Cultural Storytelling
 
-6. Decision-Oriented Design
+Cultural information can be adapted according to the visitor's selected interests.
 
-The platform moves from:
+### 6️⃣ Decision-Oriented Architecture
 
-Signals → Analysis → Coordination → Action
+The system moves beyond information delivery:
 
+```text
+Signals
+  ↓
+Analysis
+  ↓
+Coordination
+  ↓
+Risk / Insight
+  ↓
+Action Plan
+  ↓
+Decision Support
+```
 
-🔐 Demonstration Transparency
+---
 
-The current prototype uses demo/simulated signals for monitoring and conservation scenarios.
+# 🔐 Demonstration Transparency
 
-It does not claim verified live connectivity to:
+The current prototype uses **demo/simulated signals** for monitoring and conservation scenarios.
 
-CCTV systems
-Satellite feeds
-IoT sensors
-Structural sensors
-Government databases
+The prototype does **not** claim verified live connectivity to:
+
+* 📹 CCTV systems
+* 🛰️ Satellite feeds
+* 🌡️ IoT sensors
+* 🏗️ Structural sensors
+* 🏛️ Government databases
 
 unless those integrations are actually implemented and verified.
 
-📸 Screenshots
+This distinction keeps the prototype transparent while providing a foundation for future real-world deployment.
 
-Screenshots of the working platform will be added here.
+---
 
-Recommended showcase screenshots:
+# ⚙️ Technology Stack
 
-Landing / Home Experience
-Tourist Storytelling Experience
-Authority Dashboard
-Five AI Agents
-Heritage Emergency & Decision Center
+### 🤖 AI & Intelligence
 
-🚀 Future Scope
-📡 Live structural-health monitoring
-📹 Privacy-aware real-time visitor analytics
-🛰️ Geospatial and satellite intelligence
-🌐 Multilingual heritage storytelling
-🥽 AR-based heritage experiences
-🔮 Predictive conservation
-🏛️ Secure institutional integration
-🌐 Live Demo
+* IBM Bob
+* IBM Granite
+* IBM Cloud / watsonx integration structure
 
-Heritage Intelligence Platform
+### 🌐 Application
 
-https://yashbadgujar15.github.io/Heritage-Intelligence-Platform/
+* HTML5
+* CSS3
+* JavaScript
 
-💻 GitHub Repository
+### 🛠️ Development
 
-https://github.com/YashBadgujar15/Heritage-Intelligence-Platform
+* Git
+* GitHub
+* GitHub Pages
 
-📌 Hackathon Information
+---
 
-Event: Gujarat Hackathon 2026
-Challenge: Challenge 12
-Domain: Tourism & Heritage
+# 🚀 Future Scope
 
-Challenge: Smart Heritage Conservation Platform for Ahmedabad's Walled City & Modhera
+The platform can evolve into a real-world heritage intelligence ecosystem.
 
-Project: Heritage Intelligence Platform
+### 📡 Live Structural Monitoring
 
-🏛️ Our Vision
+Integration with IoT and structural-health sensors.
 
-Preserve the Past. Understand the Present. Intelligently Shape the Future.
+### 📹 Privacy-Aware Visitor Analytics
+
+Real-time visitor-density estimation while respecting privacy.
+
+### 🛰️ Geospatial & Satellite Intelligence
+
+Satellite and geospatial data for monitoring heritage surroundings.
+
+### 🌐 Multilingual Heritage Storytelling
+
+Support for Gujarati, Hindi, English and other languages.
+
+### 🥽 AR Heritage Experiences
+
+Augmented-reality storytelling and historical visualization.
+
+### 🔮 Predictive Conservation
+
+Predict potential conservation risks before they become critical.
+
+### 🏛️ Secure Institutional Integration
+
+Future integration with verified institutional heritage-management systems.
+
+---
+
+# 🌐 Live Demo
 
 <p align="center">
-Built with 🤖 Agentic AI + 🏛️ Heritage Intelligence
+
+### 🏛️ Heritage Intelligence Platform
+
+**Explore the prototype**
+
+<br>
+
+👉 https://yashbadgujar15.github.io/Heritage-Intelligence-Platform/
+
+</p>
+
+---
+
+# 💻 GitHub Repository
+
+<p align="center">
+
+👉 https://github.com/YashBadgujar15/Heritage-Intelligence-Platform
+
 </p>
 
 
+# 🏛️ Hackathon Information
 
+|                        | Details                                                                    |
+| ---------------------- | -------------------------------------------------------------------------- |
+| 🎯 **Event**           | Gujarat Hackathon 2026                                                     |
+| 🏆 **Challenge**       | Challenge 12                                                               |
+| 🌍 **Domain**          | Tourism & Heritage                                                         |
+| 📌 **Challenge Theme** | Smart Heritage Conservation Platform for Ahmedabad's Walled City & Modhera |
+| 🤖 **Project**         | Heritage Intelligence Platform                                             |
+| 🧠 **Approach**        | Agentic AI + Multi-Agent Intelligence                                      |
 
+---
 
+# 🎯 Vision
 
+> ## **Preserve the Past.**
+>
+> ## **Understand the Present.**
+>
+> ## **Intelligently Shape the Future.**
 
+Heritage is not only something to preserve.
 
+It is something to **understand, protect, experience and intelligently manage for future generations.**
 
+---
 
+<p align="center">
+
+### 🤖 Built with Agentic AI + 🏛️ Heritage Intelligence
+
+**Gujarat Hackathon 2026 · Challenge 12**
+
+</p>
