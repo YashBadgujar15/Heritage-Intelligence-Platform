@@ -30,12 +30,14 @@
 @keyframes pageReveal {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    /* No transform here — transform on #app creates a containing block
+       that traps position:fixed children (the modal overlay) inside it,
+       making the modal scroll with the page instead of staying fixed
+       to the viewport. Opacity-only fade has no containing-block side effect. */
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
