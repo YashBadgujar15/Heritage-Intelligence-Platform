@@ -456,7 +456,44 @@
     }, { once:true });
   }
 
- 
+  /* ------------------------------------------------------------
+     HUD
+     ------------------------------------------------------------ */
+  function createHUD() {
+    if (document.getElementById(HUD_ID)) return;
+
+    const hud = document.createElement('aside');
+    hud.id = HUD_ID;
+    hud.innerHTML = `
+      <div class="hip-hud-top">
+        <div class="hip-hud-title">Heritage Command</div>
+        <div class="hip-hud-live"><i class="hip-hud-dot"></i> ONLINE</div>
+      </div>
+
+      <div class="hip-hud-row">
+        <span class="hip-hud-label">Mission XP</span>
+        <span class="hip-hud-value">2,450</span>
+      </div>
+      <div class="hip-xp"><i></i></div>
+
+      <div class="hip-hud-row">
+        <span class="hip-hud-label">Agents</span>
+        <span class="hip-hud-value">05 ACTIVE</span>
+      </div>
+
+      <div class="hip-hud-row">
+        <span class="hip-hud-label">World Status</span>
+        <span class="hip-hud-value" id="hip-world-status">MONITORING</span>
+      </div>
+
+      <div class="hip-hud-mission">
+        <small>Current Objective</small>
+        <strong id="hip-current-mission">Explore the Heritage Network</strong>
+      </div>
+    `;
+
+    document.body.appendChild(hud);
+  }
 
   /* ------------------------------------------------------------
      SCAN LINE
