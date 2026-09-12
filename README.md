@@ -28,8 +28,8 @@
 | Team Member | Enrollment No. | College | Branch | Role |
 |---|---|---|---|---|
 | **Yash Badgujar (Team Leader)** | **ET25BTCO801** | **Sarvajanik College of Engineering & Technology, Surat** | **Computer Engineering** | 👑 Team Lead & Project Architect |
-| **Anjali Sonar** | **ET25BTCO821** | **Sarvajanik College of Engineering & Technology,Surat** | **Computer Engineering** | 🤖 AI / Agent Development |
-| **Tanvi Chib** | **ET25BTCO206** | **Sarvajanik College of Engineering & Technology,Surat** | **Computer Engineering** | 💻 Frontend / UI & Integration |
+| **Anjali Sonar** | **ET25BTCO821** | **Sarvajanik College of Engineering & Technology, Surat** | **Computer Engineering** | 🤖 AI / Agent Development |
+| **Tanvi Chib** | **ET25BTCO206** | **Sarvajanik College of Engineering & Technology, Surat** | **Computer Engineering** | 💻 Frontend / UI & Integration |
 
 ---
 
