@@ -1635,9 +1635,9 @@ footer .border-t.border-stone-700 {
 
 /* =========================================================
    GAME-LAYER SUPPRESSION
-   Hides all injected gaming UI (scan line, HUD, intro,
-   hero command panel, bracket decorations, grid overlay)
-   without touching script.js.
+   Hides injected gaming UI that is NOT the intro splash.
+   The intro (#heritage-game-intro) is intentionally shown
+   on every page load — do NOT add a hide rule for it here.
    ========================================================= */
 
 /* 1. Sweeping horizontal scan line */
@@ -1647,11 +1647,6 @@ footer .border-t.border-stone-700 {
 
 /* 2. Heritage Command / ONLINE / Mission XP / World Status HUD */
 #heritage-game-hud {
-  display: none !important;
-}
-
-/* 3. "Enter the Heritage World / Start Mission" intro splash */
-#heritage-game-intro {
   display: none !important;
 }
 
@@ -2164,10 +2159,9 @@ footer {
    --------------------------------------------------------- */
 
 @media (prefers-reduced-motion: reduce) {
-  /* Game element hides are intentional — keep them */
+  /* Game element hides — intro is intentionally NOT suppressed here */
   #heritage-game-scan,
   #heritage-game-hud,
-  #heritage-game-intro,
   #hi-final-hero-panel,
   .hip-bracket { display: none !important; }
 
