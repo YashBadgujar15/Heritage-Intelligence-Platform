@@ -1,0 +1,534 @@
+/* =========================================================
+   HERITAGE INTELLIGENCE PLATFORM
+   CINEMATIC ANIMATION SYSTEM
+   UI ONLY — NO FUNCTIONALITY CHANGE
+   ========================================================= */
+
+
+/* =========================================================
+   1. GLOBAL MOTION
+   ========================================================= */
+
+* {
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+
+/* =========================================================
+   2. PAGE ENTRANCE
+   ========================================================= */
+
+#app {
+  animation: pageReveal 0.7s ease-out both;
+}
+
+@keyframes pageReveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================================
+   3. HERO CINEMATIC EFFECT
+   ========================================================= */
+
+.gradient-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.gradient-hero::before {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  background:
+    radial-gradient(
+      circle at 30% 30%,
+      rgba(255, 255, 255, 0.10),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 75% 70%,
+      rgba(212, 175, 55, 0.12),
+      transparent 30%
+    );
+  animation: heroAura 12s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes heroAura {
+  0% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.55;
+  }
+
+  100% {
+    transform: scale(1.15) rotate(4deg);
+    opacity: 0.9;
+  }
+}
+
+
+/* =========================================================
+   4. HERO CONTENT FLOAT
+   ========================================================= */
+
+.gradient-hero h1 {
+  animation:
+    heroTitleReveal 0.9s cubic-bezier(.2,.8,.2,1) both,
+    titleFloat 6s ease-in-out 1s infinite;
+}
+
+@keyframes heroTitleReveal {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+    filter: blur(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes titleFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+
+/* =========================================================
+   5. CARDS — PREMIUM HOVER
+   ========================================================= */
+
+.card,
+.glass-card,
+.white-panel,
+.bg-white {
+  transform: translateZ(0);
+}
+
+.card:hover,
+.glass-card:hover,
+.white-panel:hover {
+  transform: translateY(-5px);
+}
+
+
+/* =========================================================
+   6. SOFT CARD GLOW
+   ========================================================= */
+
+.card:hover {
+  box-shadow:
+    0 18px 45px rgba(15, 23, 42, 0.10),
+    0 0 0 1px rgba(212, 175, 55, 0.08);
+}
+
+
+/* =========================================================
+   7. BUTTON ENERGY
+   ========================================================= */
+
+button {
+  position: relative;
+  overflow: hidden;
+}
+
+button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 70%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.20),
+    transparent
+  );
+  transform: skewX(-20deg);
+  pointer-events: none;
+}
+
+button:hover::after {
+  animation: buttonSweep 0.7s ease;
+}
+
+@keyframes buttonSweep {
+  from {
+    left: -120%;
+  }
+
+  to {
+    left: 150%;
+  }
+}
+
+
+/* =========================================================
+   8. NAVIGATION MICRO ANIMATION
+   ========================================================= */
+
+nav a,
+nav button {
+  position: relative;
+}
+
+nav a::before,
+nav button::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  transform: translateX(-50%);
+  background: currentColor;
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+nav a:hover::before,
+nav button:hover::before {
+  width: 70%;
+}
+
+
+/* =========================================================
+   9. CHIP / TAG ANIMATION
+   ========================================================= */
+
+.agent-chip,
+.chip {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.agent-chip:hover,
+.chip:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+
+/* =========================================================
+   10. AI / AGENT ENERGY
+   ========================================================= */
+
+.agent-chip {
+  position: relative;
+  overflow: hidden;
+}
+
+.agent-chip::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.15) 50%,
+    transparent 80%
+  );
+  transform: translateX(-120%);
+  animation: agentScan 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes agentScan {
+  0%,
+  55% {
+    transform: translateX(-120%);
+  }
+
+  75%,
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+
+/* =========================================================
+   11. PROGRESS BAR — SCANNING EFFECT
+   ========================================================= */
+
+.progress-bar,
+.progress-fill {
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar::after,
+.progress-fill::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.30),
+    transparent
+  );
+  animation: progressScan 2.2s linear infinite;
+}
+
+@keyframes progressScan {
+  from {
+    left: -100%;
+  }
+
+  to {
+    left: 150%;
+  }
+}
+
+
+/* =========================================================
+   12. AI OUTPUT / RESULT REVEAL
+   ========================================================= */
+
+.prose,
+.markdown-output {
+  animation: resultReveal 0.65s ease-out both;
+}
+
+@keyframes resultReveal {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+
+/* =========================================================
+   13. EMERGENCY CENTER — ALERT PULSE
+   ========================================================= */
+
+.emergency-center {
+  position: relative;
+}
+
+.emergency-center::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border-radius: inherit;
+  border: 1px solid rgba(220, 38, 38, 0.18);
+  animation: emergencyPulse 2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes emergencyPulse {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.65;
+    transform: scale(1.015);
+  }
+}
+
+
+/* =========================================================
+   14. EMERGENCY DECISION CARD
+   ========================================================= */
+
+.em-decision-border {
+  position: relative;
+  animation: decisionAppear 0.7s ease-out both;
+}
+
+@keyframes decisionAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+
+/* =========================================================
+   15. ORCHESTRATOR EFFECT
+   ========================================================= */
+
+.em-orchestrator {
+  position: relative;
+  overflow: hidden;
+}
+
+.em-orchestrator::after {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  right: -80px;
+  top: -80px;
+
+  background: radial-gradient(
+    circle,
+    rgba(255,255,255,0.10),
+    transparent 70%
+  );
+
+  animation: orchestratorGlow 5s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes orchestratorGlow {
+  from {
+    transform: scale(0.8);
+    opacity: 0.35;
+  }
+
+  to {
+    transform: scale(1.3);
+    opacity: 0.8;
+  }
+}
+
+
+/* =========================================================
+   16. LOADING DOTS / STATUS
+   ========================================================= */
+
+.loading,
+.animate-pulse {
+  animation-duration: 1.5s;
+}
+
+
+/* =========================================================
+   17. ICON MICRO INTERACTION
+   ========================================================= */
+
+svg {
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
+}
+
+button:hover svg {
+  transform: translateX(1px) scale(1.04);
+}
+
+
+/* =========================================================
+   18. IMAGE / VISUAL HOVER
+   ========================================================= */
+
+img {
+  transition:
+    transform 0.6s cubic-bezier(.2,.8,.2,1),
+    filter 0.4s ease;
+}
+
+.card:hover img,
+.glass-card:hover img {
+  transform: scale(1.035);
+}
+
+
+/* =========================================================
+   19. INPUT FOCUS — PREMIUM
+   ========================================================= */
+
+input:focus,
+textarea:focus,
+select:focus {
+  transform: translateY(-1px);
+  box-shadow:
+    0 0 0 3px rgba(212, 175, 55, 0.10),
+    0 8px 25px rgba(15, 23, 42, 0.06);
+}
+
+
+/* =========================================================
+   20. STAGGERED CONTENT FEEL
+   ========================================================= */
+
+main > * {
+  animation: sectionReveal 0.6s ease-out both;
+}
+
+main > *:nth-child(1) {
+  animation-delay: 0.05s;
+}
+
+main > *:nth-child(2) {
+  animation-delay: 0.10s;
+}
+
+main > *:nth-child(3) {
+  animation-delay: 0.15s;
+}
+
+main > *:nth-child(4) {
+  animation-delay: 0.20s;
+}
+
+@keyframes sectionReveal {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================================
+   21. REDUCED MOTION ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,347 @@
+/* =========================================================
+   HERITAGE INTELLIGENCE PLATFORM
+   RESPONSIVE DESIGN SYSTEM
+   Desktop • Laptop • Tablet • Mobile
+   UI ONLY — NO FUNCTIONALITY CHANGE
+   ========================================================= */
+
+
+/* =========================================================
+   1. LARGE SCREENS
+   ========================================================= */
+
+@media (min-width: 1280px) {
+
+  .container {
+    max-width: 1200px;
+  }
+
+  .gradient-hero h1 {
+    font-size: clamp(3.5rem, 5vw, 5.5rem);
+    line-height: 0.98;
+  }
+
+  main {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+
+/* =========================================================
+   2. LAPTOP
+   ========================================================= */
+
+@media (max-width: 1279px) {
+
+  .gradient-hero h1 {
+    font-size: clamp(3rem, 6vw, 4.5rem);
+  }
+
+  .gradient-hero {
+    min-height: 520px;
+  }
+
+  main {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+
+/* =========================================================
+   3. TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .gradient-hero {
+    min-height: 500px;
+  }
+
+  .gradient-hero h1 {
+    font-size: clamp(2.6rem, 8vw, 4rem);
+  }
+
+  .gradient-hero p {
+    max-width: 90%;
+  }
+
+  nav {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  main {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .card,
+  .glass-card,
+  .white-panel {
+    border-radius: 18px;
+  }
+
+  button {
+    min-height: 42px;
+  }
+}
+
+
+/* =========================================================
+   4. MOBILE
+   ========================================================= */
+
+@media (max-width: 640px) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+  #app {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+
+  /* -------------------------
+     NAVIGATION
+     ------------------------- */
+
+  nav {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  nav .font-display {
+    font-size: 18px;
+  }
+
+
+  /* -------------------------
+     HERO
+     ------------------------- */
+
+  .gradient-hero {
+    min-height: 440px;
+    padding: 70px 18px 55px;
+  }
+
+  .gradient-hero h1 {
+    font-size: clamp(2.2rem, 12vw, 3.4rem);
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+  }
+
+  .gradient-hero p {
+    font-size: 14px;
+    line-height: 1.7;
+    max-width: 100%;
+  }
+
+
+  /* -------------------------
+     MAIN CONTENT
+     ------------------------- */
+
+  main {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+
+  /* -------------------------
+     HEADINGS
+     ------------------------- */
+
+  h1 {
+    line-height: 1.05;
+  }
+
+  h2 {
+    line-height: 1.15;
+  }
+
+  h3 {
+    line-height: 1.2;
+  }
+
+
+  /* -------------------------
+     CARDS
+     ------------------------- */
+
+  .card,
+  .glass-card,
+  .white-panel {
+    width: 100%;
+    border-radius: 16px;
+  }
+
+
+  /* -------------------------
+     BUTTONS
+     ------------------------- */
+
+  button {
+    min-height: 44px;
+    max-width: 100%;
+  }
+
+
+  /* -------------------------
+     FORMS
+     ------------------------- */
+
+  input,
+  textarea,
+  select {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+
+  /* -------------------------
+     TABLES
+     ------------------------- */
+
+  table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+
+  /* -------------------------
+     IMAGES
+     ------------------------- */
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+
+  /* -------------------------
+     AI / AGENT SECTIONS
+     ------------------------- */
+
+  .agent-chip {
+    font-size: 11px;
+    padding: 6px 9px;
+  }
+
+
+  /* -------------------------
+     EMERGENCY UI
+     ------------------------- */
+
+  .em-orchestrator,
+  .em-decision-border,
+  .emergency-center {
+    border-radius: 16px;
+  }
+
+
+  /* -------------------------
+     TOUCH DEVICES
+     ------------------------- */
+
+  .card:hover,
+  .glass-card:hover,
+  .white-panel:hover {
+    transform: none;
+  }
+
+  img {
+    transform: none !important;
+  }
+}
+
+
+/* =========================================================
+   5. VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+  .gradient-hero {
+    min-height: 410px;
+    padding: 60px 14px 45px;
+  }
+
+  .gradient-hero h1 {
+    font-size: 2.1rem;
+  }
+
+  .gradient-hero p {
+    font-size: 13px;
+  }
+
+  main {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  nav .font-display {
+    font-size: 16px;
+  }
+
+  button {
+    min-height: 42px;
+    font-size: 13px;
+  }
+}
+
+
+/* =========================================================
+   6. LANDSCAPE MOBILE
+   ========================================================= */
+
+@media (max-width: 900px) and (orientation: landscape) {
+
+  .gradient-hero {
+    min-height: 380px;
+    padding-top: 50px;
+    padding-bottom: 40px;
+  }
+
+  .gradient-hero h1 {
+    font-size: 2.8rem;
+  }
+}
+
+
+/* =========================================================
+   7. SAFE WIDTH
+   ========================================================= */
+
+@media (max-width: 640px) {
+
+  .max-w-7xl,
+  .max-w-6xl,
+  .max-w-5xl,
+  .max-w-4xl,
+  .max-w-3xl {
+    max-width: 100%;
+  }
+
+  .overflow-x-auto {
+    max-width: 100%;
+  }
+}
+
+
+/* =========================================================
+   8. REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  * {
+    scroll-behavior: auto !important;
+  }
+}
