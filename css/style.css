@@ -1606,3 +1606,563 @@ footer .border-t.border-stone-700 {
   section.bg-stone-900 .bg-stone-800.rounded-xl:hover { transform: none !important; }
   .bg-white.rounded-xl.border-l-4:hover { transform: none !important; }
 }
+
+
+/* =========================================================
+   GAME-LAYER SUPPRESSION
+   Hides all injected gaming UI (scan line, HUD, intro,
+   hero command panel, bracket decorations, grid overlay)
+   without touching script.js.
+   ========================================================= */
+
+/* 1. Sweeping horizontal scan line */
+#heritage-game-scan {
+  display: none !important;
+}
+
+/* 2. Heritage Command / ONLINE / Mission XP / World Status HUD */
+#heritage-game-hud {
+  display: none !important;
+}
+
+/* 3. "Enter the Heritage World / Start Mission" intro splash */
+#heritage-game-intro {
+  display: none !important;
+}
+
+/* 4. "◉ Heritage World / SYSTEM LIVE" hero panel */
+#hi-final-hero-panel {
+  display: none !important;
+}
+
+/* 5. Corner bracket decorations on cards */
+.hip-bracket {
+  display: none !important;
+}
+
+/* 6. Gold grid overlay injected on body.hip-game-mode::before */
+body.hip-game-mode::before {
+  display: none !important;
+}
+
+/* 7. Restore the body background — the game mode override changes it */
+body.hip-game-mode {
+  background:
+    radial-gradient(
+      circle at 0% 0%,
+      rgba(217, 154, 43, 0.055),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 100% 15%,
+      rgba(15, 118, 110, 0.035),
+      transparent 25%
+    ),
+    var(--surface-soft) !important;
+}
+
+/* 8. The second IIFE sets body { background:#0b0907 } via injected <style>.
+      Restore the warm ivory. */
+body {
+  background:
+    radial-gradient(
+      circle at 0% 0%,
+      rgba(217, 154, 43, 0.055),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 100% 15%,
+      rgba(15, 118, 110, 0.035),
+      transparent 25%
+    ),
+    #faf8f5 !important;
+}
+
+
+/* =========================================================
+   PREMIUM ANIMATIONS — CSS ONLY
+   Cinematic hero · scroll-reveal · card hover · agent
+   micro-interactions · dashboard · tourist · emergency
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   A. HERO ENTRANCE — staggered children
+   --------------------------------------------------------- */
+
+/* Chips row fades in first */
+.gradient-hero .flex.items-center.gap-2.mb-4 {
+  animation: heroFadeUp 0.7s cubic-bezier(.22,1,.36,1) 0.1s both;
+}
+
+/* H1 already has heroTitleReveal from animations.css — keep, just adjust delay */
+.gradient-hero h1 {
+  animation:
+    heroTitleReveal 0.85s cubic-bezier(.22,1,.36,1) 0.25s both,
+    titleFloat 7s ease-in-out 1.2s infinite !important;
+}
+
+/* Subtitle paragraph */
+.gradient-hero p {
+  animation: heroFadeUp 0.75s cubic-bezier(.22,1,.36,1) 0.45s both;
+}
+
+/* CTA button group */
+.gradient-hero .flex.flex-wrap.gap-3 {
+  animation: heroFadeUp 0.75s cubic-bezier(.22,1,.36,1) 0.62s both;
+}
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* ---------------------------------------------------------
+   B. HERO — ambient warm glow pulse (background layer)
+   --------------------------------------------------------- */
+
+.gradient-hero::before {
+  animation: heroAmbient 14s ease-in-out infinite alternate !important;
+}
+
+@keyframes heroAmbient {
+  0%   { opacity: 0.45; transform: scale(1)    rotate(0deg);   }
+  50%  { opacity: 0.72; transform: scale(1.08) rotate(2deg);   }
+  100% { opacity: 0.55; transform: scale(1.14) rotate(-2deg);  }
+}
+
+
+/* ---------------------------------------------------------
+   C. SCROLL-REVEAL — fade-up for content sections
+   Applied via existing .fade-in class (JS sets it on each
+   view render, so every page transition gets the animation).
+   --------------------------------------------------------- */
+
+.fade-in {
+  animation: fadeReveal 0.55s cubic-bezier(.22,1,.36,1) both !important;
+}
+
+@keyframes fadeReveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+    filter: blur(0.5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* Stagger children inside fade-in containers */
+.fade-in > *:nth-child(1) { animation-delay: 0.04s; }
+.fade-in > *:nth-child(2) { animation-delay: 0.09s; }
+.fade-in > *:nth-child(3) { animation-delay: 0.14s; }
+.fade-in > *:nth-child(4) { animation-delay: 0.19s; }
+.fade-in > *:nth-child(5) { animation-delay: 0.24s; }
+.fade-in > *:nth-child(6) { animation-delay: 0.29s; }
+
+
+/* ---------------------------------------------------------
+   D. CARD HOVER — elegant lift with warm glow
+   --------------------------------------------------------- */
+
+/* Ensure consistent base for all white content cards */
+.bg-white.rounded-xl.border,
+.bg-white.rounded-2xl.border {
+  will-change: transform;
+  transition:
+    transform 0.28s cubic-bezier(.16,1,.3,1),
+    box-shadow 0.28s ease,
+    border-color 0.28s ease !important;
+}
+
+.bg-white.rounded-xl.border:hover,
+.bg-white.rounded-2xl.border:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 14px 36px rgba(28,25,23,0.10),
+    0 2px 8px  rgba(28,25,23,0.05),
+    0 0 0 1px  rgba(180,130,55,0.10) !important;
+  border-color: rgba(180,130,55,0.22) !important;
+}
+
+/* card-hover already has a sweep ::before — enhance timing */
+.card-hover {
+  transition:
+    transform 0.28s cubic-bezier(.16,1,.3,1),
+    box-shadow 0.28s ease,
+    border-color 0.28s ease !important;
+}
+
+.card-hover:hover {
+  transform: translateY(-6px) !important;
+  box-shadow:
+    0 20px 48px rgba(28,25,23,0.13),
+    0 4px 12px  rgba(28,25,23,0.06),
+    0 0 0 1px   rgba(180,130,55,0.14) !important;
+  border-color: rgba(180,130,55,0.28) !important;
+}
+
+
+/* ---------------------------------------------------------
+   E. NAVIGATION — smooth active-state & hover transitions
+   --------------------------------------------------------- */
+
+nav button {
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.18s cubic-bezier(.22,1,.36,1) !important;
+}
+
+nav button:hover:not(:disabled) {
+  transform: translateY(-1px) !important;
+}
+
+nav button:active:not(:disabled) {
+  transform: scale(0.96) translateY(0px) !important;
+  transition-duration: 0.08s !important;
+}
+
+
+/* ---------------------------------------------------------
+   F. BUTTON PRESS FEEDBACK — all buttons
+   --------------------------------------------------------- */
+
+button:not(:disabled):active {
+  transform: scale(0.97) !important;
+  transition-duration: 0.08s !important;
+}
+
+/* Primary amber CTA lift */
+.gradient-hero button:hover:not(:disabled) {
+  transform: translateY(-3px) !important;
+  filter: brightness(1.06);
+}
+
+
+/* ---------------------------------------------------------
+   G. AI AGENT CARDS — micro-interaction on agents page
+   --------------------------------------------------------- */
+
+/* Five-agent grid cards */
+.grid.grid-cols-1.sm\:grid-cols-3.lg\:grid-cols-5 .bg-white.rounded-xl {
+  transition:
+    transform 0.26s cubic-bezier(.16,1,.3,1),
+    box-shadow 0.26s ease,
+    border-color 0.26s ease !important;
+}
+
+.grid.grid-cols-1.sm\:grid-cols-3.lg\:grid-cols-5 .bg-white.rounded-xl:hover {
+  transform: translateY(-5px) !important;
+  box-shadow:
+    0 16px 40px rgba(28,25,23,0.12),
+    0 0 0 1px rgba(180,130,55,0.16) !important;
+  border-color: rgba(180,130,55,0.28) !important;
+}
+
+/* Agent icon in grid — scale on card hover */
+.grid.grid-cols-1.sm\:grid-cols-3.lg\:grid-cols-5 .bg-white.rounded-xl:hover .text-3xl {
+  transform: scale(1.18) translateY(-2px);
+}
+.grid.grid-cols-1.sm\:grid-cols-3.lg\:grid-cols-5 .bg-white.rounded-xl .text-3xl {
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(.16,1,.3,1);
+}
+
+/* Agent chip shimmer — existing agentScan animation already fires; 
+   just ensure chips have a visible hover lift */
+.agent-chip {
+  transition:
+    transform 0.22s cubic-bezier(.16,1,.3,1),
+    box-shadow 0.22s ease !important;
+}
+.agent-chip:hover {
+  transform: translateY(-1px) scale(1.03) !important;
+  box-shadow: 0 4px 12px rgba(28,25,23,0.10) !important;
+}
+
+
+/* ---------------------------------------------------------
+   H. AUTHORITY DASHBOARD — metric card entrance
+   --------------------------------------------------------- */
+
+/* Each metric card in the 4-column overview gets a staggered
+   reveal thanks to being inside .fade-in. The hover adds a
+   gentle number-focused elevation. */
+.grid.grid-cols-2.lg\:grid-cols-4 > .bg-white.rounded-xl {
+  transition:
+    transform 0.24s cubic-bezier(.16,1,.3,1),
+    box-shadow 0.24s ease !important;
+}
+
+.grid.grid-cols-2.lg\:grid-cols-4 > .bg-white.rounded-xl:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 12px 30px rgba(28,25,23,0.10) !important;
+}
+
+/* Alert cards — slide-right reveal + hover emphasise */
+.bg-white.rounded-xl.border-l-4 {
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease !important;
+}
+
+.bg-white.rounded-xl.border-l-4:hover {
+  transform: translateX(4px) !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+/* Progress bar fill — pulse on load */
+.progress-fill {
+  animation: progressLoad 0.9s cubic-bezier(.4,0,.2,1) both !important;
+}
+
+@keyframes progressLoad {
+  from { width: 0 !important; }
+  to   { /* inherits inline width */ }
+}
+
+
+/* ---------------------------------------------------------
+   I. TOURIST EXPERIENCE — step-selection transitions
+   --------------------------------------------------------- */
+
+/* Interest selection buttons — pop when selected */
+button.border-amber-500.bg-amber-50 {
+  animation: selectionPop 0.2s cubic-bezier(.22,1,.36,1) both;
+}
+
+@keyframes selectionPop {
+  0%   { transform: scale(0.96); }
+  60%  { transform: scale(1.03); }
+  100% { transform: scale(1);    }
+}
+
+/* Site-selector card selected state */
+button.card-hover.border-amber-500 {
+  animation: selectionPop 0.22s cubic-bezier(.22,1,.36,1) both;
+}
+
+/* Storytelling / Visitor Flow result panel fade in */
+.prose {
+  animation: resultReveal 0.6s cubic-bezier(.22,1,.36,1) both !important;
+}
+
+
+/* ---------------------------------------------------------
+   J. EMERGENCY CENTER — stage-by-stage premium animation
+   --------------------------------------------------------- */
+
+/* Step reveal — slightly more cinematic */
+.em-step-reveal {
+  animation: emCinematicReveal 0.7s cubic-bezier(.22,1,.36,1) both !important;
+}
+
+@keyframes emCinematicReveal {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.985);
+    filter: blur(1px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Active agent card — warm amber border pulse */
+.em-agent-card.active-step {
+  animation: agentActivePulse 2.8s ease-in-out infinite !important;
+}
+
+@keyframes agentActivePulse {
+  0%, 100% {
+    box-shadow: 0 4px 16px rgba(28,25,23,0.08);
+  }
+  50% {
+    box-shadow:
+      0 4px 16px rgba(28,25,23,0.08),
+      0 0 0 3px rgba(217,154,43,0.14);
+  }
+}
+
+/* Incident card critical pulse — existing emPulse enhanced */
+.em-pulse-critical {
+  animation: incidentCriticalPulse 2.2s ease-in-out infinite !important;
+}
+
+@keyframes incidentCriticalPulse {
+  0%, 100% {
+    box-shadow:
+      0 0 0 2px rgba(185,28,28,0.12),
+      0 8px 28px rgba(185,28,28,0.08);
+  }
+  50% {
+    box-shadow:
+      0 0 0 6px rgba(185,28,28,0.06),
+      0 8px 28px rgba(185,28,28,0.16);
+  }
+}
+
+/* Orchestrator — amber aura breathe */
+.em-orchestrator {
+  animation: orchestratorBreathe 4s ease-in-out infinite alternate !important;
+}
+
+@keyframes orchestratorBreathe {
+  from {
+    box-shadow:
+      0 0 0 1px rgba(180,83,9,0.22),
+      0 16px 50px rgba(12,8,4,0.42);
+  }
+  to {
+    box-shadow:
+      0 0 0 1px rgba(180,83,9,0.38),
+      0 20px 60px rgba(12,8,4,0.52),
+      0 0 40px rgba(180,83,9,0.10);
+  }
+}
+
+/* Orchestrator flow line — animate width in */
+.orchestrator-flow-line {
+  animation: flowLineGrow 0.8s cubic-bezier(.22,1,.36,1) both;
+}
+
+@keyframes flowLineGrow {
+  from { transform: scaleY(0); transform-origin: top; opacity: 0; }
+  to   { transform: scaleY(1); opacity: 1; }
+}
+
+/* Decision card — slide-up with red glow */
+.em-decision-border {
+  animation: decisionSlideUp 0.75s cubic-bezier(.22,1,.36,1) both !important;
+}
+
+@keyframes decisionSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+    filter: blur(1px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Step connector label — fade in */
+h2.text-xs.font-semibold.text-stone-400.uppercase.tracking-wider.mb-4 {
+  animation: labelFade 0.4s ease both;
+}
+
+@keyframes labelFade {
+  from { opacity: 0; letter-spacing: 0.2em; }
+  to   { opacity: 0.75; }
+}
+
+
+/* ---------------------------------------------------------
+   K. DARK SECTION (Agent strip, Orchestrator, Why Agentic)
+   --------------------------------------------------------- */
+
+/* Stone-900 panel entrance */
+.bg-stone-900.rounded-xl,
+.bg-stone-900.rounded-2xl {
+  transition:
+    box-shadow 0.3s ease !important;
+}
+
+
+/* ---------------------------------------------------------
+   L. FORM ELEMENT FOCUS — premium amber ring
+   --------------------------------------------------------- */
+
+input:focus,
+select:focus,
+textarea:focus {
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease !important;
+}
+
+
+/* ---------------------------------------------------------
+   M. MODAL — entrance
+   --------------------------------------------------------- */
+
+.modal-overlay > div {
+  animation: modalEntrance 0.35s cubic-bezier(.22,1,.36,1) both;
+}
+
+@keyframes modalEntrance {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+
+/* ---------------------------------------------------------
+   N. FOOTER — subtle entrance
+   --------------------------------------------------------- */
+
+footer {
+  animation: footerReveal 0.7s ease-out 0.3s both;
+}
+
+@keyframes footerReveal {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+
+
+/* ---------------------------------------------------------
+   O. REDUCED MOTION — suppress all new animations
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  /* Game element hides are intentional — keep them */
+  #heritage-game-scan,
+  #heritage-game-hud,
+  #heritage-game-intro,
+  #hi-final-hero-panel,
+  .hip-bracket { display: none !important; }
+
+  /* Kill all premium animations */
+  .fade-in,
+  .gradient-hero .flex.items-center.gap-2.mb-4,
+  .gradient-hero h1,
+  .gradient-hero p,
+  .gradient-hero .flex.flex-wrap.gap-3,
+  .em-step-reveal,
+  .em-agent-card.active-step,
+  .em-pulse-critical,
+  .em-orchestrator,
+  .em-decision-border,
+  .prose,
+  .modal-overlay > div,
+  footer {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
