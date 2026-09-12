@@ -819,3 +819,790 @@ button {
 .em-decision-border h3 {
   font-family: 'Playfair Display', serif !important;
 }
+
+
+/* =========================================================
+   FINAL VISUAL POLISH
+   Additive only — no JS or HTML changes required
+   Heritage-inspired: ivory · charcoal · deep brown · gold
+   ========================================================= */
+
+
+/* =========================================================
+   POLISH — HERO SECTION
+   ========================================================= */
+
+/* Hero minimum height — premium breathing room */
+.gradient-hero {
+  min-height: 640px !important;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+/* Hero title — more dramatic size and tracking */
+.gradient-hero h1 {
+  font-size: clamp(2.8rem, 6.5vw, 5.8rem) !important;
+  line-height: 1.0 !important;
+  letter-spacing: -0.04em !important;
+  text-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.55),
+    0 0 60px rgba(217, 154, 43, 0.09) !important;
+}
+
+/* Hero subtitle — refined readability */
+.gradient-hero p {
+  font-size: clamp(0.95rem, 1.4vw, 1.15rem) !important;
+  line-height: 1.82 !important;
+  color: rgba(255, 255, 255, 0.73) !important;
+  letter-spacing: 0.003em;
+}
+
+/* Hero chip row — slightly more spacing */
+.gradient-hero .flex.items-center.gap-2.mb-4 {
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+/* Hero CTA button group — more generous gap */
+.gradient-hero .flex.flex-wrap.gap-3 {
+  gap: 14px;
+  margin-top: 10px;
+}
+
+/* Primary CTA — amber glow */
+.gradient-hero button:first-child {
+  box-shadow:
+    0 0 0 1px rgba(217,154,43,0.25),
+    0 8px 28px rgba(180,83,9,0.35) !important;
+}
+
+/* Golden bottom border accent — stronger */
+.gradient-hero::after {
+  height: 3px !important;
+  opacity: 0.85;
+}
+
+
+/* =========================================================
+   POLISH — NAVIGATION
+   ========================================================= */
+
+nav {
+  height: 62px;
+}
+
+/* Nav brand logotype — slightly tighter */
+nav button:first-child {
+  letter-spacing: -0.02em;
+}
+
+/* Active nav button — amber underline pip */
+nav button[class*="bg-amber-600"] {
+  box-shadow: 0 2px 10px rgba(180,83,9,0.35), inset 0 -2px 0 rgba(255,255,255,0.08);
+}
+
+/* Emergency nav button — red pulse edge */
+nav button[class*="bg-red-7"] {
+  box-shadow: 0 2px 10px rgba(185,28,28,0.35);
+}
+
+/* Nav API key button — cleaner border */
+nav button[class*="border-stone-5"],
+nav button[class*="border-amber-5"],
+nav button[class*="border-green-5"] {
+  font-size: 11px;
+  letter-spacing: 0.01em;
+}
+
+
+/* =========================================================
+   POLISH — SECTION HEADINGS (landing, tourist, authority)
+   ========================================================= */
+
+/* Section heading group spacing */
+main > section > .max-w-7xl h2,
+main > .max-w-7xl h2 {
+  letter-spacing: -0.025em;
+}
+
+/* Step labels (uppercase tracking) */
+h2.text-xs.font-semibold.text-stone-400 {
+  letter-spacing: 0.1em;
+  font-size: 10.5px;
+  opacity: 0.8;
+}
+
+/* Page-level h1s in tourist/authority/agents/emergency */
+main .text-3xl.font-bold {
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+/* Sub-paragraph below page h1 */
+main .text-3xl.font-bold + p {
+  margin-top: 6px;
+  font-size: 0.935rem;
+  color: #6b6560;
+}
+
+
+/* =========================================================
+   POLISH — HERITAGE SITE CARDS (landing grid)
+   ========================================================= */
+
+/* Site metric mini-cards */
+.bg-stone-50.rounded-lg {
+  transition: background-color 0.2s ease;
+}
+
+/* Site card emoji icon — soft lift */
+.card-hover .text-4xl {
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(.16,1,.3,1);
+}
+.card-hover:hover .text-4xl {
+  transform: scale(1.12) translateY(-2px);
+}
+
+/* Site card subtitle (amber) */
+.text-amber-600.text-sm.font-medium {
+  letter-spacing: 0.01em;
+}
+
+/* Stats strip on landing (4-column numbers) */
+main .text-center [style*="font-size:2rem"] {
+  text-shadow: 0 2px 8px rgba(180,83,9,0.12);
+}
+
+
+/* =========================================================
+   POLISH — AGENT STRIP (dark band on landing)
+   ========================================================= */
+
+/* Individual agent mini-card in dark strip */
+section.bg-stone-900 .bg-stone-800.rounded-xl {
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.28s cubic-bezier(.16,1,.3,1),
+    box-shadow 0.28s ease;
+  border: 1px solid rgba(120,113,108,0.45);
+}
+
+section.bg-stone-900 .bg-stone-800.rounded-xl:hover {
+  background-color: rgba(68,64,60,0.7) !important;
+  border-color: rgba(217,154,43,0.3) !important;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+}
+
+/* Agent icon in dark strip — lift on card hover */
+section.bg-stone-900 .bg-stone-800.rounded-xl .text-3xl {
+  transition: transform 0.3s cubic-bezier(.16,1,.3,1);
+  display: inline-block;
+}
+section.bg-stone-900 .bg-stone-800.rounded-xl:hover .text-3xl {
+  transform: scale(1.15) translateY(-2px);
+}
+
+/* Heading in dark strip */
+section.bg-stone-900 .text-center h2 {
+  letter-spacing: -0.02em;
+}
+
+
+/* =========================================================
+   POLISH — EMERGENCY CTA BLOCK (landing)
+   ========================================================= */
+
+/* The red emergency CTA panel on landing */
+.bg-gradient-to-r.from-stone-900 {
+  border: 1px solid rgba(185,28,28,0.4) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.04),
+    0 16px 48px rgba(0,0,0,0.3),
+    0 0 0 1px rgba(185,28,28,0.15);
+  transition: box-shadow 0.3s ease;
+}
+
+.bg-gradient-to-r.from-stone-900:hover {
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.04),
+    0 20px 56px rgba(0,0,0,0.38),
+    0 0 0 1px rgba(185,28,28,0.28),
+    0 0 40px rgba(185,28,28,0.08);
+}
+
+
+/* =========================================================
+   POLISH — DATA PROVENANCE NOTICE (landing)
+   ========================================================= */
+
+.bg-stone-50.border.border-stone-200.rounded-xl {
+  border-color: rgba(120,113,108,0.2) !important;
+}
+
+
+/* =========================================================
+   POLISH — TOURIST EXPERIENCE
+   ========================================================= */
+
+/* Site selector buttons in tourist view */
+button.card-hover.text-left.rounded-xl {
+  padding: 22px;
+}
+
+/* Selected state — amber tint refinement */
+button.card-hover.text-left.rounded-xl.border-amber-500 {
+  background: linear-gradient(135deg, #fffbeb, #fef3c7) !important;
+  box-shadow: 0 0 0 2px rgba(217,154,43,0.2), var(--shadow-md);
+}
+
+/* Interest filter buttons */
+button.flex.items-center.gap-2.px-4.py-2\.5.rounded-lg.border-2 {
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.18s ease;
+}
+
+/* Interest button — active state */
+button.flex.items-center.gap-2.px-4.py-2\.5.rounded-lg.border-2.border-amber-500 {
+  box-shadow: 0 0 0 3px rgba(217,154,43,0.15);
+}
+
+/* Visitor flow cards in tourist view */
+.bg-white.rounded-xl.border.border-stone-200.p-5 {
+  border-color: rgba(120,113,108,0.15) !important;
+}
+
+/* Visitor load number */
+.text-4xl.font-bold,
+.text-5xl.font-bold {
+  font-feature-settings: "tnum";
+  letter-spacing: -0.03em;
+}
+
+/* Hotspot name truncation — ensure clean layout */
+.w-36.text-xs.text-stone-600.truncate {
+  font-weight: 500;
+}
+
+
+/* =========================================================
+   POLISH — AUTHORITY DASHBOARD
+   ========================================================= */
+
+/* Site header card in authority view */
+.bg-white.rounded-xl.border.border-stone-200.p-5.mb-6 {
+  box-shadow:
+    0 2px 8px rgba(28,25,23,0.04),
+    0 1px 3px rgba(28,25,23,0.03);
+}
+
+/* Risk / status chips in authority header */
+.agent-chip.px-3.py-1.rounded-lg {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+/* Tab bar */
+.border-b.border-stone-200.mb-6 {
+  border-color: rgba(120,113,108,0.18) !important;
+}
+
+/* Tab buttons — refined hover state */
+button.tab-inactive.hover\:text-stone-600 {
+  font-size: 13.5px;
+  padding: 14px 18px;
+}
+
+button.tab-active {
+  font-size: 13.5px;
+  padding: 14px 18px;
+}
+
+/* Dashboard metric cards (4-column overview row) */
+main .grid.grid-cols-2.lg\:grid-cols-4 .bg-white.rounded-xl.border.border-stone-200.p-5 {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Dashboard metric value */
+main .text-3xl.font-bold {
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+}
+
+/* Dashboard metric label */
+main .text-xs.text-stone-400.uppercase.tracking-wider.mb-1 {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Alert cards — risk row */
+.border.border-red-100.bg-red-50.rounded-lg {
+  border-radius: 10px !important;
+}
+
+/* Conservation project rows */
+.mb-3 .flex.justify-between.text-xs.mb-1 {
+  font-size: 12px;
+}
+
+/* Recommended actions list */
+.flex.gap-2.text-xs.text-stone-600.bg-stone-50.rounded-lg.p-2 {
+  border: 1px solid rgba(120,113,108,0.1);
+  border-radius: 8px;
+  font-size: 11.5px;
+  line-height: 1.55;
+}
+
+/* Structural / encroachment alert cards */
+.bg-white.rounded-xl.border-l-4 {
+  transition: box-shadow 0.22s ease, transform 0.22s ease;
+}
+
+.bg-white.rounded-xl.border-l-4:hover {
+  transform: translateX(3px);
+  box-shadow: var(--shadow-md) !important;
+}
+
+
+/* =========================================================
+   POLISH — AI AGENTS PAGE
+   ========================================================= */
+
+/* Agent architecture section (dark bg) */
+main .bg-stone-900.rounded-xl.p-6.mb-8 {
+  border: 1px solid rgba(120,113,108,0.2);
+  box-shadow:
+    0 24px 64px rgba(0,0,0,0.22),
+    inset 0 1px 0 rgba(255,255,255,0.03);
+}
+
+/* Flow diagram nodes — dark panel */
+.bg-stone-700.border.border-stone-600.rounded-lg {
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+/* Flow line connector */
+.w-px.h-4.bg-stone-600 {
+  opacity: 0.5;
+}
+
+/* Five-agent status grid */
+main .grid.grid-cols-1.sm\:grid-cols-3.lg\:grid-cols-5.gap-3.mb-8 > div {
+  transition:
+    box-shadow 0.25s ease,
+    transform 0.28s cubic-bezier(.16,1,.3,1),
+    border-color 0.25s ease;
+}
+
+/* Agent spec cards (detail cards at bottom) */
+main .grid.md\:grid-cols-2.lg\:grid-cols-3.gap-6 > div {
+  padding: 26px !important;
+}
+
+/* Input / Output tags */
+.bg-blue-50.text-blue-700.text-xs {
+  font-size: 10.5px;
+  font-weight: 600;
+}
+
+.bg-amber-50.text-amber-700.text-xs {
+  font-size: 10.5px;
+  font-weight: 600;
+}
+
+/* Model tag — monospace */
+.bg-stone-50.text-stone-600.text-xs.px-2.py-1.rounded.font-mono {
+  font-size: 10.5px;
+  background: rgba(245,245,244,0.8);
+  border: 1px solid rgba(120,113,108,0.12);
+}
+
+/* Prompting / Logic panel */
+.bg-stone-50.rounded-lg.p-3 {
+  background: rgba(245,245,244,0.6) !important;
+  border: 1px solid rgba(120,113,108,0.1);
+}
+
+
+/* =========================================================
+   POLISH — EMERGENCY CENTER
+   ========================================================= */
+
+/* Pre-run idle state */
+.bg-stone-50.border-2.border-dashed.border-stone-300.rounded-2xl {
+  background: linear-gradient(160deg, #faf8f5, #f5f1ea) !important;
+  border-color: rgba(180,130,55,0.2) !important;
+  box-shadow: inset 0 2px 12px rgba(0,0,0,0.025);
+}
+
+/* Pre-run agent preview cards */
+.bg-white.border.border-stone-200.rounded-xl.p-3.text-center {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.bg-white.border.border-stone-200.rounded-xl.p-3.text-center:hover {
+  border-color: rgba(217,154,43,0.3) !important;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.07);
+}
+
+/* Incident card — critical pulse */
+.em-decision-border.em-pulse-critical.bg-red-50 {
+  background: linear-gradient(135deg, #fff5f5, #fef2f2) !important;
+  border-radius: 18px !important;
+}
+
+/* Incident header info boxes */
+.bg-white.rounded-xl.border.border-red-200 {
+  box-shadow: 0 1px 4px rgba(185,28,28,0.06);
+}
+
+/* Agent cards in multi-agent analysis */
+.em-agent-card.bg-white {
+  background: linear-gradient(160deg, #ffffff, #faf8f5) !important;
+  border-radius: 16px !important;
+}
+
+/* Finding label */
+.text-xs.text-stone-500.mb-2.font-semibold.uppercase.tracking-wider {
+  font-size: 9.5px;
+  letter-spacing: 0.12em;
+  color: #a8a29e;
+}
+
+/* Structural agent action signal box */
+.bg-red-50.border.border-red-200.rounded-lg.p-3 {
+  border-radius: 10px !important;
+}
+
+/* Visitor agent action signal box */
+.bg-orange-50.border.border-orange-200.rounded-lg.p-3 {
+  border-radius: 10px !important;
+}
+
+/* Conservation agent action signal box */
+.bg-blue-50.border.border-blue-200.rounded-lg.p-3 {
+  border-radius: 10px !important;
+}
+
+/* Orchestrator signal summary row */
+.em-orchestrator .grid.sm\:grid-cols-3.gap-3 > div {
+  backdrop-filter: blur(4px);
+  transition: transform 0.22s ease;
+}
+
+/* Orchestrator reasoning box */
+.em-orchestrator .bg-stone-800.rounded-xl.border.border-stone-600.p-4 {
+  background: rgba(15,12,9,0.6) !important;
+  border-color: rgba(120,113,108,0.2) !important;
+  border-radius: 14px !important;
+}
+
+/* Orchestrator verdict row arrows */
+.em-orchestrator .flex.items-start.gap-2 .text-amber-400 {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* Overall verdict box */
+.em-orchestrator .bg-red-900.border.border-red-700.rounded-xl {
+  box-shadow:
+    0 0 0 1px rgba(185,28,28,0.3),
+    0 8px 28px rgba(185,28,28,0.2);
+}
+
+/* Orchestrator CRITICAL HERITAGE EVENT text */
+.em-orchestrator .text-2xl.font-black.text-white {
+  letter-spacing: -0.025em;
+  text-shadow: 0 2px 12px rgba(185,28,28,0.4);
+}
+
+/* Step connector labels */
+h2.text-xs.font-semibold.text-stone-400.uppercase.tracking-wider.mb-4 {
+  letter-spacing: 0.1em;
+  opacity: 0.75;
+  font-size: 10px;
+  padding-left: 2px;
+}
+
+/* Action plan — three-column */
+.bg-red-50.border.border-red-200.rounded-xl.p-4,
+.bg-orange-50.border.border-orange-200.rounded-xl.p-4,
+.bg-blue-50.border.border-blue-200.rounded-xl.p-4 {
+  border-radius: 14px !important;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+/* Final decision card */
+.em-decision-border.rounded-2xl.p-6.mb-6 {
+  background: linear-gradient(145deg, #ffffff, #fdfaf6) !important;
+}
+
+/* Decision metadata boxes */
+.em-decision-border .border.rounded-xl.p-3 {
+  border-radius: 12px !important;
+}
+
+/* "Why Agentic" panel */
+.bg-stone-900.rounded-2xl.p-6.text-white {
+  box-shadow:
+    0 20px 50px rgba(0,0,0,0.22),
+    inset 0 1px 0 rgba(255,255,255,0.025);
+  border: 1px solid rgba(120,113,108,0.18);
+}
+
+
+/* =========================================================
+   POLISH — PROSE / AI OUTPUT
+   ========================================================= */
+
+.prose {
+  font-size: 0.9rem !important;
+  line-height: 1.82 !important;
+  color: #374151;
+}
+
+.prose strong {
+  color: #1c1917;
+  font-weight: 650;
+}
+
+/* Demo/live notice banners inside prose panels */
+.bg-amber-50.border.border-amber-200.rounded-lg.px-4.py-2.text-xs.text-amber-700.font-medium {
+  border-radius: 10px !important;
+  font-size: 11.5px;
+}
+.bg-green-50.border.border-green-200.rounded-lg.px-4.py-2.text-xs.text-green-700.font-medium {
+  border-radius: 10px !important;
+  font-size: 11.5px;
+}
+
+
+/* =========================================================
+   POLISH — FOOTER
+   ========================================================= */
+
+footer {
+  border-top: 1px solid rgba(120,113,108,0.3) !important;
+  background: linear-gradient(180deg, #1a1614, #110e0b) !important;
+}
+
+footer .font-semibold.text-white {
+  letter-spacing: -0.015em;
+}
+
+footer .text-xs.font-semibold.text-stone-300.uppercase.tracking-wider {
+  letter-spacing: 0.1em;
+  font-size: 10px;
+}
+
+footer .border-t.border-stone-700 {
+  border-color: rgba(120,113,108,0.2) !important;
+  margin-top: 8px;
+}
+
+
+/* =========================================================
+   POLISH — MODAL
+   ========================================================= */
+
+.modal-overlay .bg-white.rounded-2xl {
+  box-shadow:
+    0 32px 80px rgba(0,0,0,0.35),
+    0 4px 16px rgba(0,0,0,0.1);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.modal-overlay input[type="password"] {
+  border-color: rgba(120,113,108,0.2) !important;
+}
+
+
+/* =========================================================
+   POLISH — FADE-UP ENTRANCE (enhanced)
+   ========================================================= */
+
+/* Sections that use .fade-in already get the base animation.
+   We improve the keyframe for a more elegant feel. */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+    filter: blur(1px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+
+/* =========================================================
+   POLISH — RESPONSIVE REFINEMENTS
+   ========================================================= */
+
+/* Medium screens — authority tab padding */
+@media (max-width: 1024px) {
+  button.tab-inactive.hover\:text-stone-600,
+  button.tab-active {
+    padding: 12px 14px;
+    font-size: 12.5px;
+  }
+
+  /* Emergency action plan 3-col to single */
+  .grid.sm\:grid-cols-3.gap-5 {
+    gap: 14px;
+  }
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .gradient-hero {
+    min-height: 540px !important;
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+
+  .gradient-hero h1 {
+    font-size: clamp(2.4rem, 9vw, 4rem) !important;
+  }
+
+  /* Authority overview metric cards — larger gap */
+  main .grid.grid-cols-2.lg\:grid-cols-4 {
+    gap: 12px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .gradient-hero {
+    min-height: 500px !important;
+    padding-top: 60px !important;
+    padding-bottom: 60px !important;
+  }
+
+  .gradient-hero h1 {
+    font-size: clamp(2.2rem, 11vw, 3.2rem) !important;
+    letter-spacing: -0.035em !important;
+  }
+
+  .gradient-hero p {
+    font-size: 0.9rem !important;
+  }
+
+  /* Hero CTA buttons — full width stack on mobile */
+  .gradient-hero .flex.flex-wrap.gap-3 {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .gradient-hero button {
+    width: 100% !important;
+    justify-content: center !important;
+    text-align: center;
+  }
+
+  /* Authority metric grid — 2 col on mobile */
+  main .grid.grid-cols-2.lg\:grid-cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  /* Emergency agent grid — single col */
+  .grid.sm\:grid-cols-2.gap-4 {
+    grid-template-columns: 1fr;
+  }
+
+  /* Orchestrator signal row — single col */
+  .em-orchestrator .grid.sm\:grid-cols-3.gap-3 {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  /* Decision card metadata — 2 col */
+  .grid.sm\:grid-cols-2.lg\:grid-cols-4.gap-4 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  /* Action plan — single col on mobile */
+  .grid.sm\:grid-cols-3.gap-5 {
+    grid-template-columns: 1fr;
+  }
+
+  /* Tab bar — scrollable */
+  .border-b.border-stone-200.mb-6 .flex {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .border-b.border-stone-200.mb-6 .flex::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Agents page — 5-col grid to 2-col on mobile */
+  .grid.grid-cols-1.sm\:grid-cols-3.lg\:grid-cols-5.gap-3 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  /* Agent spec cards — single col on mobile */
+  .grid.md\:grid-cols-2.lg\:grid-cols-3.gap-6 {
+    grid-template-columns: 1fr;
+  }
+
+  /* Stats row — 2 col on mobile */
+  .grid.grid-cols-2.md\:grid-cols-4.gap-6 {
+    gap: 14px;
+  }
+
+  /* Footer grid — single col */
+  footer .grid.sm\:grid-cols-3 {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 400px) {
+  .gradient-hero {
+    padding-top: 50px !important;
+    padding-bottom: 50px !important;
+  }
+
+  .gradient-hero h1 {
+    font-size: 2rem !important;
+  }
+
+  main .grid.grid-cols-2.lg\:grid-cols-4 {
+    grid-template-columns: 1fr;
+  }
+
+  .grid.sm\:grid-cols-2.lg\:grid-cols-4.gap-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* =========================================================
+   POLISH — REDUCED MOTION OVERRIDE
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .gradient-hero h1 { animation: none !important; }
+  .card-hover:hover { transform: none !important; }
+  .card-hover::before { display: none; }
+  section.bg-stone-900 .bg-stone-800.rounded-xl:hover { transform: none !important; }
+  .bg-white.rounded-xl.border-l-4:hover { transform: none !important; }
+}

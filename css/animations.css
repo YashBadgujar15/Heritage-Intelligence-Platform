@@ -94,8 +94,8 @@
 @keyframes heroTitleReveal {
   from {
     opacity: 0;
-    transform: translateY(24px);
-    filter: blur(8px);
+    transform: translateY(18px);
+    filter: blur(5px);
   }
 
   to {
@@ -112,7 +112,7 @@
   }
 
   50% {
-    transform: translateY(-4px);
+    transform: translateY(-2px);
   }
 }
 
@@ -131,7 +131,7 @@
 .card:hover,
 .glass-card:hover,
 .white-panel:hover {
-  transform: translateY(-5px);
+  transform: translateY(-4px);
 }
 
 
